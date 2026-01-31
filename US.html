@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+    <link rel="icon" href="favicon.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>預約場勘 | 錦德防水工程 - 科技抓漏專家</title>
+    <title>預約場勘 | 錦德防水工程 - 中彰投科技抓漏專家</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
             --primary: #0F172A; 
-            --accent: #B8860B;  
-            --accent-light: #D4AF37;
-            --bg-light: #F8FAFC;
+            --accent: #C5A059;  
+            --accent-light: #E2C792;
+            --bg-light: #FDFDFD;
             --white: #FFFFFF;
-            --text-main: #1E293B;
-            --text-muted: #64748B;
+            --text-main: #334155;
+            --text-muted: #94A3B8;
+            --line-green: #06C755;
         }
 
+        /* 移除動畫，確保頁面立即加載 */
         * { box-sizing: border-box; scroll-behavior: smooth; }
         body { 
             font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif; 
@@ -24,71 +27,124 @@
             line-height: 1.8; overflow-x: hidden;
         }
 
-        /* 導覽列：與全站統一 */
+        /* --- [電腦版導覽列：與首頁同步] --- */
         .navbar {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             height: 90px; display: flex; align-items: center; justify-content: space-between;
-            padding: 0 6%; position: sticky; top: 0; z-index: 2000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 0 6%; position: sticky; top: 0; z-index: 2000; border-bottom: 1px solid rgba(0,0,0,0.03);
         }
-        .logo { font-size: 1.8rem; font-weight: 900; color: var(--primary); text-decoration: none; letter-spacing: 2px; }
+        .logo { display: flex; align-items: center; font-size: 1.4rem; font-weight: 900; color: var(--primary); text-decoration: none; letter-spacing: 2px; }
+        .logo img { height: 45px; margin-right: 12px; }
         .logo span { color: var(--accent); }
+
         .nav-links { display: flex; gap: 30px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 1rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
-        .btn-call-nav { background: var(--primary); color: white !important; padding: 12px 24px; border-radius: 4px; font-weight: 700; border: 2px solid var(--primary); }
-
-        /* 聯絡區塊佈局 */
-        .contact-section { padding: 80px 6%; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; }
-
-        /* 左側：品牌資訊 */
-        .contact-info { background: var(--primary); color: white; padding: 50px; border-radius: 8px; }
-        .contact-info h2 { color: var(--accent-light); margin-top: 0; font-size: 2rem; }
-        .info-item { display: flex; align-items: flex-start; margin-bottom: 30px; }
-        .info-item i { font-size: 1.5rem; color: var(--accent); margin-right: 20px; margin-top: 5px; }
-        .info-item p { margin: 0; font-size: 1.1rem; opacity: 0.9; }
-
-        /* 右側：表單卡片 */
-        .form-card { background: white; padding: 50px; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
-        .form-group { margin-bottom: 25px; }
-        .form-group label { display: block; margin-bottom: 10px; font-weight: 700; color: var(--primary); }
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%; padding: 15px; border: 1px solid #E2E8F0; border-radius: 4px; font-size: 1rem; outline: none; transition: 0.3s;
+        .nav-links a { 
+            text-decoration: none; color: var(--primary); font-weight: 500; font-size: 0.95rem; 
+            transition: 0.3s; letter-spacing: 1px; position: relative;
         }
-        .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+            background: var(--accent); transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .btn-call-nav { 
+            background: var(--primary); color: white !important; padding: 12px 28px; border-radius: 2px; 
+            font-weight: 600; font-size: 0.9rem; transition: 0.3s;
+        }
+        .btn-call-nav:hover { background: var(--accent); transform: translateY(-2px); }
+
+        .menu-toggle { display: none; font-size: 1.6rem; color: var(--primary); cursor: pointer; }
+
+        /* --- [手機版側邊欄：與首頁同步] --- */
+        .sidebar {
+            position: fixed; top: 0; right: -100%; width: 300px; height: 100vh;
+            background: var(--primary); z-index: 3000; padding: 60px 40px;
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; gap: 25px;
+        }
+        .sidebar.active { right: 0; box-shadow: -10px 0 50px rgba(0,0,0,0.3); }
+        .sidebar a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 1.1rem; letter-spacing: 2px; transition: 0.3s; }
+        .sidebar-close { position: absolute; top: 25px; right: 25px; color: white; font-size: 1.8rem; cursor: pointer; }
+        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2500; display: none; }
+        .sidebar-overlay.active { display: block; }
+
+        /* --- [表單區塊] --- */
+        .contact-header { text-align: center; padding: 60px 0 40px; }
+        .contact-header h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: var(--primary); margin: 0; letter-spacing: 2px; }
+        .contact-header p { color: var(--accent); letter-spacing: 8px; font-size: 0.8rem; margin-top: 15px; }
+
+        .contact-section { padding: 0 6% 100px; max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; }
+
+        .contact-info { background: var(--primary); color: white; padding: 60px 50px; border-radius: 2px; height: fit-content; }
+        .contact-info h2 { color: var(--accent); margin-top: 0; font-size: 1.8rem; margin-bottom: 40px; }
+        .info-item { display: flex; align-items: flex-start; margin-bottom: 40px; }
+        .info-item i { font-size: 1.3rem; color: var(--accent); margin-right: 25px; margin-top: 5px; }
+        .info-item p { margin: 0; font-size: 0.9rem; opacity: 0.6; }
+        .info-item .val { font-weight: 700; font-size: 1.3rem; opacity: 1; margin-top: 8px; }
+
+        .form-card { background: white; padding: 60px; border-radius: 2px; box-shadow: 0 30px 60px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.02); }
+        .form-group { margin-bottom: 30px; }
+        .form-group label { display: block; margin-bottom: 12px; font-weight: 700; color: var(--primary); font-size: 0.95rem; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 18px; border: 1px solid #E2E8F0; border-radius: 2px; font-size: 1rem; outline: none; transition: 0.3s; background: #F9FBFF;
+        }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); background: white; box-shadow: 0 0 10px rgba(197, 160, 89, 0.1); }
         
         .submit-btn {
-            background: var(--accent); color: white; border: none; padding: 20px;
+            background: var(--accent); color: white; border: none; padding: 22px;
             font-size: 1.1rem; font-weight: 800; cursor: pointer; width: 100%;
-            border-radius: 4px; transition: 0.3s;
+            border-radius: 2px; transition: 0.4s; letter-spacing: 4px;
         }
-        .submit-btn:hover { background: var(--primary); transform: translateY(-3px); }
+        .submit-btn:hover { background: var(--primary); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
 
-        footer { background: var(--primary); color: white; padding: 40px; text-align: center; margin-top: 60px; }
+        footer { background: var(--primary); color: white; padding: 80px 8% 50px; text-align: center; }
+        .line-float { position: fixed; bottom: 40px; right: 40px; background: var(--line-green); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 3000; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: 0.3s; }
 
         @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+            .navbar { height: 80px; }
             .contact-section { grid-template-columns: 1fr; }
+            .form-card { padding: 40px 30px; }
         }
     </style>
 </head>
 <body>
 
     <header class="navbar">
-        <a href="index.html" class="logo">錦德<span>防水工程</span></a>
+        <a href="index.html" class="logo">
+            <img src="favicon.png" alt="錦德">
+            錦德<span>防水工程</span>
+        </a>
         <nav class="nav-links">
-            <a href="index.html">首頁 HOME</a>
-            <a href="about.html">關於我們 ABOUT</a>
-            <a href="services.html">服務項目 SERVICE</a>
-            <a href="cases.html">實績對比 CASES</a>
-            <a href="areas.html">服務區域 AREA</a>
-            <a href="US.html" class="btn-call-nav">立即預約</a>
+            <a href="index.html">首頁</a>
+            <a href="about.html">關於錦德</a>
+            <a href="services.html">服務項目</a>
+            <a href="cases.html">實績對比</a>
+            <a href="daily.html">工程日常</a>
+            <a href="areas.html">服務區域</a>
+            <a href="tel:0963696032" class="btn-call-nav">預約專線</a>
         </nav>
+        <div class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
     </header>
 
-    <div style="text-align:center; padding-top: 60px;">
-        <h1 style="font-size: 2.5rem; font-weight: 900; color: var(--primary);">聯絡錦德</h1>
-        <p style="color: var(--text-muted); letter-spacing: 5px;">GET IN TOUCH</p>
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-times"></i></div>
+        <div style="color: var(--accent); font-weight: 800; letter-spacing: 4px; margin-bottom: 25px; font-size: 0.8rem;">MENU</div>
+        <a href="index.html" onclick="toggleSidebar()">首頁</a>
+        <a href="about.html" onclick="toggleSidebar()">關於錦德</a>
+        <a href="services.html" onclick="toggleSidebar()">服務項目</a>
+        <a href="cases.html" onclick="toggleSidebar()">實績對比</a>
+        <a href="daily.html" onclick="toggleSidebar()">工程日常</a>
+        <a href="areas.html" onclick="toggleSidebar()">服務區域</a>
+        <a href="tel:0963696032" style="color: var(--accent); margin-top: 20px; font-weight: 700;">撥打專線</a>
+    </div>
+
+    <div class="contact-header">
+        <h1>預約場勘</h1>
+        <p>GET IN TOUCH</p>
     </div>
 
     <section class="contact-section">
@@ -98,41 +154,39 @@
                 <i class="fas fa-phone-alt"></i>
                 <div>
                     <p>服務專線</p>
-                    <p style="font-weight: 700; font-size: 1.3rem;">0963-696-032</p>
+                    <div class="val">0963-696-032</div>
                 </div>
             </div>
             <div class="info-item">
                 <i class="fas fa-map-marker-alt"></i>
                 <div>
-                    <p>服務區域</p>
-                    <p>台中、彰化、南投全區服務</p>
+                    <p>服務範圍</p>
+                    <div class="val">中彰投全區服務</div>
                 </div>
             </div>
             <div class="info-item">
                 <i class="fas fa-clock"></i>
                 <div>
                     <p>營業時間</p>
-                    <p>週一至週六 08:00 - 18:00</p>
+                    <div class="val">週一至週六 08:00 - 18:00</div>
                 </div>
             </div>
-            <div style="margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-size: 0.9rem; opacity: 0.7;">
-                錦德防水工程<br>
-                專業防水、止漏、壁癌根治
+            <div style="margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-size: 0.85rem; opacity: 0.5; line-height: 2;">
+                錦德防水工程有限公司<br>
+                統一編號：80081612<br>
+                五年正式合約保固 ‧ 誠信施作
             </div>
         </div>
 
         <div class="form-card">
             <form action="https://api.web3forms.com/submit" method="POST">
-                
                 <input type="hidden" name="access_key" value="d9e5c0ca-40bd-45d0-a8c5-e802bfc12957">
-                
                 <input type="hidden" name="redirect" value="https://jindewaterproof.com/index.html">
-                
-                <input type="hidden" name="subject" value="【錦德網站】新的場勘預約申請">
+                <input type="hidden" name="subject" value="【錦德預約】收到新的場勘需求">
 
                 <div class="form-group">
                     <label>您的姓名 *</label>
-                    <input type="text" name="name" placeholder="例：林先生/小姐" required>
+                    <input type="text" name="name" placeholder="請輸入姓名" required>
                 </div>
 
                 <div class="form-group">
@@ -141,7 +195,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>施工地點</label>
+                    <label>施工區域 *</label>
                     <select name="location">
                         <option value="台中市">台中市</option>
                         <option value="彰化縣市">彰化縣市</option>
@@ -150,24 +204,43 @@
                 </div>
 
                 <div class="form-group">
-                    <label>問題描述 (選填)</label>
-                    <textarea name="message" rows="4" placeholder="請描述漏水位置，如：頂樓、外牆、浴室..."></textarea>
+                    <label>問題描述</label>
+                    <textarea name="message" rows="4" placeholder="請簡單描述漏水位置，例如：頂樓地板、浴室牆面..."></textarea>
                 </div>
 
                 <input type="checkbox" name="botcheck" style="display:none">
-
                 <button type="submit" class="submit-btn">送出預約申請</button>
             </form>
         </div>
     </section>
 
-    <div style="height: 400px; background: #eee; margin-top: 40px;">
-        <iframe src="https://www.google.com/maps/embed?pb=您的地圖連結" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <div style="height: 480px; background: #eee; border-top: 1px solid rgba(0,0,0,0.05);">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.941215480521!2d120.7180436!3d24.1387254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346927712a1a9133%3A0x56a5faa6ee7647ad!2z6Yym5b635bel56iLLeWkluWqiuaLiematue_uuaWsCDpmLLmsLTlt6XnqIs!5e0!3m2!1szh-TW!2stw!4v1715850000000!5m2!1szh-TW!2stw" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
     </div>
 
     <footer>
-        <p>© 2026 錦德防水工程 | 中彰投科技抓漏專業團隊</p>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h2 style="font-size: 1.5rem; color: var(--accent); margin-bottom: 15px;">錦德防水工程</h2>
+            <p style="opacity: 0.6; font-size: 0.85rem; letter-spacing: 2px;">科技檢測 ‧ 誠信施作 ‧ 五年保固</p>
+            <div style="font-size: 0.75rem; opacity: 0.4; margin-top: 30px;">© 2026 JIN-DE WATERPROOFING</div>
+        </div>
     </footer>
 
+    <a href="https://line.me/ti/p/rqqh-uyZsq" class="line-float" target="_blank"><i class="fab fa-line"></i></a>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.querySelector('.sidebar-overlay').classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
