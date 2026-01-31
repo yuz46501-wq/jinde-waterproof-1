@@ -25,18 +25,18 @@
             line-height: 1.8; overflow-x: hidden;
         }
 
-        /* --- 跑馬燈公告 --- */
+        /* --- 跑馬燈 --- */
         .announcement-bar {
             background: #0F172A; color: #fff; padding: 12px 0;
             overflow: hidden; white-space: nowrap; font-size: 0.85rem; letter-spacing: 1px;
         }
         .marquee-content {
             display: inline-block; padding-left: 100%;
-            animation: marquee 25s linear infinite;
+            animation: marquee 30s linear infinite;
         }
         @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* --- 導覽列 (與截圖一致) --- */
+        /* --- 導覽列 --- */
         .navbar {
             background: white; height: 90px; display: flex; align-items: center; 
             justify-content: space-between; padding: 0 5%; position: sticky; 
@@ -45,9 +45,17 @@
         .logo { display: flex; align-items: center; font-size: 1.4rem; font-weight: 900; color: var(--primary); text-decoration: none; }
         .logo img { height: 48px; margin-right: 12px; }
         .logo span { color: var(--accent); }
-        .hamburger { cursor: pointer; font-size: 1.5rem; color: var(--primary); transition: 0.3s; }
+        .hamburger { cursor: pointer; font-size: 1.5rem; color: var(--primary); position: relative; z-index: 3001; }
 
-        /* --- 側邊漢堡選單 (同步深藍背景風格) --- */
+        /* --- 漢堡選單遮罩 (新增) --- */
+        .menu-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden;
+            transition: 0.3s; z-index: 2500;
+        }
+        .menu-overlay.active { opacity: 1; visibility: visible; }
+
+        /* --- 漢堡側邊選單 (同步風格) --- */
         .nav-links { 
             position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
             background: #0F172A; flex-direction: column; align-items: flex-start;
@@ -55,63 +63,58 @@
             display: flex; gap: 0;
         }
         .nav-links.active { right: 0; }
-        .menu-label { 
-            color: var(--accent); font-size: 0.75rem; letter-spacing: 4px; 
-            margin-bottom: 30px; font-weight: 700; display: block; 
-        }
+        .menu-label { color: var(--accent); font-size: 0.75rem; letter-spacing: 4px; margin-bottom: 30px; font-weight: 700; display: block; }
         .nav-links a { 
-            padding: 15px 0; width: 100%; color: #FFFFFF; font-size: 1.15rem; 
+            padding: 15px 0; width: 100%; color: #FFFFFF; font-size: 1.1rem; 
             text-decoration: none; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .nav-links a.active-page { color: var(--accent); }
-        
-        /* 選單底部聯絡鈕 */
-        .nav-contact-box { width: 100%; margin-top: auto; padding-bottom: 40px; }
-        .nav-contact-box a { 
-            border: none; font-size: 1rem; display: flex; align-items: center; 
-            gap: 12px; padding: 12px 0; color: white !important;
-        }
 
-        /* --- 頁面標題背景 --- */
+        .nav-contact-box { width: 100%; margin-top: auto; padding-bottom: 40px; }
+        .nav-contact-box a { border: none; font-size: 1rem; display: flex; align-items: center; gap: 12px; padding: 12px 0; color: white !important; }
+
+        /* --- 內容與標題 --- */
         .page-header { 
-            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), 
                         url('https://image2url.com/r2/default/images/1769873652015-5632ee47-cf8f-41a5-a90e-6463a308cd64.blob') center/cover no-repeat;
             color: white; padding: 120px 6% 140px; text-align: center;
         }
-        .page-header h1 { font-size: 2.2rem; font-weight: 900; margin: 0; letter-spacing: 5px; }
+        .page-header h1 { font-size: 2.2rem; font-weight: 900; margin: 0; letter-spacing: 4px; }
         .page-header p { font-size: 1.1rem; opacity: 0.9; margin-top: 15px; }
 
-        /* --- 卡片網格內容 --- */
+        /* --- 卡片網格 --- */
         .photo-section { padding: 0 6% 100px; max-width: 1400px; margin: -60px auto 0; }
         .daily-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
         @media (min-width: 768px) { .daily-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1200px) { .daily-grid { grid-template-columns: repeat(3, 1fr); } }
 
         .daily-card {
-            background: var(--white); border-radius: 20px; overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: 0.4s; position: relative;
+            background: white; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.4s; position: relative;
             opacity: 0; transform: translateY(30px);
         }
         .daily-card.active { opacity: 1; transform: translateY(0); }
         .img-wrapper { width: 100%; height: 320px; overflow: hidden; }
-        .daily-card img { width: 100%; height: 100%; object-fit: cover; transition: 1.2s; }
+        .daily-card img { width: 100%; height: 100%; object-fit: cover; }
         .card-tag {
             position: absolute; top: 15px; left: 15px; z-index: 10;
             background: var(--accent-grad); color: white; padding: 5px 14px; border-radius: 4px; font-size: 0.7rem; font-weight: 800;
         }
-        .card-content { padding: 30px 20px; text-align: center; }
+        .card-content { padding: 25px 20px; text-align: center; }
         .card-content h3 { margin: 0; font-size: 1.2rem; color: var(--primary); font-weight: 800; }
         .card-content p { color: var(--text-muted); font-size: 0.9rem; margin-top: 10px; }
 
-        footer { background: var(--primary); color: rgba(255,255,255,0.6); padding: 50px 6%; text-align: center; font-size: 0.8rem; }
         .line-float { 
-            position: fixed; bottom: 30px; right: 30px; background: var(--line-green); color: white; 
-            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            font-size: 30px; z-index: 4000; box-shadow: 0 10px 20px rgba(6,199,85,0.3); text-decoration: none;
+            position: fixed; bottom: 30px; right: 30px; background: var(--line-green); 
+            width: 60px; height: 60px; border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; font-size: 30px; color: white;
+            z-index: 4000; box-shadow: 0 10px 20px rgba(6,199,85,0.3); text-decoration: none;
         }
     </style>
 </head>
 <body>
+
+    <div class="menu-overlay" id="menuOverlay"></div>
 
     <div class="announcement-bar">
         <div class="marquee-content">
@@ -120,8 +123,12 @@
     </div>
 
     <header class="navbar">
-        <a href="index.html" class="logo"><img src="favicon.png" alt="Logo">錦德<span>防水工程</span></a>
+        <a href="index.html" class="logo">
+            <img src="favicon.png" alt="錦德Logo">
+            錦德<span>防水工程</span>
+        </a>
         <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+        
         <nav class="nav-links" id="navLinks">
             <span class="menu-label">M E N U</span>
             <a href="index.html">首頁</a>
@@ -131,6 +138,7 @@
             <a href="cases.html">實績對比</a>
             <a href="daily.html" class="active-page">工程日常</a>
             <a href="areas.html">服務區域</a>
+            
             <div class="nav-contact-box">
                 <a href="https://line.me/ti/p/rqqh-uyZsq" style="color: #06C755 !important;"><i class="fab fa-line"></i> Line 諮詢</a>
                 <a href="tel:0963696032" style="color: #D4AF37 !important;"><i class="fas fa-phone"></i> 撥打專線</a>
@@ -145,7 +153,6 @@
 
     <section class="photo-section">
         <div class="daily-grid">
-            
             <div class="daily-card reveal">
                 <div class="img-wrapper">
                     <span class="card-tag">FEAST</span>
@@ -156,7 +163,6 @@
                     <p>放下機具，享受美食，最強團隊的向心力就在這瞬間凝聚。</p>
                 </div>
             </div>
-
             <div class="daily-card reveal">
                 <div class="img-wrapper">
                     <span class="card-tag">WORK</span>
@@ -167,7 +173,6 @@
                     <p>不論地點多遠，只要有漏水需求，錦德團隊使命必達。</p>
                 </div>
             </div>
-
             <div class="daily-card reveal">
                 <div class="img-wrapper">
                     <span class="card-tag">ANNUAL</span>
@@ -178,7 +183,6 @@
                     <p>感謝夥伴一整年的專業與辛勞，共創錦德卓越品質。</p>
                 </div>
             </div>
-
             <div class="daily-card reveal">
                 <div class="img-wrapper">
                     <span class="card-tag">CRAFT</span>
@@ -189,7 +193,6 @@
                     <p>不斷優化工藝細節，確保每一次止漏工程都能經得起時間考驗。</p>
                 </div>
             </div>
-
             <div class="daily-card reveal">
                 <div class="img-wrapper">
                     <span class="card-tag">TEAM</span>
@@ -200,31 +203,38 @@
                     <p>透過高壓下的信任與執行力，練就工程現場的最佳配合。</p>
                 </div>
             </div>
-
         </div>
     </section>
-
-    <footer>
-        <p>© 2026 錦德防水工程 | 中部職人首選</p>
-    </footer>
 
     <a href="https://line.me/ti/p/rqqh-uyZsq" class="line-float"><i class="fab fa-line"></i></a>
 
     <script>
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
-        hamburger.addEventListener('click', () => {
+        const menuOverlay = document.getElementById('menuOverlay');
+        
+        // 切換選單狀態的函式
+        function toggleMenu() {
             navLinks.classList.toggle('active');
-            hamburger.querySelector('i').classList.toggle('fa-bars');
-            hamburger.querySelector('i').classList.toggle('fa-times');
-        });
+            menuOverlay.classList.toggle('active');
+            const icon = hamburger.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+            
+            // 防止背景滾動
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+        }
 
+        hamburger.addEventListener('click', toggleMenu);
+        // 點擊遮罩處收合選單
+        menuOverlay.addEventListener('click', toggleMenu);
+
+        // 卡片動畫
         function reveal() {
             var cards = document.querySelectorAll(".daily-card");
             cards.forEach((card, index) => {
-                var windowHeight = window.innerHeight;
                 var elementTop = card.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 50) {
+                if (elementTop < window.innerHeight - 50) {
                     setTimeout(() => { card.classList.add("active"); }, index * 150);
                 }
             });
