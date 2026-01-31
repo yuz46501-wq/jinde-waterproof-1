@@ -1,213 +1,233 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+    <link rel="icon" href="favicon.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>服務區域 | 錦德防水工程</title>
+    <title>服務區域 | 錦德防水工程 - 中彰投全區服務</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root {
             --primary: #0F172A; 
-            --accent: #B8860B;  
-            --accent-light: #D4AF37;
-            --bg-light: #F1F5F9;
+            --accent: #C5A059;  
+            --accent-light: #E2C792;
+            --bg-light: #FDFDFD;
             --white: #FFFFFF;
-        }
-        * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { 
-            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; 
-            margin: 0; background: var(--bg-light); color: #334155; 
-            line-height: 1.6; overflow-x: hidden;
+            --text-main: #334155;
+            --text-muted: #94A3B8;
+            --line-green: #06C755;
         }
 
-        /* --- 動畫特效 --- */
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { 
+            font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif; 
+            margin: 0; background: var(--bg-light); color: var(--text-main); 
+            line-height: 1.8; overflow-x: hidden;
+        }
+
+        /* --- [動畫定義] --- */
         @keyframes pulse-gold {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(184, 134, 11, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(184, 134, 11, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(184, 134, 11, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
         }
         @keyframes shake {
             0% { transform: rotate(0); }
-            25% { transform: rotate(3deg); }
-            50% { transform: rotate(-3deg); }
-            75% { transform: rotate(3deg); }
+            25% { transform: rotate(5deg); }
+            50% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
             100% { transform: rotate(0); }
         }
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* 導覽列 */
+        /* --- [導覽列] --- */
         .navbar {
-            background: white; min-height: 100px; display: flex; align-items: center; justify-content: space-between;
-            padding: 10px 5%; position: sticky; top: 0; z-index: 2000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            height: 90px; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 6%; position: sticky; top: 0; z-index: 2000; border-bottom: 1px solid rgba(0,0,0,0.03);
         }
-        .logo { font-size: 1.6rem; font-weight: 900; color: var(--primary); text-decoration: none; flex-shrink: 0; }
+        .logo { display: flex; align-items: center; font-size: 1.4rem; font-weight: 900; color: var(--primary); text-decoration: none; letter-spacing: 2px; }
+        .logo img { height: 45px; margin-right: 12px; }
         .logo span { color: var(--accent); }
-        
-        .nav-links { display: flex; align-items: center; gap: 15px; }
-        .nav-links a { text-decoration: none; color: var(--primary); font-weight: bold; font-size: 0.9rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
-        
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.95rem; transition: 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--accent); transition: 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+
         .btn-call-nav { 
-            background: var(--accent); color: white !important; padding: 10px 22px; border-radius: 50px; 
-            margin-left: 10px; display: inline-block;
+            background: var(--accent); color: white !important; padding: 12px 28px; border-radius: 50px; 
+            font-weight: 700; font-size: 0.9rem; transition: 0.3s;
         }
-        .btn-call-nav:hover { animation: shake 0.5s ease-in-out; background: var(--primary); }
+        .btn-call-nav:hover { animation: shake 0.4s ease-in-out; background: var(--primary); }
 
-        /* 標題區 */
+        /* --- [手機側邊欄] --- */
+        .menu-toggle { display: none; font-size: 1.6rem; color: var(--primary); cursor: pointer; }
+        .sidebar { position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background: var(--primary); z-index: 3000; padding: 60px 40px; transition: 0.5s; display: flex; flex-direction: column; gap: 25px; }
+        .sidebar.active { right: 0; }
+        .sidebar a { color: white; text-decoration: none; font-size: 1.1rem; }
+        .sidebar-close { position: absolute; top: 25px; right: 25px; color: white; font-size: 1.8rem; cursor: pointer; }
+        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2500; display: none; }
+        .sidebar-overlay.active { display: block; }
+
+        /* --- [頁面內容] --- */
         .page-header {
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
                         url('https://images.unsplash.com/photo-1449156001437-3a1661acda22?q=80&w=1600') center/cover;
-            padding: 80px 5%; text-align: center; color: white;
+            padding: 100px 6% 120px; text-align: center; color: white;
         }
-        .page-header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .page-header h1 { font-size: 2.8rem; font-weight: 900; letter-spacing: 4px; margin: 0; }
+        .page-header p { font-size: 1.1rem; letter-spacing: 6px; opacity: 0.8; margin-top: 20px; }
 
-        .section { padding: 40px 5%; max-width: 1200px; margin: 0 auto; }
+        .section { padding: 0 6% 100px; max-width: 1400px; margin: 0 auto; }
 
-        /* 內容容器 */
         .area-container {
-            display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px;
-            background: white; padding: 45px; border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.1); margin-top: -60px;
+            display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px;
+            background: white; padding: 60px; border-radius: 2px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.05); margin-top: -80px;
         }
-        .area-info h2 { color: var(--primary); margin-bottom: 25px; border-left: 6px solid var(--accent); padding-left: 15px; }
         
-        .districts { margin-top: 10px; }
+        .area-info h2 { color: var(--primary); font-size: 2.2rem; font-weight: 900; margin-bottom: 40px; border-left: 6px solid var(--accent); padding-left: 20px; }
+        .city-name { font-size: 1.3rem; font-weight: 800; color: var(--accent); margin-bottom: 20px; display: block; }
+        
         .dist-tag { 
-            display: inline-block; background: #f8fafc; padding: 8px 16px; 
-            border-radius: 8px; margin: 5px; font-size: 0.9rem; font-weight: 600;
-            border: 1px solid #e2e8f0; transition: 0.3s; color: var(--primary);
+            display: inline-block; background: #F8FAFC; padding: 10px 20px; 
+            border-radius: 2px; margin: 5px; font-size: 1rem; font-weight: 600;
+            border: 1px solid #E2E8F0; transition: 0.3s; color: var(--primary);
         }
-        .dist-tag:hover { background: var(--primary); color: white; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .dist-tag:hover { background: var(--primary); color: white; transform: translateY(-3px); }
 
-        /* 按鈕動畫 */
         .btn-call {
-            display: inline-block; background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            color: white; padding: 18px 35px; border-radius: 50px; text-decoration: none;
-            font-weight: 900; font-size: 1.2rem; margin-top: 30px;
-            animation: pulse-gold 2s infinite; position: relative; overflow: hidden;
-            text-align: center; width: 100%; max-width: 350px;
+            display: block; background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: white; padding: 22px; border-radius: 50px; text-decoration: none; 
+            font-weight: 900; font-size: 1.2rem; text-align: center; 
+            transition: 0.3s; letter-spacing: 4px; margin-top: 40px;
+            animation: pulse-gold 2s infinite;
         }
-        .btn-call:hover::after { left: 120%; }
 
-        .map-wrapper { border-radius: 15px; overflow: hidden; border: 8px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1); min-height: 400px; }
-        iframe { width: 100%; height: 100%; min-height: 480px; border: 0; }
+        .map-wrapper { border-radius: 2px; overflow: hidden; min-height: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        iframe { width: 100%; height: 100%; border: 0; }
 
-        /* 數據區 */
-        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; margin-top: 50px; }
-        .stat-item { padding: 40px 20px; background: white; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .stat-item i { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; }
-        .stat-item h3 { display: inline-block; font-size: 2.5rem; margin: 10px 0; color: var(--primary); font-weight: 900; }
-        .stat-item span { font-size: 1.2rem; font-weight: 900; color: var(--accent); margin-left: 5px; }
+        /* 數據跑分 */
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 80px; }
+        .stat-item { padding: 50px 30px; background: white; border-radius: 2px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .stat-item i { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
+        .stat-item h3 { font-size: 3.2rem; color: var(--primary); font-weight: 900; }
 
-        footer { background: var(--primary); color: white; padding: 60px 5%; text-align: center; margin-top: 80px; }
+        footer { background: var(--primary); color: white; padding: 80px 8% 50px; text-align: center; }
 
-        /* --- 響應式優化 --- */
-        @media (max-width: 900px) {
-            .navbar { flex-direction: column; padding: 15px; min-height: auto; gap: 10px; }
-            .nav-links { gap: 10px; flex-wrap: wrap; justify-content: center; }
-            .nav-links a { margin: 5px; }
-            .area-container { grid-template-columns: 1fr; margin-top: 20px; padding: 30px 20px; }
-            .map-wrapper { min-height: 300px; }
-            iframe { min-height: 350px; }
+        /* --- [LINE 懸浮按鈕樣式] --- */
+        .line-float { 
+            position: fixed; bottom: 40px; right: 40px; 
+            background: var(--line-green); color: white; 
+            width: 65px; height: 65px; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 35px; text-decoration: none; z-index: 3000; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: 0.3s; 
+        }
+        .line-float:hover { transform: scale(1.1); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+            .area-container { grid-template-columns: 1fr; padding: 40px 25px; }
             .stat-grid { grid-template-columns: 1fr; }
-            .page-header h1 { font-size: 1.8rem; }
+            .line-float { bottom: 30px; right: 30px; width: 55px; height: 55px; font-size: 28px; }
         }
     </style>
 </head>
 <body>
 
     <header class="navbar">
-        <a href="index.html" class="logo">錦德<span>防水工程</span></a>
+        <a href="index.html" class="logo">
+            <img src="favicon.png" alt="錦德">
+            錦德<span>防水工程</span>
+        </a>
         <nav class="nav-links">
-            <a href="index.html">首頁 HOME</a>
-            <a href="about.html">關於我們 ABOUT</a>
-            <a href="services.html">服務項目 SERVICE</a>
-            <a href="cases.html">實績對比 CASES</a>
-            <a href="areas.html" style="color:var(--accent)">服務區域 AREA</a>
-            <a href="contact.html" class="btn-call-nav">立即預約</a>
+            <a href="index.html">首頁</a>
+            <a href="about.html">關於錦德</a>
+            <a href="services.html">服務項目</a>
+            <a href="cases.html">實績對比</a>
+            <a href="daily.html">工程日常</a>
+            <a href="areas.html" style="color:var(--accent)">服務區域</a>
+            <a href="tel:0963696032" class="btn-call-nav">預約場勘</a>
         </nav>
+        <div class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
     </header>
+
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-times"></i></div>
+        <a href="index.html">首頁</a>
+        <a href="about.html">關於錦德</a>
+        <a href="services.html">服務項目</a>
+        <a href="cases.html">實績對比</a>
+        <a href="areas.html">服務區域</a>
+        <a href="tel:0963696032" style="color:var(--accent)">立即撥打</a>
+    </div>
 
     <section class="page-header">
         <h1>專業到府 · 中部全區服務</h1>
-        <p>台中、彰化、南投，免費預約現場勘查估價</p>
+        <p>台中、彰化、南投，免費預約現場勘查</p>
     </section>
 
     <div class="section">
-        <div class="area-container reveal active">
+        <div class="area-container">
             <div class="area-info">
                 <h2>服務據點與範圍</h2>
-                
-                <div class="city-box" style="margin-bottom: 30px;">
-                    <span style="font-size: 1.25rem; font-weight: 900; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-                        <i class="fas fa-location-dot"></i> 台中地區 (全區服務)
-                    </span>
+                <div class="city-box" style="margin-bottom: 35px;">
+                    <span class="city-name"><i class="fas fa-location-dot"></i> 台中地區</span>
                     <div class="districts">
-                        <span class="dist-tag">東區</span><span class="dist-tag">北屯區</span><span class="dist-tag">西屯區</span>
-                        <span class="dist-tag">南屯區</span><span class="dist-tag">太平區</span><span class="dist-tag">大里區</span>
-                        <span class="dist-tag">豐原區</span><span class="dist-tag">潭子區</span><span class="dist-tag">烏日區</span>
+                        <span class="dist-tag">東區</span><span class="dist-tag">太平區</span><span class="dist-tag">北屯區</span>
+                        <span class="dist-tag">西屯區</span><span class="dist-tag">南屯區</span><span class="dist-tag">大里區</span>
                     </div>
                 </div>
-
-                <div class="city-box" style="margin-bottom: 30px;">
-                    <span style="font-size: 1.25rem; font-weight: 900; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-                        <i class="fas fa-car-side"></i> 彰化/南投地區
-                    </span>
+                <div class="city-box">
+                    <span class="city-name"><i class="fas fa-car-side"></i> 彰化/南投地區</span>
                     <div class="districts">
-                        <span class="dist-tag">彰化市</span><span class="dist-tag">員林市</span><span class="dist-tag">鹿港鎮</span>
-                        <span class="dist-tag">和美鎮</span><span class="dist-tag">草屯鎮</span><span class="dist-tag">南投市</span>
+                        <span class="dist-tag">彰化市</span><span class="dist-tag">員林市</span><span class="dist-tag">草屯鎮</span>
+                        <span class="dist-tag">南投市</span>
                     </div>
                 </div>
-
-                <a href="tel:0963696032" class="btn-call"><i class="fas fa-phone"></i> 預約撥打：0963-696-032</a>
+                <a href="tel:0963696032" class="btn-call"><i class="fas fa-phone"></i> 撥打預約：0963-696-032</a>
             </div>
-            
             <div class="map-wrapper">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.94167527181!2d120.6908977!3d24.1352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d22e0e0a5bb%3A0xe54790089f21f64e!2zNDA05Y-w5Lit5biC5p2x5Y2A5bu65oiQ6LevMzQ25be3N-iZnw!5e0!3m2!1szh-TW!2stw!4v1710000000000!5m2!1szh-TW!2stw" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://maps.google.com/maps/contrib/111880921837105247555" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
 
         <div class="stat-grid">
-            <div class="stat-item reveal">
+            <div class="stat-item">
                 <i class="fas fa-house-chimney-crack"></i><br>
-                <h3 class="counter" data-target="500">0</h3><span>+</span>
+                <h3 class="counter" data-target="800">0</h3><span>+</span>
                 <p>成功漏水修復案例</p>
             </div>
-            <div class="stat-item reveal">
+            <div class="stat-item">
                 <i class="fas fa-shield-halved"></i><br>
                 <h3 class="counter" data-target="100">0</h3><span>%</span>
-                <p>專業責任保固承諾</p>
+                <p>正式合約責任保固</p>
             </div>
-            <div class="stat-item reveal">
+            <div class="stat-item">
                 <i class="fas fa-calendar-check"></i><br>
                 <h3 class="counter" data-target="24">0</h3><span>h</span>
-                <p>快速安排預約勘查</p>
+                <p>快速安排到府勘查</p>
             </div>
         </div>
     </div>
 
     <footer>
-        <h2 style="font-size: 1.6rem; color: var(--accent); margin-bottom: 10px;">錦德防水工程</h2>
-        <p>地址：台中市東區建成路346巷7號</p>
-        <p>電話：0963-696-032</p>
-        <div style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 30px; padding-top: 20px;">
-            <p style="opacity: 0.5; font-size: 0.85rem;">© 2026 錦德防水 | 統編 80081612 | 職人守護 ‧ 終結滲漏</p>
-        </div>
+        <h2 style="font-size: 1.5rem; color: var(--accent);">錦德防水工程</h2>
+        <p style="opacity: 0.6; font-size: 0.9rem;">台中市太平區東村八街37巷8號</p>
+        <div style="margin-top: 40px; font-size: 0.8rem; opacity: 0.4;">© 2026 錦德防水 | 統編 80081612</div>
     </footer>
 
-    <script>
-        // 1. 進場揭幕動畫
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            reveals.forEach(el => {
-                var windowHeight = window.innerHeight;
-                var elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) { el.classList.add("active"); }
-            });
-        }
+    <a href="https://line.me/ti/p/rqqh-uyZsq" class="line-float" target="_blank"><i class="fab fa-line"></i></a>
 
-        // 2. 數字跑分動畫 (優化平滑度)
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.querySelector('.sidebar-overlay').classList.toggle('active');
+        }
         function countUp() {
             const counters = document.querySelectorAll('.counter');
             counters.forEach(counter => {
@@ -215,19 +235,12 @@
                     if (entries[0].isIntersecting) {
                         const target = +counter.getAttribute('data-target');
                         let count = 0;
-                        const duration = 2000; // 2秒完成
-                        const frameRate = 1000 / 60;
-                        const totalFrames = duration / frameRate;
-                        const increment = target / totalFrames;
-
                         const update = () => {
-                            count += increment;
+                            count += (target / 80);
                             if (count < target) {
                                 counter.innerText = Math.ceil(count);
                                 requestAnimationFrame(update);
-                            } else {
-                                counter.innerText = target;
-                            }
+                            } else { counter.innerText = target; }
                         };
                         update();
                         observer.unobserve(counter);
@@ -236,12 +249,7 @@
                 observer.observe(counter);
             });
         }
-
-        window.addEventListener("scroll", reveal);
-        window.addEventListener("load", () => {
-            reveal();
-            countUp();
-        });
+        window.addEventListener("load", countUp);
     </script>
 </body>
 </html>
