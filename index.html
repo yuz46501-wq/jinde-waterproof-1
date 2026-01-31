@@ -8,8 +8,8 @@
     <style>
         /* --- 1. 全域設定 --- */
         :root {
-            --primary: #0F172A; 
-            --accent: #C5A059;  
+            --primary: #0F172A; /* 深藍底色 */
+            --accent: #C5A059;  /* 截圖中的金色 */
             --white: #FFFFFF;
             --bg-gray: #F8FAFC;
             --text-dark: #1E293B;
@@ -20,7 +20,7 @@
         body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; background: var(--white); color: var(--text-dark); line-height: 1.8; overflow-x: hidden; }
         body.no-scroll { overflow: hidden; }
 
-        /* --- 2. 開場動畫 --- */
+        /* --- 2. 開場動畫 (Loader) --- */
         #loader {
             position: fixed; inset: 0; background: var(--primary); 
             display: flex; justify-content: center; align-items: center;
@@ -45,11 +45,11 @@
 
         .nav-links { display: flex; gap: 30px; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
-        .btn-nav { background: var(--accent); color: white !important; padding: 10px 20px; border-radius: 4px; }
+        .btn-nav { background: var(--accent); color: white !important; padding: 10px 25px; border-radius: 4px; }
 
         .hamburger { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); }
 
-        /* --- 4. 漢堡選單 (同步圖片樣式) --- */
+        /* --- 4. 漢堡選單 (同步截圖配色) --- */
         .mobile-menu {
             position: fixed; top: 0; right: -100%; width: 300px; height: 100vh;
             background: var(--primary); z-index: 2001; padding: 60px 40px;
@@ -63,15 +63,18 @@
         .menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; display: none; }
         .menu-overlay.active { display: block; }
 
-        /* --- 5. 內容區塊樣式 --- */
+        /* --- 5. 區塊樣式 --- */
         .promo-bar { background: #1E293B; color: #E2C792; padding: 10px 5%; font-size: 0.9rem; font-weight: bold; }
+        
         .hero {
             height: 60vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1503387762-592dea58f230?q=80&w=1600') center/cover;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white;
         }
+        
         .reveal { opacity: 0; transform: translateY(40px); transition: 1s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        /* 數據欄 */
         .stats-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             max-width: 1100px; margin: -50px auto 0; background: white;
@@ -82,13 +85,16 @@
         .stat-item h3 { font-size: 2.2rem; color: var(--accent); margin-bottom: 5px; }
         .stat-item p { font-size: 0.9rem; color: var(--text-muted); font-weight: bold; }
 
+        /* 最新動態卡片 */
         .section { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
         .section-header { text-align: center; margin-bottom: 60px; }
         .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .news-card { border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .news-card { border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; transition: 0.3s; }
+        .news-card:hover { transform: translateY(-5px); }
         .news-img { width: 100%; height: 220px; object-fit: cover; }
         .news-info { padding: 25px; }
 
+        /* 對比滑動 */
         .ba-container { max-width: 900px; margin: 0 auto 60px; }
         .ba-box { position: relative; width: 100%; height: 450px; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
         .ba-img { position: absolute; inset: 0; background-size: cover; background-position: center; }
@@ -96,13 +102,20 @@
         .ba-range { position: absolute; inset: 0; width: 100%; -webkit-appearance: none; background: transparent; z-index: 3; cursor: ew-resize; }
         .ba-range::-webkit-slider-thumb { -webkit-appearance: none; width: 45px; height: 45px; background: var(--accent); border: 4px solid white; border-radius: 50%; }
 
+        /* 頁腳 */
         footer { background: var(--primary); color: white; padding: 80px 5% 40px; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; }
         .footer-col h4 { color: var(--accent); margin-bottom: 20px; font-size: 1.1rem; }
-        .footer-col a { color: #94A3B8; text-decoration: none; display: block; margin-bottom: 10px; font-size: 0.9rem; }
+        .footer-col a { color: #94A3B8; text-decoration: none; display: block; margin-bottom: 10px; font-size: 0.9rem; transition: 0.3s; }
+        .footer-col a:hover { color: var(--accent); }
 
-        /* --- 6. 懸浮與響應式 --- */
-        .line-float { position: fixed; bottom: 30px; right: 30px; background: #06C755; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); text-decoration: none; }
+        /* --- 6. 懸浮按鈕與響應式 --- */
+        .line-float { 
+            position: fixed; bottom: 30px; right: 30px; 
+            background: #06C755; color: white; width: 60px; height: 60px; 
+            border-radius: 50%; display: flex; justify-content: center; align-items: center; 
+            z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); text-decoration: none; 
+        }
         .line-float i { font-size: 32px; }
 
         @media (max-width: 992px) {
@@ -227,11 +240,11 @@
             </div>
             <div class="footer-col">
                 <h4>快速連結</h4>
-                <a href="#">首頁</a><a href="about.html">關於我們</a><a href="services.html">服務項目</a>
+                <a href="index.html">首頁</a><a href="about.html">關於我們</a><a href="services.html">服務項目</a>
             </div>
             <div class="footer-col">
                 <h4>服務項目</h4>
-                <a href="#">頂樓防水</a><a href="#">科技抓漏</a><a href="#">壁癌處理</a>
+                <a href="services.html">頂樓防水</a><a href="services.html">科技抓漏</a><a href="services.html">壁癌處理</a>
             </div>
             <div class="footer-col">
                 <h4>聯絡我們</h4>
@@ -247,12 +260,12 @@
     </a>
 
     <script>
-        // 開場動畫控制
+        // 開場動畫與捲動解鎖
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.body.classList.add('loaded');
                 document.body.classList.remove('no-scroll');
-                reveal();
+                reveal(); // 初始化動畫
             }, 2000);
         });
 
@@ -262,11 +275,15 @@
             document.getElementById('overlay').classList.toggle('active');
         }
 
-        // 滾動顯現控制
+        // 滾動顯現動畫
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             reveals.forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add("active");
+                var windowHeight = window.innerHeight;
+                var revealTop = el.getBoundingClientRect().top;
+                if (revealTop < windowHeight - 80) {
+                    el.classList.add("active");
+                }
             });
         }
         window.addEventListener("scroll", reveal);
