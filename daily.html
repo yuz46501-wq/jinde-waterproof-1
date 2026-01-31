@@ -9,8 +9,8 @@
     <style>
         :root {
             --primary: #0F172A; 
-            --accent: linear-gradient(135deg, #B8860B 0%, #D4AF37 100%);
-            --accent-plain: #B8860B;
+            --accent: #B8860B;
+            --accent-grad: linear-gradient(135deg, #B8860B 0%, #D4AF37 100%);
             --bg-light: #F8FAFC;
             --white: #FFFFFF;
             --text-main: #1E293B;
@@ -25,112 +25,131 @@
             line-height: 1.8; overflow-x: hidden;
         }
 
-        /* --- 動畫 --- */
-        .reveal { 
-            opacity: 0; transform: translateY(30px); 
-            transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1); 
+        /* --- 跑馬燈公告 --- */
+        .announcement-bar {
+            background: #0F172A; color: #fff; padding: 10px 0;
+            overflow: hidden; white-space: nowrap; font-size: 0.85rem; letter-spacing: 1px;
         }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        .marquee-content {
+            display: inline-block; padding-left: 100%;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
         /* --- 導覽列 --- */
         .navbar {
             background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(15px);
-            height: 90px; display: flex; align-items: center; justify-content: space-between;
-            padding: 0 6%; position: sticky; top: 0; z-index: 2000;
+            height: 100px; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%; position: sticky; top: 0; z-index: 2000;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
-        .logo { display: flex; align-items: center; font-size: 1.5rem; font-weight: 900; color: var(--primary); text-decoration: none; }
-        .logo img { height: 48px; margin-right: 12px; }
-        .logo span { color: var(--accent-plain); }
+        .logo { display: flex; align-items: center; font-size: 1.4rem; font-weight: 900; color: var(--primary); text-decoration: none; }
+        .logo img { height: 42px; margin-right: 10px; }
+        .logo span { color: var(--accent); }
         
         .hamburger { cursor: pointer; font-size: 1.5rem; color: var(--primary); z-index: 3001; }
-        @media (min-width: 993px) { .hamburger { display: none; } }
+        @media (min-width: 1201px) { .hamburger { display: none; } }
 
-        /* --- 手機版側邊選單 --- */
-        .nav-links { display: flex; align-items: center; gap: 25px; }
-        @media (max-width: 992px) {
-            .nav-links { 
-                position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
-                background: #0F172A; flex-direction: column; align-items: flex-start;
-                padding: 100px 40px; gap: 0; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-                z-index: 3000;
-            }
-            .nav-links.active { right: 0; }
-            .nav-links::before {
-                content: "MENU"; color: var(--accent-plain); font-size: 0.75rem; 
-                letter-spacing: 4px; margin-bottom: 30px; font-weight: 700;
-            }
-            .nav-links a { padding: 15px 0; width: 100%; color: #FFFFFF; font-size: 1.2rem; text-decoration: none; }
-            .nav-contact-box { width: 100%; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
-            .nav-contact-box a { font-size: 1.1rem; display: flex; align-items: center; padding: 10px 0; text-decoration: none;}
+        .nav-links { display: flex; align-items: center; gap: 15px; }
+        .nav-links a { 
+            text-decoration: none; color: var(--primary); font-weight: 700; 
+            font-size: 0.85rem; display: flex; flex-direction: column; align-items: center;
+            transition: 0.3s; line-height: 1.2;
+        }
+        .nav-links a:hover { color: var(--accent); }
+        .active-page { color: var(--accent) !important; }
+
+        /* 按鈕樣式 */
+        .btn-call-nav { 
+            background: var(--accent-grad); color: white !important; 
+            padding: 10px 20px !important; border-radius: 5px; 
+            flex-direction: row !important; gap: 8px; font-size: 0.9rem !important;
         }
 
-        /* --- 頁面標題背景 --- */
+        @media (max-width: 1200px) {
+            .nav-links { 
+                position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+                background: #0F172A; flex-direction: column; align-items: flex-start;
+                padding: 100px 30px; gap: 0; transition: 0.5s; z-index: 3000;
+            }
+            .nav-links.active { right: 0; }
+            .nav-links a { 
+                padding: 15px 0; width: 100%; color: #FFFFFF; font-size: 1.1rem; 
+                border-bottom: 1px solid rgba(255,255,255,0.1); align-items: flex-start;
+            }
+            .btn-call-nav { margin-top: 15px; justify-content: center; border-radius: 50px; }
+        }
+
+        /* --- 頁面標題背景 (使用指定的專業團隊照) --- */
         .page-header { 
             background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
                         url('https://image2url.com/r2/default/images/1769873652015-5632ee47-cf8f-41a5-a90e-6463a308cd64.blob') center/cover no-repeat;
-            color: white; padding: 130px 6% 150px; text-align: center;
+            color: white; padding: 140px 6% 160px; text-align: center;
         }
-        .page-header h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 900; margin: 0; letter-spacing: 4px; }
-        .page-header p { font-size: 1rem; opacity: 0.8; letter-spacing: 4px; margin-top: 15px; }
+        .page-header h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 900; margin: 0; letter-spacing: 5px; }
+        .page-header p { font-size: 1rem; opacity: 0.9; letter-spacing: 4px; margin-top: 15px; font-weight: 300; }
 
-        /* --- 卡片網格區 --- */
-        .photo-section { padding: 0 6% 100px; max-width: 1400px; margin: -60px auto 0; }
-        .daily-grid { display: grid; grid-template-columns: 1fr; gap: 35px; }
+        /* --- 卡片網格 --- */
+        .photo-section { padding: 0 6% 100px; max-width: 1400px; margin: -70px auto 0; }
+        .daily-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
         @media (min-width: 768px) { .daily-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1200px) { .daily-grid { grid-template-columns: repeat(3, 1fr); } }
 
         .daily-card {
-            background: var(--white); border-radius: 25px; overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.5s; position: relative;
+            background: var(--white); border-radius: 20px; overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: 0.4s; position: relative;
+            opacity: 0; transform: translateY(30px);
         }
-        .daily-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .daily-card.active { opacity: 1; transform: translateY(0); }
+        .daily-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.12); }
 
-        .img-wrapper { width: 100%; height: 350px; overflow: hidden; }
-        .daily-card img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s ease; }
-        .daily-card:hover img { transform: scale(1.1); }
+        .img-wrapper { width: 100%; height: 320px; overflow: hidden; }
+        .daily-card img { width: 100%; height: 100%; object-fit: cover; transition: 1.2s; }
+        .daily-card:hover img { transform: scale(1.08); }
 
         .card-tag {
-            position: absolute; top: 20px; left: 20px; z-index: 10;
-            background: var(--accent); color: white; padding: 6px 16px; border-radius: 50px; font-size: 0.75rem; font-weight: 800;
+            position: absolute; top: 15px; left: 15px; z-index: 10;
+            background: var(--accent-grad); color: white; padding: 5px 14px; border-radius: 4px; font-size: 0.7rem; font-weight: 800;
         }
 
-        .card-content { padding: 35px 20px; text-align: center; }
-        .card-content h3 { margin: 0; font-size: 1.25rem; color: var(--primary); font-weight: 900; }
-        .card-content p { color: var(--text-muted); font-size: 0.95rem; margin-top: 12px; }
+        .card-content { padding: 30px 20px; text-align: center; }
+        .card-content h3 { margin: 0; font-size: 1.2rem; color: var(--primary); font-weight: 800; }
+        .card-content p { color: var(--text-muted); font-size: 0.9rem; margin-top: 10px; }
 
-        footer { background: var(--primary); color: white; padding: 60px 6% 40px; text-align: center; }
+        footer { background: var(--primary); color: rgba(255,255,255,0.6); padding: 50px 6%; text-align: center; font-size: 0.8rem; }
         .line-float { 
-            position: fixed; bottom: 30px; right: 30px; background: var(--line-green); color: white; 
-            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            font-size: 30px; z-index: 3000; box-shadow: 0 10px 25px rgba(6, 199, 85, 0.4); 
-            text-decoration: none;
+            position: fixed; bottom: 25px; right: 25px; background: var(--line-green); color: white; 
+            width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-size: 28px; z-index: 3000; box-shadow: 0 10px 20px rgba(6, 199, 85, 0.3); text-decoration: none;
         }
     </style>
 </head>
 <body>
 
+    <div class="announcement-bar">
+        <div class="marquee-content">
+            📢 錦德防水最新公告：中彰投地區預約場勘完全免費，工程享五年正式合約保固 | 專業漏水檢測，透明開價 | ☎️ 服務專線：0963-696-032
+        </div>
+    </div>
+
     <header class="navbar">
         <a href="index.html" class="logo"><img src="favicon.png" alt="Logo">錦德<span>防水工程</span></a>
         <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
         <nav class="nav-links" id="navLinks">
-            <a href="index.html">首頁</a>
-            <a href="about.html">關於錦德</a>
-            <a href="services.html">服務項目</a>
-            <a href="cases.html">實績對比</a>
-            <a href="daily.html" class="active-page">錦德日常</a>
-            <div class="nav-contact-box">
-                <a href="https://line.me/ti/p/rqqh-uyZsq" style="color: var(--line-green);"><i class="fab fa-line"></i> Line 諮詢</a>
-                <a href="tel:0963696032" style="color: var(--accent-plain);"><i class="fas fa-phone"></i> 撥打專線</a>
-            </div>
+            <a href="index.html"><span>首頁</span><small>HOME</small></a>
+            <a href="about.html"><span>關於我們</span><small>ABOUT</small></a>
+            <a href="services.html"><span>服務項目</span><small>SERVICE</small></a>
+            <a href="cases.html"><span>實績對比</span><small>CASES</small></a>
+            <a href="daily.html" class="active-page"><span>錦德日常</span><small>DAILY</small></a>
+            <a href="areas.html"><span>服務區域</span><small>AREA</small></a>
+            <a href="contact.html" class="btn-call-nav">立即預約</a>
+            <a href="tel:0963696032" class="btn-call-nav"><i class="fas fa-phone"></i>撥打電話</a>
         </nav>
     </header>
 
     <section class="page-header">
-        <div class="reveal">
-            <h1>錦德團隊紀錄</h1>
-            <p>專業止漏 ‧ 熱情生活</p>
-        </div>
+        <h1>錦德團隊紀錄</h1>
+        <p>專業止漏 ‧ 熱情生活</p>
     </section>
 
     <section class="photo-section">
@@ -139,7 +158,7 @@
             <div class="daily-card reveal">
                 <div class="img-wrapper">
                     <span class="card-tag">FEAST</span>
-                    <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEQjqVpfZVxFuQvEggvwV1HDfd78J8PHQACoTAAAoW06VdXBQN6J31ptjgE.jpeg" alt="團隊烤肉">
+                    <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEQjqVpfZVxFuQvEggvwV1HDfd78J8PHQACoTAAAoW06VdXBQN6J31ptjgE.jpeg">
                 </div>
                 <div class="card-content">
                     <h3>團隊烤肉 ‧ 歡聚時刻</h3>
@@ -150,7 +169,7 @@
             <div class="daily-card reveal">
                 <div class="img-wrapper">
                     <span class="card-tag">WORK</span>
-                    <img src="https://i.postimg.cc/3NHNKM6f/IMG-8756.jpg" alt="花蓮任務">
+                    <img src="https://i.postimg.cc/3NHNKM6f/IMG-8756.jpg">
                 </div>
                 <div class="card-content">
                     <h3>遠征花蓮 ‧ 職人精神</h3>
@@ -161,7 +180,7 @@
             <div class="daily-card reveal">
                 <div class="img-wrapper">
                     <span class="card-tag">ANNUAL</span>
-                    <img src="https://i.postimg.cc/Gmp23xMj/IMG-3408.jpg" alt="尾牙聚餐">
+                    <img src="https://i.postimg.cc/Gmp23xMj/IMG-3408.jpg">
                 </div>
                 <div class="card-content">
                     <h3>114 年度尾牙 ‧ 豐收</h3>
@@ -171,16 +190,15 @@
 
             <div class="daily-card reveal">
                 <div class="img-wrapper">
-                    <span class="card-tag">DETAILS</span>
-                    <img src="https://i.postimg.cc/hG6h5Q1d/IMG-2461.jpg" alt="環境維護">
+                    <span class="card-tag">CRAFT</span>
+                    <img src="https://image2url.com/r2/default/images/1769873652015-5632ee47-cf8f-41a5-a90e-6463a308cd64.blob">
                 </div>
                 <div class="card-content">
-                    <h3>環境維護 ‧ 展現專業</h3>
-                    <p>井然有序的工坊，是我們對每一個施工環節堅持的展現。</p>
+                    <h3>技術研討 ‧ 追求卓越</h3>
+                    <p>不斷優化工藝細節，確保每一次止漏工程都能經得起時間考驗。</p>
                 </div>
             </div>
-
-            <div class="daily-card reveal">
+                        <div class="daily-card reveal">
                 <div class="img-wrapper">
                     <span class="card-tag">TEAM</span>
                     <img src="https://i.postimg.cc/bN5Xb0Yp/IMG-3410.jpg" alt="生存遊戲">
@@ -188,17 +206,6 @@
                 <div class="card-content">
                     <h3>生存遊戲 ‧ 默契訓練</h3>
                     <p>透過高壓下的信任與執行力，練就工程現場的最佳配合。</p>
-                </div>
-            </div>
-
-            <div class="daily-card reveal">
-                <div class="img-wrapper">
-                    <span class="card-tag">CRAFT</span>
-                    <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEQjqVpfZVxFuQvEggvwV1HDfd78J8PHQACoTAAAoW06VdXBQN6J31ptjgE.jpeg" alt="專業工法">
-                </div>
-                <div class="card-content">
-                    <h3>技術研討 ‧ 追求卓越</h3>
-                    <p>不斷優化工藝細節，確保每一次止漏工程都能經得起時間考驗。</p>
                 </div>
             </div>
 
@@ -221,18 +228,14 @@
         });
 
         function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
+            var cards = document.querySelectorAll(".daily-card");
+            cards.forEach((card, index) => {
                 var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementTop = card.getBoundingClientRect().top;
                 if (elementTop < windowHeight - 50) {
-                    (function(index) {
-                        setTimeout(function() {
-                            reveals[index].classList.add("active");
-                        }, index * 100); 
-                    })(i);
+                    setTimeout(() => { card.classList.add("active"); }, index * 100);
                 }
-            }
+            });
         }
         window.addEventListener("scroll", reveal);
         window.addEventListener("load", reveal);
