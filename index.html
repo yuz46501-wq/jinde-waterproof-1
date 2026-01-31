@@ -18,9 +18,9 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
         body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; background: var(--white); color: var(--text-dark); line-height: 1.8; overflow-x: hidden; }
-        body.no-scroll { overflow: hidden; } /* 動畫與選單開啟時禁止捲動 */
+        body.no-scroll { overflow: hidden; }
 
-        /* --- 2. 開場動畫 (Loader) --- */
+        /* --- 2. 開場動畫 --- */
         #loader {
             position: fixed; inset: 0; background: var(--primary); 
             display: flex; justify-content: center; align-items: center;
@@ -34,7 +34,7 @@
         @keyframes expand { to { width: 220px; } }
         body.loaded #loader { transform: translateY(-100%); }
 
-        /* --- 3. 導覽列與漢堡選單 --- */
+        /* --- 3. 導覽列 --- */
         .navbar {
             height: 80px; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px);
             display: flex; align-items: center; justify-content: space-between;
@@ -43,30 +43,28 @@
         .logo { font-size: 1.5rem; font-weight: 900; color: var(--primary); text-decoration: none; }
         .logo span { color: var(--accent); }
 
-        /* 電腦版選單 */
         .nav-links { display: flex; gap: 30px; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
         .btn-nav { background: var(--accent); color: white !important; padding: 10px 20px; border-radius: 4px; }
 
-        /* 漢堡圖示 */
         .hamburger { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); }
 
-        /* 手機側邊選單 */
+        /* --- 4. 漢堡選單 (同步圖片樣式) --- */
         .mobile-menu {
             position: fixed; top: 0; right: -100%; width: 300px; height: 100vh;
-            background: var(--primary); z-index: 2001; padding: 100px 40px;
-            display: flex; flex-direction: column; gap: 30px; transition: 0.4s ease;
+            background: var(--primary); z-index: 2001; padding: 60px 40px;
+            display: flex; flex-direction: column; transition: 0.4s ease;
         }
         .mobile-menu.active { right: 0; }
-        .mobile-menu a { color: white; text-decoration: none; font-size: 1.3rem; font-weight: 600; }
+        .mobile-menu a { color: white; text-decoration: none; font-size: 1.2rem; margin-bottom: 25px; font-weight: 500; }
+        .menu-header { color: var(--accent); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 40px; font-weight: bold; }
+        .menu-call { color: var(--accent) !important; font-weight: bold; margin-top: 10px; }
+        .close-btn { position: absolute; top: 25px; right: 30px; color: white; font-size: 1.8rem; cursor: pointer; }
         .menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; display: none; }
         .menu-overlay.active { display: block; }
 
-        /* --- 4. 跑馬燈 --- */
+        /* --- 5. 內容區塊樣式 --- */
         .promo-bar { background: #1E293B; color: #E2C792; padding: 10px 5%; font-size: 0.9rem; font-weight: bold; }
-
-        /* --- 5. Hero 區塊 --- */
         .hero {
             height: 60vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1503387762-592dea58f230?q=80&w=1600') center/cover;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white;
@@ -74,7 +72,6 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: 1s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- 6. 專業數據欄 (三/四欄) --- */
         .stats-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             max-width: 1100px; margin: -50px auto 0; background: white;
@@ -85,7 +82,6 @@
         .stat-item h3 { font-size: 2.2rem; color: var(--accent); margin-bottom: 5px; }
         .stat-item p { font-size: 0.9rem; color: var(--text-muted); font-weight: bold; }
 
-        /* --- 7. 最新動態 (三欄卡片) --- */
         .section { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
         .section-header { text-align: center; margin-bottom: 60px; }
         .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
@@ -93,7 +89,6 @@
         .news-img { width: 100%; height: 220px; object-fit: cover; }
         .news-info { padding: 25px; }
 
-        /* --- 8. 實績對比 (滑動式) --- */
         .ba-container { max-width: 900px; margin: 0 auto 60px; }
         .ba-box { position: relative; width: 100%; height: 450px; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
         .ba-img { position: absolute; inset: 0; background-size: cover; background-position: center; }
@@ -101,30 +96,25 @@
         .ba-range { position: absolute; inset: 0; width: 100%; -webkit-appearance: none; background: transparent; z-index: 3; cursor: ew-resize; }
         .ba-range::-webkit-slider-thumb { -webkit-appearance: none; width: 45px; height: 45px; background: var(--accent); border: 4px solid white; border-radius: 50%; }
 
-        /* --- 9. 頁腳 (四欄) --- */
         footer { background: var(--primary); color: white; padding: 80px 5% 40px; }
-        .footer-grid {
-            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
-            max-width: 1200px; margin: 0 auto;
-        }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; }
         .footer-col h4 { color: var(--accent); margin-bottom: 20px; font-size: 1.1rem; }
         .footer-col a { color: #94A3B8; text-decoration: none; display: block; margin-bottom: 10px; font-size: 0.9rem; }
 
-        /* --- 10. 響應式設定 --- */
+        /* --- 6. 懸浮與響應式 --- */
+        .line-float { position: fixed; bottom: 30px; right: 30px; background: #06C755; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); text-decoration: none; }
+        .line-float i { font-size: 32px; }
+
         @media (max-width: 992px) {
             .nav-links { display: none; }
             .hamburger { display: block; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
             .stat-item { border-right: none; border-bottom: 1px solid #eee; padding: 20px 0; }
-            .stat-item:last-child { border-bottom: none; }
         }
         @media (max-width: 600px) {
             .footer-grid { grid-template-columns: 1fr; }
             .ba-box { height: 300px; }
         }
-
-        /* LINE 按鈕 */
-        .line-float { position: fixed; bottom: 30px; right: 30px; background: #06C755; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body class="no-scroll">
@@ -155,39 +145,22 @@
         </div>
     </nav>
 
-    <<div class="menu-overlay" id="overlay" onclick="toggleMenu()"></div>
-
-<div class="mobile-menu" id="mobileMenu">
-    <div class="close-btn" onclick="toggleMenu()">&times;</div>
-    
-    <div class="menu-header">MENU</div>
-    
-    <a href="index.html" onclick="toggleMenu()">首頁</a>
-    <a href="about.html" onclick="toggleMenu()">關於錦德</a>
-    <a href="services.html" onclick="toggleMenu()">服務項目</a>
-    <a href="cases.html" onclick="toggleMenu()">實績對比</a>
-    <a href="journal.html" onclick="toggleMenu()">工程日常</a>
-    <a href="area.html" onclick="toggleMenu()">服務區域</a>
-    
-    <a href="tel:0963696032" class="menu-call" onclick="toggleMenu()">撥打專線</a>
-</div>
-
-<a href="https://line.me/ti/p/rqqh-uyZsq" class="line-float" target="_blank">
-    <i class="fab fa-line"></i>
-</a>
-
-<script>
-    function toggleMenu() {
-        // 切換側邊欄與背景遮罩的 active 狀態
-        document.getElementById('mobileMenu').classList.toggle('active');
-        document.getElementById('overlay').classList.toggle('active');
-    }
-</script>
-
+    <div class="menu-overlay" id="overlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-btn" onclick="toggleMenu()">&times;</div>
+        <div class="menu-header">MENU</div>
+        <a href="index.html" onclick="toggleMenu()">首頁</a>
+        <a href="about.html" onclick="toggleMenu()">關於錦德</a>
+        <a href="services.html" onclick="toggleMenu()">服務項目</a>
+        <a href="cases.html" onclick="toggleMenu()">實績對比</a>
+        <a href="journal.html" onclick="toggleMenu()">工程日常</a>
+        <a href="area.html" onclick="toggleMenu()">服務區域</a>
+        <a href="tel:0963696032" class="menu-call" onclick="toggleMenu()">撥打專線</a>
+    </div>
 
     <header class="hero">
         <div class="reveal">
-            <h1 style="letter-spacing: 5px; margin-bottom: 10px;">科技抓漏 ‧專業防水</h1>
+            <h1 style="letter-spacing: 5px; margin-bottom: 10px;">科技抓漏 ‧ 專業防水</h1>
             <p style="font-size: 1.2rem; opacity: 0.9;">真正解決漏水根源的修繕專家</p>
         </div>
     </header>
@@ -210,21 +183,21 @@
             <div class="news-card reveal">
                 <img src="https://images.unsplash.com/photo-1621905252507-b354bcadcabc?q=80&w=800" class="news-img">
                 <div class="news-info">
-                    <h3 style="margin-bottom:10px;">太平區：頂樓防水翻新</h3>
+                    <h3>太平區：頂樓防水翻新</h3>
                     <p style="color:var(--text-muted); font-size:0.9rem;">完成結構補強與防水層塗佈，解決長期滲漏問題。</p>
                 </div>
             </div>
             <div class="news-card reveal">
                 <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800" class="news-img">
                 <div class="news-info">
-                    <h3 style="margin-bottom:10px;">北屯區：浴室壁癌根治</h3>
+                    <h3>北屯區：浴室壁癌根治</h3>
                     <p style="color:var(--text-muted); font-size:0.9rem;">透過科技儀器精準定位水源，徹底阻絕壁癌。</p>
                 </div>
             </div>
             <div class="news-card reveal">
                 <img src="https://images.unsplash.com/photo-1541888941255-20211997184b?q=80&w=800" class="news-img">
                 <div class="news-info">
-                    <h3 style="margin-bottom:10px;">西屯區：外牆滲水處理</h3>
+                    <h3>西屯區：外牆滲水處理</h3>
                     <p style="color:var(--text-muted); font-size:0.9rem;">高空作業精準修補裂縫，恢復建築外觀與防水。</p>
                 </div>
             </div>
@@ -232,7 +205,7 @@
     </section>
 
     <section class="section" style="background:var(--bg-gray); max-width:100%;">
-        <div class="section-header reveal" style="max-width:1200px; margin:0 auto 60px;">
+        <div class="section-header reveal">
             <h2 style="font-size: 2rem;">前後對比實蹟</h2>
             <p style="color:var(--accent); letter-spacing: 3px;">BEFORE & AFTER</p>
         </div>
@@ -254,7 +227,7 @@
             </div>
             <div class="footer-col">
                 <h4>快速連結</h4>
-                <a href="#">首頁</a><a href="#">關於我們</a><a href="#">服務項目</a>
+                <a href="#">首頁</a><a href="about.html">關於我們</a><a href="services.html">服務項目</a>
             </div>
             <div class="footer-col">
                 <h4>服務項目</h4>
@@ -262,19 +235,19 @@
             </div>
             <div class="footer-col">
                 <h4>聯絡我們</h4>
-                <p style="color:#94A3B8; font-size:0.85rem;">電話：0963-696-032</p>
-                <p style="color:#94A3B8; font-size:0.85rem;">地址：台中市太平區</p>
+                <p style="color:#94A3B8;">電話：0963-696-032</p>
+                <p style="color:#94A3B8;">地址：台中市太平區</p>
             </div>
         </div>
         <p style="text-align:center; margin-top:60px; font-size:0.8rem; color:#475569;">© 2026 JIN-DE WATERPROOFING | 統編：80081612</p>
     </footer>
 
     <a href="https://line.me/ti/p/rqqh-uyZsq" class="line-float" target="_blank">
-        <i class="fab fa-line" style="font-size:1.5rem;"></i> LINE 專業諮詢
+        <i class="fab fa-line"></i>
     </a>
 
     <script>
-        // 1. 開場動畫與禁止捲動
+        // 開場動畫控制
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.body.classList.add('loaded');
@@ -283,13 +256,13 @@
             }, 2000);
         });
 
-        // 2. 漢堡菜單切換
+        // 漢堡選單控制
         function toggleMenu() {
             document.getElementById('mobileMenu').classList.toggle('active');
             document.getElementById('overlay').classList.toggle('active');
         }
 
-        // 3. 滾動顯示內容
+        // 滾動顯現控制
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             reveals.forEach(el => {
