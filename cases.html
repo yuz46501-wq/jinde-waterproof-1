@@ -14,111 +14,123 @@
             --bg-light: #F8FAFC;
             --white: #FFFFFF;
             --line-green: #06C755;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
         }
         * { box-sizing: border-box; scroll-behavior: smooth; }
         body { 
-            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; 
-            margin: 0; background: var(--bg-light); color: #334155; 
+            font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif; 
+            margin: 0; background: var(--bg-light); color: var(--text-main); 
             line-height: 1.8; overflow-x: hidden;
         }
 
-        /* --- 導覽列：電腦橫向 / 手機漢堡 --- */
+        /* --- 導覽列 (與首頁同步) --- */
         .navbar {
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
             height: 90px; display: flex; align-items: center; justify-content: space-between;
-            padding: 0 6%; position: sticky; top: 0; z-index: 2000; box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            padding: 0 6%; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
-        .logo { font-size: 1.6rem; font-weight: 900; color: var(--primary); text-decoration: none; letter-spacing: 1px; }
+        .logo { 
+            display: flex; align-items: center; 
+            font-size: 1.6rem; font-weight: 900; color: var(--primary); 
+            text-decoration: none; letter-spacing: 1px; flex-shrink: 0; 
+        }
         .logo span { color: var(--accent); }
         
-        .nav-links { display: flex; align-items: center; gap: 30px; }
-        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 700; font-size: 1rem; transition: 0.3s; }
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--primary); z-index: 3001; }
+
+        .nav-links { display: flex; gap: 25px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
-        .btn-call-nav {
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            color: white !important; padding: 12px 28px; border-radius: 50px; 
-            box-shadow: 0 10px 20px rgba(184, 134, 11, 0.2);
+        .nav-links a.active-page { color: var(--accent); }
+        
+        .btn-call-nav { 
+            background: var(--primary); color: white !important; padding: 10px 22px; border-radius: 4px; 
+            font-weight: 700; border: 2px solid var(--primary); transition: 0.3s;
+        }
+        .btn-call-nav:hover { background: var(--accent); border-color: var(--accent); }
+
+        /* --- 手機版側邊選單樣式 --- */
+        @media (max-width: 992px) {
+            .hamburger { display: block; }
+            .nav-links { 
+                position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
+                background: #0F172A; flex-direction: column; align-items: flex-start;
+                padding: 100px 40px; gap: 0; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 3000; box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+            }
+            .nav-links.active { right: 0; }
+            .nav-links::before {
+                content: "MENU"; color: var(--accent); font-size: 0.75rem; 
+                letter-spacing: 4px; margin-bottom: 30px; font-weight: 700;
+            }
+            .nav-links a { padding: 15px 0; width: 100%; color: #FFFFFF; font-size: 1.2rem; }
+            .nav-contact-box { width: 100%; margin-top: 40px; }
+            .nav-contact-box a { font-size: 1.1rem; display: flex; align-items: center; }
+            .nav-contact-box i { margin-right: 15px; width: 25px; text-align: center; }
+            .btn-call-nav { display: none; }
         }
 
-        .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; color: var(--primary); }
-
-        /* --- 側邊欄 --- */
-        .sidebar {
-            position: fixed; top: 0; right: -100%; width: 300px; height: 100vh;
-            background: var(--primary); z-index: 3000; padding: 100px 40px;
-            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; gap: 30px;
-        }
-        .sidebar.active { right: 0; }
-        .sidebar a { color: white; text-decoration: none; font-size: 1.3rem; font-weight: 700; }
-        .sidebar-close { position: absolute; top: 30px; right: 30px; color: white; font-size: 2.2rem; cursor: pointer; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2500; display: none; }
-        .overlay.active { display: block; }
-
-        /* --- 標題區 --- */
+        /* --- 頁面標題區 --- */
         .page-header {
             background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.8)), 
-                        url('https://i.ibb.co/XHBnKzw/D7-D688-BE-F480-4944-8899-FE005-B550-F28.jpg') center/cover;
+                        url('https://i.ibb.co/XHBnKzw/D7-D688-BE-F480-4944-8899-FE005-B550-F28.jpg') center/cover no-repeat;
             padding: 120px 5% 140px; text-align: center; color: white; clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
         }
-        .page-header h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 900; letter-spacing: 5px; }
-        .page-header p { font-size: 1.25rem; opacity: 0.8; letter-spacing: 5px; }
+        .page-header h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 20px; font-weight: 900; letter-spacing: 5px; }
+        .page-header p { font-size: 1.1rem; opacity: 0.8; letter-spacing: 4px; }
 
-        .section { padding: 80px 5%; max-width: 1300px; margin: 0 auto; }
+        .section { padding: 60px 6%; max-width: 1300px; margin: 0 auto; }
 
-        /* --- 案例卡片美化 --- */
+        /* --- 案例卡片 --- */
         .case-card { 
-            background: white; border-radius: 30px; overflow: hidden; margin-bottom: 100px; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.03);
+            background: white; border-radius: 20px; overflow: hidden; margin-bottom: 80px; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.05);
         }
-        .case-header { padding: 35px 50px; background: #fff; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; }
-        .case-header h3 { margin: 0; color: var(--primary); font-size: 1.8rem; font-weight: 900; }
-        .case-badge { background: #FFF7ED; color: #9A3412; padding: 8px 20px; border-radius: 12px; font-weight: 800; font-size: 1rem; border: 1px solid #FFEDD5; }
+        .case-header { padding: 30px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; flex-wrap: wrap; gap: 15px; }
+        .case-header h3 { margin: 0; color: var(--primary); font-size: 1.6rem; font-weight: 800; }
+        .case-badge { background: #fef3c7; color: #92400e; padding: 6px 16px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; }
 
-        .ba-wrapper { display: grid; grid-template-columns: 1.4fr 1fr; }
-        .ba-container { position: relative; width: 100%; height: 550px; overflow: hidden; background: #111; }
+        .ba-wrapper { display: grid; grid-template-columns: 1.5fr 1fr; }
+        .ba-container { position: relative; width: 100%; height: 500px; overflow: hidden; background: #eee; }
         .ba-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; }
         
-        .ba-label { position: absolute; bottom: 20px; padding: 5px 15px; background: rgba(0,0,0,0.5); color: white; font-size: 0.8rem; font-weight: 700; z-index: 4; border-radius: 4px; }
+        .ba-label { position: absolute; bottom: 20px; padding: 4px 12px; background: rgba(0,0,0,0.6); color: white; font-size: 0.75rem; font-weight: 700; z-index: 5; border-radius: 4px; letter-spacing: 1px; }
         .label-before { right: 20px; }
-        .label-after { left: 20px; z-index: 5; }
+        .label-after { left: 20px; }
 
-        .after { z-index: 2; width: 50%; border-right: 5px solid #FFF; }
-        
-        /* 滑桿美化 */
-        .ba-slider { position: absolute; -webkit-appearance: none; width: 100%; height: 100%; background: transparent; z-index: 10; cursor: ew-resize; outline: none; }
+        .after { z-index: 2; width: 50%; border-right: 4px solid #FFF; }
+        .ba-slider { position: absolute; -webkit-appearance: none; width: 100%; height: 100%; background: transparent; z-index: 10; cursor: ew-resize; outline: none; margin: 0; }
         .ba-slider::-webkit-slider-thumb { 
-            -webkit-appearance: none; width: 50px; height: 50px; 
-            background: var(--accent); border: 5px solid white; border-radius: 50%; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.4);
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E");
+            -webkit-appearance: none; width: 44px; height: 44px; 
+            background: var(--accent); border: 4px solid white; border-radius: 50%; 
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E");
             background-repeat: no-repeat; background-position: center;
         }
 
-        .case-details { padding: 60px; display: flex; flex-direction: column; justify-content: center; }
-        .case-details h4 { color: var(--accent); font-size: 1.6rem; font-weight: 900; margin: 0 0 25px; display: flex; align-items: center; gap: 15px; }
-        .case-details h4::before { content: ""; width: 8px; height: 35px; background: var(--accent); border-radius: 10px; }
-        .case-details p { font-size: 1.2rem; color: #475569; margin: 0; line-height: 2; font-weight: 500; }
+        .case-details { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .case-details h4 { color: var(--accent); font-size: 1.4rem; font-weight: 800; margin: 0 0 20px; display: flex; align-items: center; gap: 12px; }
+        .case-details h4::before { content: ""; width: 6px; height: 28px; background: var(--accent); border-radius: 4px; }
+        .case-details p { font-size: 1.05rem; color: #475569; margin: 0; line-height: 1.8; }
 
         /* LINE 按鈕 */
         .line-float { 
-            position: fixed; bottom: 40px; right: 40px; background: var(--line-green); color: white; 
-            width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            font-size: 38px; text-decoration: none; z-index: 3000; box-shadow: 0 15px 30px rgba(6, 199, 85, 0.3); 
+            position: fixed; bottom: 30px; right: 30px; background: var(--line-green); color: white; 
+            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-size: 30px; text-decoration: none; z-index: 3000; box-shadow: 0 10px 25px rgba(6, 199, 85, 0.4); 
             transition: 0.3s;
         }
-        .line-float:hover { transform: scale(1.1) translateY(-5px); }
 
-        footer { background: var(--primary); color: white; padding: 80px 5%; text-align: center; }
+        footer { background: var(--primary); color: white; padding: 60px 6%; text-align: center; }
+        .footer-info { opacity: 0.7; font-size: 0.9rem; margin-top: 20px; line-height: 2; }
 
-        /* 手機版適配 */
         @media (max-width: 1024px) {
-            .nav-links { display: none; }
-            .menu-toggle { display: block; }
             .ba-wrapper { grid-template-columns: 1fr; }
             .ba-container { height: 400px; }
-            .page-header h1 { font-size: 2.5rem; }
-            .case-header h3 { font-size: 1.4rem; }
-            .case-details { padding: 40px; }
+            .case-header { padding: 25px 30px; }
+            .case-details { padding: 35px 30px; }
         }
     </style>
 </head>
@@ -126,27 +138,20 @@
 
     <header class="navbar">
         <a href="index.html" class="logo">錦德<span>防水工程</span></a>
-        <nav class="nav-links">
+        <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+        <nav class="nav-links" id="navLinks">
             <a href="index.html">首頁</a>
             <a href="about.html">關於我們</a>
             <a href="services.html">服務項目</a>
-            <a href="cases.html" style="color:var(--accent)">實績對比</a>
+            <a href="cases.html" class="active-page">實績對比</a>
             <a href="areas.html">服務區域</a>
+            <div class="nav-contact-box">
+                <a href="https://line.me/ti/p/rqqh-uyZsq" style="color: #06C755;"><i class="fab fa-line"></i> Line 諮詢</a>
+                <a href="tel:0963696032" style="color: var(--accent);"><i class="fas fa-phone"></i> 撥打專線</a>
+            </div>
             <a href="contact.html" class="btn-call-nav">預約場勘</a>
         </nav>
-        <div class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
     </header>
-
-    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-times"></i></div>
-        <a href="index.html">首頁 HOME</a>
-        <a href="about.html">關於我們 ABOUT</a>
-        <a href="services.html">服務項目 SERVICE</a>
-        <a href="cases.html">實績對比 CASES</a>
-        <a href="areas.html">服務區域 AREA</a>
-        <a href="contact.html" style="color:var(--accent-light)">立即預約 CONTACT</a>
-    </div>
 
     <section class="page-header">
         <h1>專業修復案例</h1>
@@ -168,7 +173,7 @@
                 </div>
                 <div class="case-details">
                     <h4>工程診斷與工法</h4>
-                    <p>外牆結構裂縫導致滲漏。採用高空吊車進行 V-Cut 切割補強，並施作耐候彈性防水面漆，徹底解決漏水並美化外觀。</p>
+                    <p>老舊外牆結構裂縫導致室內滲漏。我們採用高空吊車進行裂縫 V-Cut 切割補強，並分層施作耐候型彈性防水底漆與面漆，達成徹底止漏並同步美化外觀。</p>
                 </div>
             </div>
         </div>
@@ -182,87 +187,66 @@
                 <div class="ba-container">
                     <div class="ba-label label-before">BEFORE</div><div class="ba-label label-after">AFTER</div>
                     <div class="ba-image" style="background-image: url('https://i.ibb.co/XHBnKzw/D7-D688-BE-F480-4944-8899-FE005-B550-F28.jpg');"></div>
-                    <div class="ba-image after" id="after2" style="background-image: url('https://i.ibb.co/XHBnKzw/D7-D688-BE-F480-4944-8899-FE005-B550-F28.jpg');"></div>
+                    <div class="ba-image after" id="after2" style="background-image: url('https://i.ibb.co/VWMYvMfK/IMG-4272.jpg');"></div>
                     <input type="range" min="0" max="100" value="50" class="ba-slider" oninput="document.getElementById('after2').style.width = this.value + '%'">
                 </div>
                 <div class="case-details">
                     <h4>工程診斷與工法</h4>
-                    <p>舊防水層老化。進行全面清創、鋪設抗裂網，並施作高反射斷熱漆，止漏同時降低室內溫度，達成節能效果。</p>
+                    <p>頂樓舊防水層嚴重風化。工程包含全面清創與地面研磨，針對女兒牆接縫鋪設抗裂纖維網，最後施作三道式高反射斷熱漆，止漏同時達成室內降溫。</p>
                 </div>
             </div>
         </div>
 
         <div class="case-card">
             <div class="case-header">
-                <h3>彰化 | 頂樓舊防水層翻新</h3>
-                <div class="case-badge">施工期：8天</div>
-            </div>
-            <div class="ba-wrapper">
-                <div class="ba-container">
-                    <div class="ba-label label-before">BEFORE</div><div class="ba-label label-after">AFTER</div>
-                    <div class="ba-image" style="background-image: url('https://i.ibb.co/M57Ln8cs/IMG-5270.jpg');"></div>
-                    <div class="ba-image after" id="after3" style="background-image: url('https://i.ibb.co/M57Ln8cs/IMG-5270.jpg');"></div>
-                    <input type="range" min="0" max="100" value="50" class="ba-slider" oninput="document.getElementById('after3').style.width = this.value + '%'">
-                </div>
-                <div class="case-details">
-                    <h4>工程診斷與工法</h4>
-                    <p>頂樓舊 PU 層膨起。團隊使用磨地機清除舊料，施作「一底二中二面」高規工法，確保防水層緊密結合。 </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="case-card">
-            <div class="case-header">
-                <h3>台中 | 窗框裂縫滲水修復</h3>
+                <h3>彰化 | 窗框滲水高壓灌注</h3>
                 <div class="case-badge">施工期：2天</div>
             </div>
             <div class="ba-wrapper">
                 <div class="ba-container">
                     <div class="ba-label label-before">BEFORE</div><div class="ba-label label-after">AFTER</div>
-                    <div class="ba-image" style="background-image: url('https://i.ibb.co/SDB35RjJ/IMG-1925.jpg');"></div>
-                    <div class="ba-image after" id="after4" style="background-image: url('https://i.ibb.co/gbHcxvT3/IMG-2063.jpg');"></div>
-                    <input type="range" min="0" max="100" value="50" class="ba-slider" oninput="document.getElementById('after4').style.width = this.value + '%'">
+                    <div class="ba-image" style="background-image: url('https://i.ibb.co/M57Ln8cs/IMG-5270.jpg');"></div>
+                    <div class="ba-image after" id="after3" style="background-image: url('https://i.ibb.co/gbHcxvT3/IMG-2063.jpg');"></div>
+                    <input type="range" min="0" max="100" value="50" class="ba-slider" oninput="document.getElementById('after3').style.width = this.value + '%'">
                 </div>
                 <div class="case-details">
                     <h4>工程診斷與工法</h4>
-                    <p>窗框四周產生剪力裂縫。採用高壓灌注技術，將 PU 發泡劑注入裂縫深處，徹底阻斷雨水滲入管道。</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="case-card">
-            <div class="case-header">
-                <h3>南投 | 浴室地板防水失效</h3>
-                <div class="case-badge">施工期：5天</div>
-            </div>
-            <div class="ba-wrapper">
-                <div class="ba-container">
-                    <div class="ba-label label-before">BEFORE</div><div class="ba-label label-after">AFTER</div>
-                    <div class="ba-image" style="background-image: url('https://i.ibb.co/XHBnKzw/D7-D688-BE-F480-4944-8899-FE005-B550-F28.jpg');"></div>
-                    <div class="ba-image after" id="after5" style="background-image: url('https://i.ibb.co/XHBnKzw/D7-D688-BE-F480-4944-8899-FE005-B550-F28.jpg');"></div>
-                    <input type="range" min="0" max="100" value="50" class="ba-slider" oninput="document.getElementById('after5').style.width = this.value + '%'">
-                </div>
-                <div class="case-details">
-                    <h4>工程診斷與工法</h4>
-                    <p>地板防水層老化。拆除地磚後，針對管路周邊加強彈性水泥施工，重新鋪設地磚，達成完美止漏。</p>
+                    <p>窗框因地震產生剪力裂縫。我們使用高壓灌注機將環氧樹脂(或PU發泡劑)注入結構深處，封堵滲水路徑，是免拆除地磚的最有效止漏方式。</p>
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <h2 style="font-size: 1.8rem; color: var(--accent); font-weight: 900;">錦德防水工程</h2>
-        <p>台中市太平區東村八街37巷8號 | 0963-696-032</p>
-        <p style="opacity: 0.5; font-size: 0.9rem; margin-top: 20px;">© 2026 錦德防水 | 統編 80081612</p>
+        <h2 style="font-size: 1.6rem; color: var(--accent); margin-bottom: 5px;">錦德防水工程</h2>
+        <div class="footer-info">
+            台中市太平區東村八街37巷8號 | 服務專線：0963-696-032<br>
+            © 2026 錦德防水 | 專業抓漏 ‧ 五年保固 | 統編 80081612
+        </div>
     </footer>
 
     <a href="https://line.me/ti/p/rqqh-uyZsq" class="line-float" target="_blank"><i class="fab fa-line"></i></a>
 
     <script>
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
-        }
+        // 選單邏輯 (與首頁一致)
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        
+        hamburger.addEventListener('click', (e) => {
+            navLinks.classList.toggle('active');
+            const icon = hamburger.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+            e.stopPropagation();
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                hamburger.querySelector('i').classList.add('fa-bars');
+                hamburger.querySelector('i').classList.remove('fa-times');
+            }
+        });
     </script>
 </body>
 </html>
