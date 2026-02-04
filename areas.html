@@ -21,43 +21,55 @@
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
         body { 
-            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; 
+            font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif; 
             margin: 0; background: var(--bg-light); color: var(--text-main); 
             line-height: 1.8; overflow-x: hidden;
         }
 
+        /* --- [呼吸動畫強化] --- */
+        @keyframes breathing-gold {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(184, 134, 11, 0.7); }
+            50% { transform: scale(1.03); box-shadow: 0 0 20px 10px rgba(184, 134, 11, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(184, 134, 11, 0); }
+        }
+        @keyframes breathing-line {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(6, 199, 85, 0.7); }
+            50% { transform: scale(1.1); box-shadow: 0 0 20px 10px rgba(6, 199, 85, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(6, 199, 85, 0); }
+        }
+
         /* --- [導覽列] --- */
         .navbar {
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px);
             height: 100px; display: flex; align-items: center; justify-content: space-between;
-            padding: 0 5%; position: sticky; top: 0; z-index: 2000; box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            padding: 0 5%; position: sticky; top: 0; z-index: 9999; box-shadow: 0 2px 20px rgba(0,0,0,0.05);
             transition: 0.3s;
         }
-        .logo { font-size: 1.7rem; font-weight: 900; color: var(--primary); text-decoration: none; flex-shrink: 0; }
+        .logo { font-size: 1.7rem; font-weight: 900; color: var(--primary); text-decoration: none; display: flex; align-items: center; }
         .logo span { color: var(--accent); }
         
-        /* 8 項目對齊 */
         .nav-links { display: flex; align-items: center; gap: 18px; }
         .nav-links a { text-decoration: none; color: var(--primary); font-weight: 700; font-size: 0.95rem; transition: 0.3s; white-space: nowrap; }
         .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-        .btn-call-nav { background: var(--accent); color: white !important; padding: 10px 22px; border-radius: 50px; }
+
+        /* 導覽列呼吸按鈕 */
+        .btn-call-nav { 
+            background: var(--accent); color: white !important; padding: 10px 22px; border-radius: 50px; 
+            animation: breathing-gold 2.5s infinite ease-in-out;
+        }
 
         .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; color: var(--primary); }
 
         /* --- [手機側邊欄] --- */
-        .sidebar { 
-            position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; 
-            background: var(--primary); z-index: 3000; padding: 60px 40px; 
-            transition: 0.5s ease; display: flex; flex-direction: column; gap: 15px; 
-        }
+        .sidebar { position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background: var(--primary); z-index: 10000; padding: 60px 40px; transition: 0.5s ease; display: flex; flex-direction: column; gap: 15px; }
         .sidebar.active { right: 0; }
         .sidebar .menu-label { color: var(--accent); letter-spacing: 4px; font-size: 0.8rem; margin-bottom: 10px; opacity: 0.8; font-weight: bold; }
-        .sidebar a { color: white; text-decoration: none; font-size: 1.2rem; font-weight: 700; padding: 5px 0; }
+        .sidebar a { color: white; text-decoration: none; font-size: 1.2rem; font-weight: 700; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .sidebar-close { position: absolute; top: 30px; right: 30px; color: white; font-size: 2.2rem; cursor: pointer; }
-        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2500; display: none; }
+        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9998; display: none; }
         .sidebar-overlay.active { display: block; }
 
-        /* --- [頁面內容美化] --- */
+        /* --- [主內容] --- */
         .page-header {
             background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
                         url('https://images.unsplash.com/photo-1449156001437-3a1661acda22?q=80&w=1600') center/cover fixed;
@@ -66,7 +78,7 @@
         .page-header h1 { font-size: 3rem; font-weight: 900; letter-spacing: 5px; margin: 0; }
         .page-header p { font-size: 1.2rem; opacity: 0.8; letter-spacing: 3px; margin-top: 15px; }
 
-        .section { padding: 0 6% 100px; max-width: 1300px; margin: 0 auto; }
+        .section { padding: 0 6% 100px; max-width: 1300px; margin: 0 auto; position: relative; z-index: 10; }
 
         .area-container {
             display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px;
@@ -84,46 +96,43 @@
         }
         .dist-tag:hover { background: var(--accent); color: white; border-color: var(--accent); transform: translateY(-3px); }
 
+        /* 中間呼吸按鈕 */
         .btn-call {
-            display: block; background: var(--accent);
-            color: white; padding: 20px; border-radius: 50px; text-decoration: none; 
-            font-weight: 900; font-size: 1.2rem; text-align: center; 
-            transition: 0.3s; letter-spacing: 2px; margin-top: 40px;
-            box-shadow: 0 10px 20px rgba(184, 134, 11, 0.3);
+            display: block; background: var(--accent); color: white; padding: 20px; border-radius: 50px; 
+            text-decoration: none; font-weight: 900; font-size: 1.2rem; text-align: center; 
+            margin-top: 40px; animation: breathing-gold 2.5s infinite ease-in-out;
         }
-        .btn-call:hover { transform: scale(1.02); background: var(--primary); }
 
         .map-wrapper { border-radius: 10px; overflow: hidden; min-height: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         iframe { width: 100%; height: 100%; border: 0; }
 
+        /* 數據跑分 */
         .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 80px; }
         .stat-item { padding: 40px 20px; background: white; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #eee; }
         .stat-item i { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; }
         .stat-item h3 { font-size: 2.8rem; color: var(--primary); font-weight: 900; margin: 0; }
-        .stat-item p { color: var(--text-muted); font-weight: 600; margin-top: 10px; }
+        .stat-item p { color: var(--text-muted); font-weight: 700; margin-top: 10px; }
 
-        footer { background: var(--primary); color: white; padding: 80px 5%; text-align: center; }
-
-        /* --- [LINE 懸浮按鈕 - 與關於頁面一致] --- */
+        /* Line 呼吸按鈕 */
         .line-float {
             position: fixed; bottom: 30px; right: 25px; background: var(--line-green); color: white;
             width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            text-decoration: none; z-index: 2900; box-shadow: 0 4px 15px rgba(6, 199, 85, 0.4); transition: 0.3s ease;
+            text-decoration: none; z-index: 9997; animation: breathing-line 3s infinite ease-in-out;
         }
         .line-float i { font-size: 30px; }
         .line-float span { display: none; }
         @media (min-width: 768px) {
-            .line-float { width: auto; height: auto; padding: 12px 22px; border-radius: 50px; }
+            .line-float { width: auto; height: auto; padding: 12px 25px; border-radius: 50px; }
             .line-float span { display: inline; margin-left: 8px; font-weight: 900; }
         }
-        .line-float:hover { transform: scale(1.1); color: white; }
 
-        @media (max-width: 1200px) {
+        footer { background: var(--primary); color: white; padding: 80px 5%; text-align: center; }
+
+        @media (max-width: 1250px) {
             .nav-links { display: none; }
             .menu-toggle { display: block; }
-            .area-container { grid-template-columns: 1fr; padding: 40px 25px; margin-top: -50px; }
+            .area-container { grid-template-columns: 1fr; padding: 40px 25px; }
             .stat-grid { grid-template-columns: 1fr; }
-            .page-header h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -173,9 +182,9 @@
                 <div class="city-box" style="margin-bottom: 35px;">
                     <span class="city-name"><i class="fas fa-location-dot"></i> 台中地區</span>
                     <div class="districts">
-                        <span class="dist-tag">東區</span><span class="dist-tag">太平區</span><span class="dist-tag">北屯區</span>
-                        <span class="dist-tag">西屯區</span><span class="dist-tag">南屯區</span><span class="dist-tag">大里區</span>
-                        <span class="dist-tag">中區</span><span class="dist-tag">南區</span><span class="dist-tag">西區</span>
+                        <span class="dist-tag">太平區</span><span class="dist-tag">大里區</span><span class="dist-tag">北屯區</span>
+                        <span class="dist-tag">西屯區</span><span class="dist-tag">南屯區</span><span class="dist-tag">東區</span>
+                        <span class="dist-tag">西區</span><span class="dist-tag">南區</span><span class="dist-tag">北區</span>
                     </div>
                 </div>
                 <div class="city-box">
@@ -188,7 +197,7 @@
                 <a href="tel:0963696032" class="btn-call"><i class="fas fa-phone"></i> 預約專線：0963-696-032</a>
             </div>
             <div class="map-wrapper">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3641.597282855148!2d120.7188!3d24.1147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDA2JzUyLjkiTiAxMjDCsDQzJzA3LjciRQ!5e0!3m2!1szh-TW!2stw!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.8354807494426!2d120.7135891!3d24.1336111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693dee278148b3%3A0x89e000f6b4d5a995!2zNDA25Y-w5Lit5biC5aSq5bmz5Y2A5p2x5p2R5YWr6KGXMzflt7c46Jmf!5e0!3m2!1szh-TW!2stw!4v1710000000000" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
 
@@ -201,25 +210,24 @@
             <div class="stat-item">
                 <i class="fas fa-shield-halved"></i>
                 <h3 class="counter" data-target="100">0</h3>
-                <p>正式責任保固 (%)</p>
+                <p>責任保固 (%)</p>
             </div>
             <div class="stat-item">
                 <i class="fas fa-calendar-check"></i>
                 <h3 class="counter" data-target="24">0</h3>
-                <p>小時內安排場勘</p>
+                <p>小時內快速場勘</p>
             </div>
         </div>
     </div>
 
     <footer>
         <h2 style="font-size: 1.8rem; color: var(--accent); font-weight: 900;">錦德防水工程</h2>
-        <p style="opacity: 0.8;">台中市太平區東村八街37巷8號</p>
-        <p style="opacity: 0.4; margin-top: 30px; font-size: 0.8rem;">© 2026 JINDE WATERPROOFING | 專業品質 · 守護您的家</p>
+        <p>台中市太平區東村八街37巷8號</p>
+        <div style="margin-top: 30px; font-size: 0.8rem; opacity: 0.4;">© 2026 JINDE WATERPROOFING | 統編 80081612 | 守護您的家</div>
     </footer>
 
     <a href="https://line.me/ti/p/rqqh-uyZsq" class="line-float" target="_blank">
-        <i class="fab fa-line"></i>
-        <span>Line 諮詢</span>
+        <i class="fab fa-line"></i><span>Line 諮詢</span>
     </a>
 
     <script>
@@ -228,42 +236,26 @@
             document.querySelector('.sidebar-overlay').classList.toggle('active');
         }
 
-        window.onscroll = function() {
-            const nav = document.getElementById("navbar");
-            if (window.scrollY > 50) {
-                nav.style.height = "75px";
-                nav.style.boxShadow = "0 5px 20px rgba(0,0,0,0.1)";
-            } else {
-                nav.style.height = "100px";
-                nav.style.boxShadow = "0 2px 20px rgba(0,0,0,0.05)";
-            }
-        };
-
-        function countUp() {
+        // 穩定版跑分腳本：進入畫面就跑
+        function startCounting() {
             const counters = document.querySelectorAll('.counter');
             counters.forEach(counter => {
-                const observer = new IntersectionObserver((entries) => {
-                    if (entries[0].isIntersecting) {
-                        const target = +counter.getAttribute('data-target');
-                        let count = 0;
-                        const update = () => {
-                            const speed = target / 50;
-                            count += speed;
-                            if (count < target) {
-                                counter.innerText = Math.ceil(count) + (target === 1000 ? "+" : "");
-                                requestAnimationFrame(update);
-                            } else { 
-                                counter.innerText = target + (target === 1000 ? "+" : ""); 
-                            }
-                        };
-                        update();
-                        observer.unobserve(counter);
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const speed = target / 40; 
+                const update = () => {
+                    count += speed;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count) + (target === 1000 ? "+" : "");
+                        requestAnimationFrame(update);
+                    } else {
+                        counter.innerText = target + (target === 1000 ? "+" : "");
                     }
-                }, { threshold: 0.5 });
-                observer.observe(counter);
+                };
+                update();
             });
         }
-        window.addEventListener("load", countUp);
+        window.addEventListener('load', startCounting);
     </script>
 </body>
 </html>
