@@ -10,147 +10,136 @@
     <style>
         :root {
             --primary: #0F172A; 
-            --accent: #C5A059;  
-            --accent-light: #E2C792;
-            --bg-light: #FDFDFD;
+            --accent: #B8860B;  
+            --accent-light: #D4AF37;
+            --bg-light: #F8FAFC;
             --white: #FFFFFF;
-            --text-main: #334155;
-            --text-muted: #94A3B8;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
             --line-green: #06C755;
         }
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
         body { 
-            font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif; 
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; 
             margin: 0; background: var(--bg-light); color: var(--text-main); 
             line-height: 1.8; overflow-x: hidden;
         }
 
-        /* --- [動畫定義] --- */
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
-        }
-        @keyframes shake {
-            0% { transform: rotate(0); }
-            25% { transform: rotate(5deg); }
-            50% { transform: rotate(-5deg); }
-            75% { transform: rotate(5deg); }
-            100% { transform: rotate(0); }
-        }
-
         /* --- [導覽列] --- */
         .navbar {
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            height: 90px; display: flex; align-items: center; justify-content: space-between;
-            padding: 0 6%; position: sticky; top: 0; z-index: 2000; border-bottom: 1px solid rgba(0,0,0,0.03);
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            height: 100px; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%; position: sticky; top: 0; z-index: 2000; box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
         }
-        .logo { display: flex; align-items: center; font-size: 1.4rem; font-weight: 900; color: var(--primary); text-decoration: none; letter-spacing: 2px; }
-        .logo img { height: 45px; margin-right: 12px; }
+        .logo { font-size: 1.7rem; font-weight: 900; color: var(--primary); text-decoration: none; flex-shrink: 0; }
         .logo span { color: var(--accent); }
+        
+        /* 8 項目對齊 */
+        .nav-links { display: flex; align-items: center; gap: 18px; }
+        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 700; font-size: 0.95rem; transition: 0.3s; white-space: nowrap; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .btn-call-nav { background: var(--accent); color: white !important; padding: 10px 22px; border-radius: 50px; }
 
-        .nav-links { display: flex; gap: 30px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.95rem; transition: 0.3s; position: relative; }
-        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--accent); transition: 0.3s; }
-        .nav-links a:hover::after { width: 100%; }
-
-        .btn-call-nav { 
-            background: var(--accent); color: white !important; padding: 12px 28px; border-radius: 50px; 
-            font-weight: 700; font-size: 0.9rem; transition: 0.3s;
-        }
-        .btn-call-nav:hover { animation: shake 0.4s ease-in-out; background: var(--primary); }
+        .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; color: var(--primary); }
 
         /* --- [手機側邊欄] --- */
-        .menu-toggle { display: none; font-size: 1.6rem; color: var(--primary); cursor: pointer; }
-        .sidebar { position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background: var(--primary); z-index: 3000; padding: 60px 40px; transition: 0.5s; display: flex; flex-direction: column; gap: 25px; }
+        .sidebar { 
+            position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; 
+            background: var(--primary); z-index: 3000; padding: 60px 40px; 
+            transition: 0.5s ease; display: flex; flex-direction: column; gap: 15px; 
+        }
         .sidebar.active { right: 0; }
-        .sidebar a { color: white; text-decoration: none; font-size: 1.1rem; }
-        .sidebar-close { position: absolute; top: 25px; right: 25px; color: white; font-size: 1.8rem; cursor: pointer; }
-        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2500; display: none; }
+        .sidebar .menu-label { color: var(--accent); letter-spacing: 4px; font-size: 0.8rem; margin-bottom: 10px; opacity: 0.8; font-weight: bold; }
+        .sidebar a { color: white; text-decoration: none; font-size: 1.2rem; font-weight: 700; padding: 5px 0; }
+        .sidebar-close { position: absolute; top: 30px; right: 30px; color: white; font-size: 2.2rem; cursor: pointer; }
+        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2500; display: none; }
         .sidebar-overlay.active { display: block; }
 
-        /* --- [頁面內容] --- */
+        /* --- [頁面內容美化] --- */
         .page-header {
-            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
-                        url('https://images.unsplash.com/photo-1449156001437-3a1661acda22?q=80&w=1600') center/cover;
-            padding: 100px 6% 120px; text-align: center; color: white;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+                        url('https://images.unsplash.com/photo-1449156001437-3a1661acda22?q=80&w=1600') center/cover fixed;
+            height: 40vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white;
         }
-        .page-header h1 { font-size: 2.8rem; font-weight: 900; letter-spacing: 4px; margin: 0; }
-        .page-header p { font-size: 1.1rem; letter-spacing: 6px; opacity: 0.8; margin-top: 20px; }
+        .page-header h1 { font-size: 3rem; font-weight: 900; letter-spacing: 5px; margin: 0; }
+        .page-header p { font-size: 1.2rem; opacity: 0.8; letter-spacing: 3px; margin-top: 15px; }
 
-        .section { padding: 0 6% 100px; max-width: 1400px; margin: 0 auto; }
+        .section { padding: 0 6% 100px; max-width: 1300px; margin: 0 auto; }
 
         .area-container {
-            display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px;
-            background: white; padding: 60px; border-radius: 2px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.05); margin-top: -80px;
+            display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px;
+            background: white; padding: 60px; border-radius: 15px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08); margin-top: -80px;
         }
         
-        .area-info h2 { color: var(--primary); font-size: 2.2rem; font-weight: 900; margin-bottom: 40px; border-left: 6px solid var(--accent); padding-left: 20px; }
+        .area-info h2 { color: var(--primary); font-size: 2.2rem; font-weight: 900; margin-bottom: 30px; border-left: 6px solid var(--accent); padding-left: 20px; }
         .city-name { font-size: 1.3rem; font-weight: 800; color: var(--accent); margin-bottom: 20px; display: block; }
         
         .dist-tag { 
-            display: inline-block; background: #F8FAFC; padding: 10px 20px; 
-            border-radius: 2px; margin: 5px; font-size: 1rem; font-weight: 600;
-            border: 1px solid #E2E8F0; transition: 0.3s; color: var(--primary);
+            display: inline-block; background: #f1f5f9; padding: 8px 18px; 
+            border-radius: 50px; margin: 5px; font-size: 0.95rem; font-weight: 600;
+            border: 1px solid #e2e8f0; transition: 0.3s; color: var(--primary);
         }
-        .dist-tag:hover { background: var(--primary); color: white; transform: translateY(-3px); }
+        .dist-tag:hover { background: var(--accent); color: white; border-color: var(--accent); transform: translateY(-3px); }
 
         .btn-call {
-            display: block; background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            color: white; padding: 22px; border-radius: 50px; text-decoration: none; 
+            display: block; background: var(--accent);
+            color: white; padding: 20px; border-radius: 50px; text-decoration: none; 
             font-weight: 900; font-size: 1.2rem; text-align: center; 
-            transition: 0.3s; letter-spacing: 4px; margin-top: 40px;
-            animation: pulse-gold 2s infinite;
+            transition: 0.3s; letter-spacing: 2px; margin-top: 40px;
+            box-shadow: 0 10px 20px rgba(184, 134, 11, 0.3);
         }
+        .btn-call:hover { transform: scale(1.02); background: var(--primary); }
 
-        .map-wrapper { border-radius: 2px; overflow: hidden; min-height: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .map-wrapper { border-radius: 10px; overflow: hidden; min-height: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         iframe { width: 100%; height: 100%; border: 0; }
 
-        /* 數據跑分 */
         .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 80px; }
-        .stat-item { padding: 50px 30px; background: white; border-radius: 2px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-        .stat-item i { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
-        .stat-item h3 { font-size: 3.2rem; color: var(--primary); font-weight: 900; }
+        .stat-item { padding: 40px 20px; background: white; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #eee; }
+        .stat-item i { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; }
+        .stat-item h3 { font-size: 2.8rem; color: var(--primary); font-weight: 900; margin: 0; }
+        .stat-item p { color: var(--text-muted); font-weight: 600; margin-top: 10px; }
 
-        footer { background: var(--primary); color: white; padding: 80px 8% 50px; text-align: center; }
+        footer { background: var(--primary); color: white; padding: 80px 5%; text-align: center; }
 
-        /* --- [LINE 懸浮按鈕樣式] --- */
-        .line-float { 
-            position: fixed; bottom: 40px; right: 40px; 
-            background: var(--line-green); color: white; 
-            width: 65px; height: 65px; border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; 
-            font-size: 35px; text-decoration: none; z-index: 3000; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: 0.3s; 
+        /* --- [LINE 懸浮按鈕 - 與關於頁面一致] --- */
+        .line-float {
+            position: fixed; bottom: 30px; right: 25px; background: var(--line-green); color: white;
+            width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; z-index: 2900; box-shadow: 0 4px 15px rgba(6, 199, 85, 0.4); transition: 0.3s ease;
         }
-        .line-float:hover { transform: scale(1.1); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+        .line-float i { font-size: 30px; }
+        .line-float span { display: none; }
+        @media (min-width: 768px) {
+            .line-float { width: auto; height: auto; padding: 12px 22px; border-radius: 50px; }
+            .line-float span { display: inline; margin-left: 8px; font-weight: 900; }
+        }
+        .line-float:hover { transform: scale(1.1); color: white; }
 
-        @media (max-width: 992px) {
+        @media (max-width: 1200px) {
             .nav-links { display: none; }
             .menu-toggle { display: block; }
-            .area-container { grid-template-columns: 1fr; padding: 40px 25px; }
+            .area-container { grid-template-columns: 1fr; padding: 40px 25px; margin-top: -50px; }
             .stat-grid { grid-template-columns: 1fr; }
-            .line-float { bottom: 30px; right: 30px; width: 55px; height: 55px; font-size: 28px; }
+            .page-header h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <header class="navbar">
-        <a href="index.html" class="logo">
-            <img src="favicon.png" alt="錦德">
-            錦德<span>防水工程</span>
-        </a>
+    <header class="navbar" id="navbar">
+        <a href="index.html" class="logo">錦德<span>防水工程</span></a>
         <nav class="nav-links">
             <a href="index.html">首頁</a>
             <a href="about.html">關於錦德</a>
             <a href="services.html">服務項目</a>
+            <a href="methods.html">專業工法</a>
             <a href="cases.html">實績對比</a>
-            <a href="daily.html">工程日常</a>
-            <a href="areas.html" style="color:var(--accent)">服務區域</a>
-            <a href="tel:0963696032" class="btn-call-nav">預約場勘</a>
+            <a href="journal.html">工程日常</a>
+            <a href="areas.html" class="active">服務區域</a>
+            <a href="contact.html" class="btn-call-nav">預約場勘</a>
         </nav>
         <div class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
     </header>
@@ -158,17 +147,23 @@
     <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-times"></i></div>
+        <div class="menu-label">MENU</div>
         <a href="index.html">首頁</a>
         <a href="about.html">關於錦德</a>
         <a href="services.html">服務項目</a>
+        <a href="methods.html">專業工法</a>
         <a href="cases.html">實績對比</a>
-        <a href="areas.html">服務區域</a>
-        <a href="tel:0963696032" style="color:var(--accent)">立即撥打</a>
+        <a href="journal.html">工程日常</a>
+        <a href="areas.html" style="color:var(--accent-light)">服務區域</a>
+        <a href="contact.html">預約場勘</a>
+        <br>
+        <a href="https://line.me/ti/p/rqqh-uyZsq" style="color:var(--line-green)"><i class="fab fa-line"></i> Line 諮詢</a>
+        <a href="tel:0963696032" style="color:var(--accent-light)"><i class="fas fa-phone"></i> 撥打專線</a>
     </div>
 
     <section class="page-header">
         <h1>專業到府 · 中部全區服務</h1>
-        <p>台中、彰化、南投，免費預約現場勘查</p>
+        <p>台中、彰化、南投，預約現場勘查</p>
     </section>
 
     <div class="section">
@@ -180,6 +175,7 @@
                     <div class="districts">
                         <span class="dist-tag">東區</span><span class="dist-tag">太平區</span><span class="dist-tag">北屯區</span>
                         <span class="dist-tag">西屯區</span><span class="dist-tag">南屯區</span><span class="dist-tag">大里區</span>
+                        <span class="dist-tag">中區</span><span class="dist-tag">南區</span><span class="dist-tag">西區</span>
                     </div>
                 </div>
                 <div class="city-box">
@@ -189,45 +185,60 @@
                         <span class="dist-tag">南投市</span>
                     </div>
                 </div>
-                <a href="tel:0963696032" class="btn-call"><i class="fas fa-phone"></i> 撥打預約：0963-696-032</a>
+                <a href="tel:0963696032" class="btn-call"><i class="fas fa-phone"></i> 預約專線：0963-696-032</a>
             </div>
             <div class="map-wrapper">
-                <iframe src="https://maps.google.com/maps/contrib/111880921837105247555" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3641.597282855148!2d120.7188!3d24.1147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDA2JzUyLjkiTiAxMjDCsDQzJzA3LjciRQ!5e0!3m2!1szh-TW!2stw!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
 
         <div class="stat-grid">
             <div class="stat-item">
-                <i class="fas fa-house-chimney-crack"></i><br>
-                <h3 class="counter" data-target="800">0</h3><span>+</span>
-                <p>成功漏水修復案例</p>
+                <i class="fas fa-house-chimney-crack"></i>
+                <h3 class="counter" data-target="1000">0</h3>
+                <p>成功修復案例</p>
             </div>
             <div class="stat-item">
-                <i class="fas fa-shield-halved"></i><br>
-                <h3 class="counter" data-target="100">0</h3><span>%</span>
-                <p>正式合約責任保固</p>
+                <i class="fas fa-shield-halved"></i>
+                <h3 class="counter" data-target="100">0</h3>
+                <p>正式責任保固 (%)</p>
             </div>
             <div class="stat-item">
-                <i class="fas fa-calendar-check"></i><br>
-                <h3 class="counter" data-target="24">0</h3><span>h</span>
-                <p>快速安排到府勘查</p>
+                <i class="fas fa-calendar-check"></i>
+                <h3 class="counter" data-target="24">0</h3>
+                <p>小時內安排場勘</p>
             </div>
         </div>
     </div>
 
     <footer>
-        <h2 style="font-size: 1.5rem; color: var(--accent);">錦德防水工程</h2>
-        <p style="opacity: 0.6; font-size: 0.9rem;">台中市太平區東村八街37巷8號</p>
-        <div style="margin-top: 40px; font-size: 0.8rem; opacity: 0.4;">© 2026 錦德防水 | 統編 80081612</div>
+        <h2 style="font-size: 1.8rem; color: var(--accent); font-weight: 900;">錦德防水工程</h2>
+        <p style="opacity: 0.8;">台中市太平區東村八街37巷8號</p>
+        <p style="opacity: 0.4; margin-top: 30px; font-size: 0.8rem;">© 2026 JINDE WATERPROOFING | 專業品質 · 守護您的家</p>
     </footer>
 
-    <a href="https://line.me/ti/p/rqqh-uyZsq" class="line-float" target="_blank"><i class="fab fa-line"></i></a>
+    <a href="https://line.me/ti/p/rqqh-uyZsq" class="line-float" target="_blank">
+        <i class="fab fa-line"></i>
+        <span>Line 諮詢</span>
+    </a>
 
     <script>
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('active');
             document.querySelector('.sidebar-overlay').classList.toggle('active');
         }
+
+        window.onscroll = function() {
+            const nav = document.getElementById("navbar");
+            if (window.scrollY > 50) {
+                nav.style.height = "75px";
+                nav.style.boxShadow = "0 5px 20px rgba(0,0,0,0.1)";
+            } else {
+                nav.style.height = "100px";
+                nav.style.boxShadow = "0 2px 20px rgba(0,0,0,0.05)";
+            }
+        };
+
         function countUp() {
             const counters = document.querySelectorAll('.counter');
             counters.forEach(counter => {
@@ -236,11 +247,14 @@
                         const target = +counter.getAttribute('data-target');
                         let count = 0;
                         const update = () => {
-                            count += (target / 80);
+                            const speed = target / 50;
+                            count += speed;
                             if (count < target) {
-                                counter.innerText = Math.ceil(count);
+                                counter.innerText = Math.ceil(count) + (target === 1000 ? "+" : "");
                                 requestAnimationFrame(update);
-                            } else { counter.innerText = target; }
+                            } else { 
+                                counter.innerText = target + (target === 1000 ? "+" : ""); 
+                            }
                         };
                         update();
                         observer.unobserve(counter);
