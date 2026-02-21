@@ -25,13 +25,6 @@
             line-height: 1.8; overflow-x: hidden;
         }
 
-        /* --- 呼吸動畫 --- */
-        @keyframes breathing-line {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(6, 199, 85, 0.7); }
-            50% { transform: scale(1.1); box-shadow: 0 0 25px 10px rgba(6, 199, 85, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(6, 199, 85, 0); }
-        }
-
         /* --- 跑馬燈 --- */
         .announcement-bar {
             background: #0F172A; color: #fff; padding: 12px 0;
@@ -61,7 +54,6 @@
         }
         .menu-overlay.active { opacity: 1; visibility: visible; }
 
-        /* --- 漢堡選單 (同步 8 個項目) --- */
         .nav-links { 
             position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
             background: #0F172A; flex-direction: column; align-items: flex-start;
@@ -76,10 +68,10 @@
         }
         .nav-links a.active-page { color: var(--accent); }
 
-        /* --- 標題區 --- */
+        /* --- 頁面標題區 --- */
         .page-header { 
-            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), 
-                        url('https://image2url.com/r2/default/images/1770234760382-785b5412-28be-4c19-8f60-c42dae48241f.jpeg') center/cover no-repeat;
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
+                        url('https://images.unsplash.com/photo-1541913057815-9c59f67d515a?q=80&w=1600') center/cover no-repeat;
             color: white; padding: 100px 6% 120px; text-align: center;
         }
         .page-header h1 { font-size: 2.2rem; font-weight: 900; margin: 0; letter-spacing: 4px; }
@@ -87,42 +79,41 @@
 
         /* --- 卡片網格 --- */
         .photo-section { padding: 0 6% 100px; max-width: 1400px; margin: -50px auto 0; }
-        .daily-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
+        .daily-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
         @media (min-width: 768px) { .daily-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1200px) { .daily-grid { grid-template-columns: repeat(3, 1fr); } }
 
         .daily-card {
-            background: white; border-radius: 20px; overflow: hidden;
+            background: white; border-radius: 15px; overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.4s; position: relative;
-            opacity: 0; transform: translateY(30px);
+            opacity: 0; transform: translateY(30px); border: 1px solid #eee;
         }
         .daily-card.active { opacity: 1; transform: translateY(0); }
-        .img-wrapper { width: 100%; height: 300px; overflow: hidden; position: relative; }
+        .img-wrapper { width: 100%; height: 280px; overflow: hidden; position: relative; }
         .daily-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .daily-card:hover img { transform: scale(1.1); }
+        .daily-card:hover img { transform: scale(1.05); }
         
         .card-tag {
             position: absolute; top: 15px; left: 15px; z-index: 10;
-            background: var(--accent-grad); color: white; padding: 5px 14px; border-radius: 4px; font-size: 0.7rem; font-weight: 800;
+            background: var(--accent-grad); color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; letter-spacing: 1px;
         }
-        .card-content { padding: 25px 20px; text-align: center; }
-        .card-content h3 { margin: 0; font-size: 1.2rem; color: var(--primary); font-weight: 800; }
-        .card-content p { color: var(--text-muted); font-size: 0.9rem; margin-top: 10px; }
+        .card-content { padding: 25px; text-align: left; }
+        .card-content h3 { margin: 0; font-size: 1.25rem; color: var(--primary); font-weight: 900; }
+        .card-content p { color: var(--text-muted); font-size: 0.95rem; margin-top: 12px; line-height: 1.6; }
 
-        /* --- Line 呼吸按鈕 --- */
+        /* --- 浮動按鈕 --- */
         .line-float { 
-            position: fixed; bottom: 30px; right: 30px; background: var(--line-green); 
-            width: 60px; height: 60px; border-radius: 50%; display: flex; 
-            align-items: center; justify-content: center; font-size: 30px; color: white;
-            z-index: 4000; text-decoration: none;
-            animation: breathing-line 3s infinite ease-in-out;
+            position: fixed; bottom: 30px; right: 25px; background: var(--line-green); 
+            width: 55px; height: 55px; border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; font-size: 28px; color: white;
+            z-index: 4000; text-decoration: none; box-shadow: 0 5px 15px rgba(6, 199, 85, 0.3);
         }
     </style>
 </head>
 <body>
 
     <div class="menu-overlay" id="menuOverlay"></div>
-
+    
     <div class="announcement-bar">
         <div class="marquee-content">
             📢 錦德防水最新公告：中彰投地區預約場勘完全免費，工程享五年正式合約保固 | 專業漏水檢測，透明開價 | ☎️ 服務專線：0963-696-032
@@ -141,22 +132,22 @@
             <a href="index.html">首頁</a>
             <a href="about.html">關於錦德</a>
             <a href="services.html">服務項目</a>
-            <a href="method.html">專業工法</a>
+            <a href="methods.html">專業工法</a>
             <a href="cases.html">實績對比</a>
-            <a href="daily.html" class="active-page">工程日常</a>
+            <a href="journal.html" class="active-page">工程日常</a>
             <a href="areas.html">服務區域</a>
             <a href="contact.html">預約場勘</a>
             
             <div style="margin-top:auto; padding-bottom:40px; width:100%;">
-                <a href="https://line.me/ti/p/rqqh-uyZsq" style="color: #06C755 !important; border:none;"><i class="fab fa-line"></i> Line 諮詢</a>
-                <a href="tel:0963696032" style="color: #D4AF37 !important; border:none;"><i class="fas fa-phone"></i> 撥打專線</a>
+                <a href="https://line.me/ti/p/rqqh-uyZsq" style="color: #06C755 !important; border:none;"><i class="fab fa-line"></i> Line 快速諮詢</a>
+                <a href="tel:0963696032" style="color: #D4AF37 !important; border:none;"><i class="fas fa-phone"></i> 直接撥打專線</a>
             </div>
         </nav>
     </header>
 
     <section class="page-header">
         <h1>錦德團隊紀錄</h1>
-        <p>專業止漏 ‧ 熱情生活</p>
+        <p>不只在修漏水，我們也在認真生活</p>
     </section>
 
     <section class="photo-section">
@@ -164,55 +155,22 @@
             <div class="daily-card reveal">
                 <div class="img-wrapper">
                     <span class="card-tag">FEAST</span>
-                    <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEQjqVpfZVxFuQvEggvwV1HDfd78J8PHQACoTAAAoW06VdXBQN6J31ptjgE.jpeg">
+                    <img src="https://image2url.com/r2/default/images/1770234574028-ca0cc772-3d5f-45fd-a7bc-ea9168c4ba34.jpeg">
                 </div>
                 <div class="card-content">
-                    <h3>團隊烤肉 ‧ 歡聚時刻</h3>
-                    <p>放下機具，享受美食，最強團隊的向心力就在這瞬間凝聚。</p>
+                    <h3>團隊充電時刻</h3>
+                    <p>高品質工程需要好的夥伴。在忙碌的工期中停下來吃頓好的，這就是錦德最強凝聚力的來源。</p>
                 </div>
             </div>
-            
+
             <div class="daily-card reveal">
                 <div class="img-wrapper">
                     <span class="card-tag">WORK</span>
-                    <img src="https://i.postimg.cc/3NHNKM6f/IMG-8756.jpg">
-                </div>
-                <div class="card-content">
-                    <h3>遠征花蓮 ‧ 職人精神</h3>
-                    <p>不論地點多遠，只要有漏水需求，錦德團隊使命必達。</p>
-                </div>
-            </div>
-
-            <div class="daily-card reveal">
-                <div class="img-wrapper">
-                    <span class="card-tag">TEAM</span>
-                    <img src="https://i.postimg.cc/bN5Xb0Yp/IMG-3410.jpg">
-                </div>
-                <div class="card-content">
-                    <h3>生存遊戲 ‧ 默契訓練</h3>
-                    <p>透過高壓下的信任與執行力，練就工程現場的最佳配合。</p>
-                </div>
-            </div>
-
-            <div class="daily-card reveal">
-                <div class="img-wrapper">
-                    <span class="card-tag">ANNUAL</span>
-                    <img src="https://i.postimg.cc/Gmp23xMj/IMG-3408.jpg">
-                </div>
-                <div class="card-content">
-                    <h3>114 年度尾牙 ‧ 豐收</h3>
-                    <p>感謝夥伴一整年的專業與辛勞，共創錦德卓越品質。</p>
-                </div>
-            </div>
-
-            <div class="daily-card reveal">
-                <div class="img-wrapper">
-                    <span class="card-tag">MENTOR</span>
                     <img src="https://image2url.com/r2/default/images/1770234458334-423f86df-8ba9-41e2-ad20-cff4a03879ab.jpeg">
                 </div>
                 <div class="card-content">
-                    <h3>高空作業 ‧ 專注細節</h3>
-                    <p>嚴格遵守工安標準，為客戶解決最難纏的滲漏問題。</p>
+                    <h3>高空作業執行</h3>
+                    <p>面對最難搞的外牆漏點，我們不嫌麻煩，該掛繩就掛繩，該巡檢就巡檢，這是基本的職人精神。</p>
                 </div>
             </div>
 
@@ -222,27 +180,50 @@
                     <img src="https://image2url.com/r2/default/images/1770233830579-1b432f49-b16b-4cac-85e3-6a952d37c024.jpeg">
                 </div>
                 <div class="card-content">
-                    <h3>115年尾牙</h3>
-                    <p>一整年的奔波，換來無數家庭的笑容。感謝錦德團隊每位成員的無私奉獻，我們以專業立足，以誠信紮根。尾牙充電完畢，明年持續精進，挑戰更多不可能的漏水難題！</p>
+                    <h3>115 年度尾牙</h3>
+                    <p>感謝夥伴一整年的拼勁。我們以專業立足，用實力幫客戶解決難題。尾牙充飽電，明年繼續精進！</p>
                 </div>
             </div>
-<div class="daily-card reveal">
-    <div class="img-wrapper">
-        <span class="card-tag">FEAST</span>
-        <img src="https://image2url.com/r2/default/images/1770234574028-ca0cc772-3d5f-45fd-a7bc-ea9168c4ba34.jpeg" alt="11月聚餐">
-    </div>
-    <div class="card-content">
-        <h3>11月充電時刻 ‧ 團隊聚餐</h3>
-        <p>高品質的工程來自於快樂的夥伴。在忙碌的賽程中停下腳步分享美食，這就是錦德最強凝聚力的來源！</p>
-    </div>
-</div>
 
+            <div class="daily-card reveal">
+                <div class="img-wrapper">
+                    <span class="card-tag">MISSION</span>
+                    <img src="https://i.postimg.cc/3NHNKM6f/IMG-8756.jpg">
+                </div>
+                <div class="card-content">
+                    <h3>遠征花蓮施工</h3>
+                    <p>只要客戶信任我們，距離不是問題。跨區遠征，就是要把錦德的標竿品質帶到每個有需要的地方。</p>
+                </div>
+            </div>
+
+            <div class="daily-card reveal">
+                <div class="img-wrapper">
+                    <span class="card-tag">TRAIN</span>
+                    <img src="https://i.postimg.cc/bN5Xb0Yp/IMG-3410.jpg">
+                </div>
+                <div class="card-content">
+                    <h3>默契訓練活動</h3>
+                    <p>透過高壓下的信任與執行力訓練，練就工程現場的最佳配合度。團隊強，施工品質才會穩。</p>
+                </div>
+            </div>
+
+            <div class="daily-card reveal">
+                <div class="img-wrapper">
+                    <span class="card-tag">RELAX</span>
+                    <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEQjqVpfZVxFuQvEggvwV1HDfd78J8PHQACoTAAAoW06VdXBQN6J31ptjgE.jpeg">
+                </div>
+                <div class="card-content">
+                    <h3>團隊日常烤肉</h3>
+                    <p>放下工具，分享生活。這群手腳俐落的年輕人，私底下也是最有默契的兄弟。</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <a href="https://line.me/ti/p/rqqh-uyZsq" class="line-float"><i class="fab fa-line"></i></a>
 
     <script>
+        // 導覽列邏輯
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
         const menuOverlay = document.getElementById('menuOverlay');
@@ -259,13 +240,13 @@
         hamburger.addEventListener('click', toggleMenu);
         menuOverlay.addEventListener('click', toggleMenu);
 
-        // 卡片滾動顯現動畫
+        // 卡片捲動動畫
         function reveal() {
             var cards = document.querySelectorAll(".daily-card");
-            cards.forEach((card, index) => {
+            cards.forEach((card) => {
                 var elementTop = card.getBoundingClientRect().top;
-                if (elementTop < window.innerHeight - 50) {
-                    setTimeout(() => { card.classList.add("active"); }, index * 100);
+                if (elementTop < window.innerHeight - 80) {
+                    card.classList.add("active");
                 }
             });
         }
