@@ -42,7 +42,7 @@
             .nav-links { 
                 position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
                 background: #121A2D; display: flex; flex-direction: column; align-items: flex-start;
-                padding: 60px 35px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                padding: 80px 35px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 z-index: 10000; box-shadow: -10px 0 30px rgba(0,0,0,0.4);
             }
             .nav-links.active { right: 0; }
@@ -57,7 +57,8 @@
         @media (min-width: 993px) {
             .menu-tag, .menu-footer { display: none; }
             .nav-links { display: flex; gap: 25px; }
-            .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; }
+            .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; transition: 0.3s; }
+            .nav-links a:hover { color: var(--accent); }
             .hamburger { display: none; }
         }
 
@@ -90,7 +91,9 @@
         .phone-btn { background-color: var(--accent); }
         .float-btn:hover { transform: scale(1.1); }
 
-        footer { background: var(--primary); color: white; padding: 60px 6%; text-align: center; }
+        footer { background: var(--primary); color: white; padding: 60px 6%; text-align: center; font-size: 0.9rem; }
+        
+        /* 捲動顯現效果 */
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
@@ -132,21 +135,21 @@
     </div>
 
     <section class="page-header">
-        <h1 class="reveal active">關於錦德防水</h1>
-        <p class="reveal active" style="letter-spacing: 2px; opacity: 0.8; margin-top: 15px;">實力派年輕團隊・責任守護</p>
+        <h1 class="reveal">關於錦德防水</h1>
+        <p class="reveal" style="letter-spacing: 2px; opacity: 0.8; margin-top: 15px;">實力派年輕團隊・責任守護</p>
     </section>
 
     <section style="background: var(--primary); color: white; padding: 50px 0;">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap; gap: 30px;">
-            <div class="reveal active">
+            <div class="reveal">
                 <div style="font-size: 2.2rem; font-weight: 900; color: var(--accent);">STRENGTH</div>
                 <div style="opacity: 0.8; font-size: 0.9rem;">年輕團隊・手腳俐落</div>
             </div>
-            <div class="reveal active">
+            <div class="reveal">
                 <div style="font-size: 2.2rem; font-weight: 900; color: var(--accent);">QUALITY</div>
                 <div style="opacity: 0.8; font-size: 0.9rem;">紮實技術・不走捷徑</div>
             </div>
-            <div class="reveal active">
+            <div class="reveal">
                 <div style="font-size: 2.2rem; font-weight: 900; color: var(--accent);">TRUST</div>
                 <div style="opacity: 0.8; font-size: 0.9rem;">責任保固・絕不推託</div>
             </div>
@@ -207,24 +210,39 @@
     </footer>
 
     <script>
-        // 漢堡選單控制
+        // 選單功能控制
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
-        hamburger.addEventListener('click', () => {
+
+        // 點擊漢堡按鈕切換
+        hamburger.addEventListener('click', (e) => {
             navLinks.classList.toggle('active');
+            e.stopPropagation();
         });
 
-        // 捲動顯示
+        // 點擊選單外部自動關閉
+        document.addEventListener('click', (e) => {
+            if (navLinks.classList.contains('active') && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // 捲動顯示邏輯
         function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
+            const reveals = document.querySelectorAll(".reveal");
+            const windowHeight = window.innerHeight;
             reveals.forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight - 50) {
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
                     el.classList.add("active");
                 }
             });
         }
+
         window.addEventListener("scroll", reveal);
-        window.onload = reveal;
+        // 初始化檢查一次
+        window.addEventListener("load", reveal);
     </script>
 </body>
 </html>
