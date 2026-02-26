@@ -4,140 +4,180 @@
     <link rel="icon" href="favicon.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>工程技術規格 | 錦德工程行</title>
+    <title>專業工法 | 錦德防水工程</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #1E293B; --accent: #B8860B; --bg-light: #F1F5F9;
-            --white: #FFFFFF; --text-main: #334155; --border: #CBD5E1;
+            --primary: #0F172A; 
+            --accent: #B8860B; 
+            --accent-light: #D4AF37;
+            --bg-light: #F8FAFC;
+            --white: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --line-green: #06C755;
+            --border: #CBD5E1;
         }
 
-        * { box-sizing: border-box; }
-        body { font-family: "PingFang TC", "Noto Sans TC", sans-serif; margin: 0; background: var(--bg-light); color: var(--text-main); line-height: 1.6; }
-
-        /* --- 導覽列 (依據截圖樣式優化) --- */
-        .navbar {
-            background: white; height: 80px; display: flex; align-items: center; justify-content: space-between;
-            padding: 0 6%; position: sticky; top: 0; z-index: 2000; box-shadow: 0 1px 10px rgba(0,0,0,0.1);
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { 
+            font-family: "PingFang TC", "Noto Sans TC", sans-serif; 
+            margin: 0; background: var(--bg-light); color: var(--text-main); 
+            line-height: 1.8; overflow-x: hidden;
         }
-        .logo { font-size: 1.4rem; font-weight: 900; color: var(--primary); text-decoration: none; }
+
+        /* --- [導覽列統一] --- */
+        .header-fixed-container { position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.05); background: white; }
+        .navbar { height: 90px; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; }
+        .logo { display: flex; align-items: center; font-size: 1.6rem; font-weight: 900; color: var(--primary); text-decoration: none; letter-spacing: 1px; }
+        .logo img { height: 50px; margin-right: 12px; }
         .logo span { color: var(--accent); }
+        .hamburger { display: block; cursor: pointer; font-size: 1.5rem; color: var(--primary); z-index: 10001; }
 
-        .nav-links { display: none; gap: 20px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 700; font-size: 0.9rem; transition: 0.3s; }
-        .nav-links a.active { color: var(--accent); }
+        .announcement-bar { background: var(--accent); color: white; padding: 10px 0; font-size: 0.9rem; font-weight: 600; overflow: hidden; position: relative; z-index: 900; }
+        .marquee-content { white-space: nowrap; display: inline-block; animation: marquee-scroll 25s linear infinite; }
+        @keyframes marquee-scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
-        /* 手機版選單按鈕 */
-        .menu-btn { display: block; font-size: 1.5rem; cursor: pointer; color: var(--primary); }
-
-        /* 手機版側邊目錄 (對應截圖深色風格) */
-        .mobile-nav {
-            position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
-            background: #1a1f2b; transition: 0.4s; z-index: 3000; padding: 60px 30px; 
-            display: flex; flex-direction: column; gap: 25px;
-        }
-        .mobile-nav.active { right: 0; }
-        .mobile-nav a { color: #fff; text-decoration: none; font-size: 1.1rem; font-weight: 500; border-bottom: 1px solid #2d3548; padding-bottom: 10px; }
-        .mobile-nav .close-btn { position: absolute; top: 20px; right: 20px; color: white; font-size: 1.5rem; cursor: pointer; }
-        .nav-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2500; display: none; }
-        .nav-overlay.active { display: block; }
-
-        @media (min-width: 1024px) {
-            .nav-links { display: flex; }
-            .menu-btn { display: none; }
+        /* --- [手機版側邊選單] --- */
+        @media (max-width: 992px) {
+            .nav-links { 
+                position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
+                background: #121A2D; display: flex; flex-direction: column; align-items: flex-start;
+                padding: 80px 35px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 10000; box-shadow: -10px 0 30px rgba(0,0,0,0.4);
+            }
+            .nav-links.active { right: 0; }
+            .nav-links a { text-decoration: none; color: white; padding: 18px 0; font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.05); width: 100%; }
+            .menu-tag { color: var(--accent); font-weight: 900; font-size: 0.85rem; letter-spacing: 4px; margin-bottom: 25px; display: block; }
+            .menu-footer { margin-top: auto; padding-bottom: 20px; width: 100%; }
+            .menu-contact-btn { display: flex; align-items: center; gap: 12px; text-decoration: none; padding: 12px 0; }
         }
 
-        /* --- 內容區 --- */
-        .header-box { background: var(--primary); padding: 50px 6%; text-align: center; color: white; }
-        .content-wrap { max-width: 1000px; margin: -30px auto 60px; padding: 0 20px; }
-        
-        .banner-img-box { 
-            background: white; padding: 15px; border-radius: 8px; 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15); margin-bottom: 40px;
+        @media (min-width: 993px) {
+            .menu-tag, .menu-footer { display: none; }
+            .nav-links { display: flex; gap: 25px; }
+            .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; }
+            .hamburger { display: none; }
         }
-        .banner-img-box img { width: 100%; display: block; border-radius: 4px; }
 
-        .tech-section { background: white; padding: 40px; border-radius: 8px; margin-bottom: 30px; border-left: 6px solid var(--accent); }
-        .tech-section h2 { margin-top: 0; font-size: 1.4rem; color: var(--primary); border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        /* --- [Hero 標題] --- */
+        .page-header {
+            height: 40vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
+                        url('https://images.unsplash.com/photo-1541913057-08493010787e?q=80&w=1600') center/cover no-repeat fixed;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white;
+        }
+        .page-header h1 { font-size: clamp(2rem, 8vw, 3rem); font-weight: 900; letter-spacing: 5px; margin: 0; }
+
+        /* --- [內容區域] --- */
+        .content-wrap { max-width: 1000px; margin: -50px auto 60px; padding: 0 20px; position: relative; z-index: 10; }
+        .banner-img-box { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); margin-bottom: 40px; }
+        .banner-img-box img { width: 100%; display: block; border-radius: 8px; }
+
+        .tech-section { background: white; padding: 40px; border-radius: 12px; margin-bottom: 30px; border-left: 6px solid var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .tech-section h2 { margin-top: 0; font-size: 1.6rem; color: var(--primary); border-bottom: 1px solid var(--border); padding-bottom: 15px; font-weight: 800; }
         
         .layer-list { list-style: none; padding: 0; }
-        .layer-list li { padding: 15px 0; border-bottom: 1px dashed var(--border); display: grid; grid-template-columns: 160px 1fr; gap: 15px; }
-        .layer-name { font-weight: 900; color: var(--accent); }
+        .layer-list li { padding: 20px 0; border-bottom: 1px dashed var(--border); display: grid; grid-template-columns: 180px 1fr; gap: 15px; }
+        .layer-name { font-weight: 900; color: var(--accent); font-size: 1.1rem; }
 
-        footer { text-align: center; padding: 40px; color: #94a3b8; font-size: 0.85rem; }
+        .floating-contact { position: fixed; right: 20px; bottom: 30px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
+        .float-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .line-btn { background-color: #06C755; }
+        .phone-btn { background-color: var(--accent); }
+
+        footer { text-align: center; padding: 60px 6%; background: var(--primary); color: white; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 768px) {
-            .layer-list li { grid-template-columns: 1fr; gap: 5px; }
+            .layer-list li { grid-template-columns: 1fr; gap: 8px; }
         }
     </style>
 </head>
 <body>
 
-    <header class="navbar">
-        <a href="index.html" class="logo">錦德<span>防水工程</span></a>
-        
-        <nav class="nav-links">
-            <a href="index.html">首頁</a>
-            <a href="about.html">關於我們</a>
-            <a href="services.html">服務項目</a>
-            <a href="methods.html" class="active">專業工法</a>
-            <a href="cases.html">實績對比</a>
-            <a href="daily.html">工程日常</a>
-            <a href="contact.html">預約場勘</a>
-        </nav>
-
-        <div class="menu-btn" id="openMenu"><i class="fas fa-bars"></i></div>
-    </header>
-
-    <div class="nav-overlay" id="overlay"></div>
-    <div class="mobile-nav" id="mobileNav">
-        <div class="close-btn" id="closeMenu"><i class="fas fa-times"></i></div>
-        <a href="index.html">首頁</a>
-        <a href="about.html">關於我們</a>
-        <a href="services.html">服務項目</a>
-        <a href="methods.html">專業工法</a>
-        <a href="cases.html">實績對比</a>
-        <a href="daily.html">工程日常</a>
-        <a href="contact.html">預約場勘</a>
+    <div class="header-fixed-container">
+        <header class="navbar">
+            <a href="index.html" class="logo">
+                <img src="favicon.png" alt="Logo">錦德<span>防水工程</span>
+            </a>
+            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+            <nav class="nav-links" id="navLinks">
+                <span class="menu-tag">M E N U</span>
+                <a href="index.html">首頁</a>
+                <a href="about.html">關於錦德</a>
+                <a href="services.html">服務項目</a>
+                <a href="methods.html" style="color: var(--accent);">專業工法</a>
+                <a href="cases.html">實績對比</a>
+                <a href="journal.html">工程日常</a>
+                <a href="areas.html">服務區域</a>
+                <div class="menu-footer">
+                    <a href="https://line.me/ti/p/rqqh-uyZsq" class="menu-contact-btn">
+                        <i class="fab fa-line" style="color:#06C755; font-size: 1.6rem;"></i>
+                        <span style="color:#06C755; font-weight:bold;">Line 諮詢</span>
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div class="announcement-bar">
+            <div class="marquee-content">🛡️ 錦德專業防水系統結構規格，五層防護，確保您的家滴水不漏！ ✨</div>
+        </div>
     </div>
 
-    <div class="header-box">
-        <h1>屋頂防水系統結構規格</h1>
-    </div>
+    <section class="page-header">
+        <h1 class="reveal active">屋頂防水系統結構</h1>
+        <p class="reveal active" style="letter-spacing: 2px; opacity: 0.8; margin-top: 15px;">工程技術規格・結構級防水體系</p>
+    </section>
 
     <div class="content-wrap">
-        <div class="banner-img-box">
-            <img src="banner.jpg" alt="屋頂防水五層防禦結構圖">
+        <div class="banner-img-box reveal active">
+            <img src="https://i.ibb.co/VWMYvMfK/IMG-4272.jpg" alt="五層結構圖">
         </div>
-
-        <div class="tech-section">
+        <div class="tech-section reveal active">
             <h2>系統結構層次說明</h2>
             <ul class="layer-list">
-                <li><span class="layer-name">第一層：底層結構</span><span>RC 混凝土地面。經研磨處理確保表面無劣化層。</span></li>
-                <li><span class="layer-name">第二層：封閉塗層</span><span>高滲透型強效防水底漆。強化基層硬度。</span></li>
-                <li><span class="layer-name">第三層：應力補強</span><span>抗裂纖維網。針對熱漲冷縮進行物理性應力分散。</span></li>
-                <li><span class="layer-name">第四層：主防水層</span><span>壓克力彈性防水材。具備高延伸率，形成連續無縫膜。</span></li>
-                <li><span class="layer-name">第五層：耐候防護</span><span>壓克力防水防熱面漆。阻絕紫外線與熱劣化。</span></li>
+                <li><span class="layer-name">第一層：底層結構</span><span>RC 混凝土地面，高壓研磨處理。</span></li>
+                <li><span class="layer-name">第二層：封閉塗層</span><span>高滲透防水底漆，強化抓地力。</span></li>
+                <li><span class="layer-name">第三層：應力補強</span><span>抗裂纖維網，分散地震熱漲應力。</span></li>
+                <li><span class="layer-name">第四層：主防水層</span><span>高延伸彈性防水材。</span></li>
+                <li><span class="layer-name">第五層：耐候防護</span><span>防熱防護面漆，阻絕紫外線。</span></li>
             </ul>
         </div>
     </div>
 
-    <footer>© 2026 錦德工程行 | 結構級防水體系</footer>
+    <div class="floating-contact">
+        <a href="tel:0963696032" class="float-btn phone-btn"><i class="fas fa-phone-alt"></i></a>
+        <a href="https://line.me/ti/p/rqqh-uyZsq" target="_blank" class="float-btn line-btn"><i class="fab fa-line"></i></a>
+    </div>
+
+    <footer>© 2026 錦德防水工程 | 結構級防水體系</footer>
 
     <script>
-        const openBtn = document.getElementById('openMenu');
-        const closeBtn = document.getElementById('closeMenu');
-        const mobileNav = document.getElementById('mobileNav');
-        const overlay = document.getElementById('overlay');
+        // 選單功能修正
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
 
-        function toggleMenu() {
-            mobileNav.classList.toggle('active');
-            overlay.classList.toggle('active');
+        hamburger.onclick = function(e) {
+            navLinks.classList.toggle('active');
+            e.stopPropagation();
+        };
+
+        document.onclick = function(e) {
+            if (navLinks.classList.contains('active') && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        };
+
+        // 捲動顯現
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add("active");
+            });
         }
-
-        openBtn.addEventListener('click', toggleMenu);
-        closeBtn.addEventListener('click', toggleMenu);
-        overlay.addEventListener('click', toggleMenu);
+        window.onscroll = reveal;
+        window.onload = reveal;
     </script>
 </body>
 </html>
