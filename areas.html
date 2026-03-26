@@ -7,12 +7,11 @@
     <title>服務區域 | 錦德防水工程 - 中彰投全區服務</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
         :root {
-            --primary: #0F172A; 
-            --accent: #B8860B;  
-            --accent-light: #D4AF37;
+            --primary: #0F172A;
+            --accent: #B8860B;
+            --accent-grad: linear-gradient(135deg, #B8860B 0%, #D4AF37 100%);
             --bg-light: #F8FAFC;
             --white: #FFFFFF;
             --text-main: #1E293B;
@@ -20,257 +19,207 @@
             --line-green: #06C755;
         }
 
-        /* --- [動畫效果] --- */
-        @keyframes breathing-gold {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(184, 134, 11, 0.4); }
-            50% { transform: scale(1.02); box-shadow: 0 0 15px 5px rgba(184, 134, 11, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(184, 134, 11, 0); }
-        }
-        @keyframes breathing-line {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(6, 199, 85, 0.5); }
-            50% { transform: scale(1.05); box-shadow: 0 0 20px 8px rgba(6, 199, 85, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(6, 199, 85, 0); }
-        }
-
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
         body { 
-            font-family: "Noto Sans TC", "PingFang TC", sans-serif; 
+            font-family: "Noto Sans TC", sans-serif; 
             margin: 0; background: var(--bg-light); color: var(--text-main); 
             line-height: 1.8; overflow-x: hidden;
         }
 
-        /* --- [導覽列 - 全站統一] --- */
+        /* --- [導覽列 Navbar] --- */
         .header-fixed-container { position: sticky; top: 0; z-index: 10000; box-shadow: 0 4px 20px rgba(0,0,0,0.05); background: white; }
         .navbar { height: 90px; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; }
         .logo { display: flex; align-items: center; font-size: 1.6rem; font-weight: 900; color: var(--primary); text-decoration: none; }
+        .logo img { height: 45px; margin-right: 12px; }
         .logo span { color: var(--accent); }
-        .hamburger { cursor: pointer; font-size: 1.6rem; color: var(--primary); padding: 10px; z-index: 10002; }
+        .hamburger { cursor: pointer; font-size: 1.6rem; color: var(--primary); z-index: 10002; }
 
-        .announcement-bar { background: var(--accent); color: white; padding: 10px 0; font-size: 0.85rem; font-weight: 600; overflow: hidden; }
-        .marquee-content { white-space: nowrap; display: inline-block; animation: marquee-scroll 30s linear infinite; }
-        @keyframes marquee-scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
-
-        .menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 10000; }
-        .menu-overlay.active { opacity: 1; visibility: visible; }
+        .announcement-bar { background: var(--accent); color: white; padding: 10px 0; font-size: 0.85rem; font-weight: 600; text-align: center; }
 
         @media (max-width: 1099px) {
             .nav-links { 
                 position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
                 background: #0F172A; display: flex; flex-direction: column; padding: 100px 35px;
-                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10001;
+                transition: 0.4s; z-index: 10001;
             }
             .nav-links.active { right: 0; }
             .nav-links a { color: white; text-decoration: none; padding: 15px 0; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
-            .menu-tag { color: var(--accent); font-size: 0.75rem; letter-spacing: 4px; margin-bottom: 20px; font-weight: bold; }
-            .menu-footer { margin-top: auto; padding-bottom: 20px; display: flex; flex-direction: column; gap: 15px; }
-            .menu-contact-btn { color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
         }
 
         @media (min-width: 1100px) {
-            .hamburger, .menu-tag, .menu-footer { display: none; }
-            .nav-links { display: flex; gap: 25px; align-items: center; }
-            .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; transition: 0.3s; }
-            .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-            .btn-call-nav { background: var(--accent); color: white !important; padding: 10px 22px; border-radius: 50px; animation: breathing-gold 2.5s infinite; }
+            .hamburger { display: none; }
+            .nav-links { display: flex; gap: 25px; }
+            .nav-links a { text-decoration: none; color: var(--primary); font-weight: 700; transition: 0.3s; }
+            .nav-links a.active-link { color: var(--accent); }
         }
 
-        /* --- [主內容區] --- */
-        .page-header {
+        /* --- [頁面內容] --- */
+        .page-header { 
             background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
-                        url('https://images.unsplash.com/photo-1449156001437-3a1661acda22?q=80&w=1600') center/cover fixed;
-            height: 40vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white;
+                        url('https://images.unsplash.com/photo-1449156001437-3a1661acda22?q=80&w=1600') center/cover;
+            height: 35vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; 
         }
-        .page-header h1 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 900; letter-spacing: 5px; margin: 0; }
-        .page-header p { font-size: 1.1rem; opacity: 0.9; letter-spacing: 3px; margin-top: 15px; }
+        .page-header h1 { font-size: clamp(2rem, 6vw, 2.8rem); font-weight: 900; letter-spacing: 4px; }
 
-        .section { padding: 0 6% 100px; max-width: 1300px; margin: 0 auto; }
-
+        .section { padding: 60px 6% 100px; max-width: 1300px; margin: 0 auto; }
+        
         .area-container {
             display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px;
-            background: white; padding: 50px; border-radius: 20px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.08); margin-top: -60px;
+            background: white; padding: 40px; border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.06); margin-top: -80px;
         }
-        
-        .area-info h2 { color: var(--primary); font-size: 2rem; font-weight: 900; margin-bottom: 30px; border-left: 6px solid var(--accent); padding-left: 20px; }
-        .city-name { font-size: 1.2rem; font-weight: 800; color: var(--accent); margin-bottom: 15px; display: block; }
+
+        .area-info h2 { color: var(--primary); font-size: 1.8rem; font-weight: 900; margin-bottom: 25px; border-left: 6px solid var(--accent); padding-left: 15px; }
+        .city-name { font-size: 1.2rem; font-weight: 800; color: var(--accent); margin: 20px 0 10px; display: block; }
         
         .dist-tag { 
-            display: inline-block; background: #f1f5f9; padding: 6px 16px; 
+            display: inline-block; background: #f1f5f9; padding: 6px 14px; 
             border-radius: 50px; margin: 4px; font-size: 0.9rem; font-weight: 600;
-            border: 1px solid #e2e8f0; transition: 0.3s; color: var(--primary);
+            border: 1px solid #e2e8f0; color: var(--primary);
         }
-        .dist-tag:hover { background: var(--accent); color: white; transform: translateY(-3px); }
 
         .btn-call {
-            display: block; background: var(--accent); color: white; padding: 18px; border-radius: 50px; 
+            display: block; background: var(--accent-grad); color: white; padding: 18px; border-radius: 50px; 
             text-decoration: none; font-weight: 900; font-size: 1.1rem; text-align: center; 
-            margin-top: 35px; animation: breathing-gold 2.5s infinite; transition: 0.3s;
+            margin-top: 30px; box-shadow: 0 10px 20px rgba(184, 134, 11, 0.3);
+            animation: pulse-gold 2s infinite;
         }
 
-        .map-wrapper { border-radius: 15px; overflow: hidden; min-height: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        @keyframes pulse-gold {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
 
-        /* 數據跑分區 */
-        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 80px; }
-        .stat-item { padding: 45px 20px; background: white; border-radius: 20px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; transition: 0.3s; }
-        .stat-item:hover { transform: translateY(-5px); border-color: var(--accent-light); }
-        .stat-item i { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
+        .map-wrapper { border-radius: 15px; overflow: hidden; height: 450px; border: 1px solid #eee; }
+        
+        /* 統計數字區 */
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 60px; }
+        .stat-item { padding: 40px 20px; background: white; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #f0f0f0; transition: 0.3s; }
+        .stat-item:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .stat-item i { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; }
         .stat-item h3 { font-size: 2.8rem; color: var(--primary); font-weight: 900; margin: 0; }
-        .stat-item p { color: var(--text-muted); font-weight: 700; margin-top: 10px; font-size: 1rem; }
+        .stat-item p { color: var(--text-muted); font-weight: 700; font-size: 1.1rem; }
 
-        /* Line 懸浮按鈕 */
-        .line-float {
-            position: fixed; bottom: 30px; right: 25px; background: var(--line-green); color: white;
-            padding: 12px 25px; border-radius: 50px; display: flex; align-items: center; justify-content: center;
-            text-decoration: none; z-index: 9999; animation: breathing-line 3s infinite; box-shadow: 0 10px 20px rgba(6,199,85,0.3);
-        }
-        .line-float i { font-size: 24px; margin-right: 8px; }
-        .line-float span { font-weight: 900; }
+        @media (max-width: 991px) { .area-container { grid-template-columns: 1fr; margin-top: -40px; padding: 30px 20px; } }
 
-        footer { background: var(--primary); color: white; padding: 70px 5%; text-align: center; }
-
-        @media (max-width: 1099px) {
-            .area-container { grid-template-columns: 1fr; padding: 35px 20px; }
-            .map-wrapper { min-height: 300px; }
-            .line-float span { display: none; }
-            .line-float { width: 60px; height: 60px; padding: 0; border-radius: 50%; }
-            .line-float i { margin-right: 0; font-size: 30px; }
-        }
+        footer { background: var(--primary); color: white; padding: 60px 5%; text-align: center; }
+        .line-float { position: fixed; bottom: 30px; right: 30px; background: var(--line-green); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; color: white; z-index: 9999; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
 
 <div class="header-fixed-container">
     <header class="navbar">
-        <a href="index.html" class="logo">錦德<span>防水工程</span></a>
+        <a href="index.html" class="logo"><img src="favicon.png">錦德<span>防水工程</span></a>
         <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
         <nav class="nav-links" id="navLinks">
-            <span class="menu-tag">M E N U</span>
             <a href="index.html">首頁</a>
             <a href="about.html">關於錦德</a>
             <a href="services.html">服務項目</a>
             <a href="methods.html">專業工法</a>
             <a href="cases.html">實績對比</a>
-            <a href="journal.html">工程日常</a>
-            <a href="areas.html" class="active">服務區域</a>
-            <a href="contact.html" class="btn-call-nav">預約場勘</a>
-            <div class="menu-footer">
-                <a href="https://line.me/ti/p/rqqh-uyZsq" class="menu-contact-btn" style="color: var(--line-green);">
-                    <i class="fab fa-line"></i><span>Line 諮詢</span>
-                </a>
-                <a href="tel:0963696032" class="menu-contact-btn" style="color: var(--accent-light);">
-                    <i class="fas fa-phone"></i><span>撥打專線</span>
-                </a>
-            </div>
+            <a href="daily.html">工程日常</a>
+            <a href="areas.html" class="active-link">服務區域</a>
+            <a href="contact.html">預約場勘</a>
         </nav>
     </header>
-    <div class="announcement-bar">
-        <div class="marquee-content">🛡️ 錦德防水：中彰投科技抓漏專家，提供五年正式合約保固。統編：80081612 ✨ 歡迎預約場勘詢問 ✨</div>
+    <div class="announcement-bar">🛡️ 中彰投專業防水團隊，五年合約保固，誠信經營。</div>
+</div>
+
+<section class="page-header">
+    <h1>中部全區服務範圍</h1>
+    <p>深耕在地 ‧ 專業到府</p>
+</section>
+
+<div class="section">
+    <div class="area-container">
+        <div class="area-info">
+            <h2>服務據點與範圍</h2>
+            
+            <div class="city-box">
+                <span class="city-name"><i class="fas fa-location-dot"></i> 台中地區 (核心服務)</span>
+                <div class="districts">
+                    <span class="dist-tag">太平區</span><span class="dist-tag">大里區</span><span class="dist-tag">北屯區</span>
+                    <span class="dist-tag">西屯區</span><span class="dist-tag">南屯區</span><span class="dist-tag">東區</span>
+                    <span class="dist-tag">西區</span><span class="dist-tag">南區</span><span class="dist-tag">北區</span>
+                    <span class="dist-tag">烏日區</span><span class="dist-tag">霧峰區</span><span class="dist-tag">豐原區</span>
+                </div>
+            </div>
+
+            <div class="city-box">
+                <span class="city-name"><i class="fas fa-car-side"></i> 彰化 / 南投地區</span>
+                <div class="districts">
+                    <span class="dist-tag">彰化市</span><span class="dist-tag">員林市</span><span class="dist-tag">和美鎮</span>
+                    <span class="dist-tag">草屯鎮</span><span class="dist-tag">南投市</span><span class="dist-tag">埔里鎮</span>
+                </div>
+            </div>
+
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 20px;">* 其他偏遠區域歡迎來電洽詢，我們將評估後回覆。</p>
+            
+            <a href="tel:0963696032" class="btn-call"><i class="fas fa-phone-alt"></i> 預約免費場勘：0963-696-032</a>
+        </div>
+        
+        <div class="map-wrapper">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3641.014234563811!2d120.710787!3d24.126435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693cb4787a8b6f%3A0x6a0e60892f39648c!2zNDEx5Y-w5Lit5biC5aSq5bmz5Y2A5p2x5p2R5YWr6KGXMzflt7fOom_omZ8!5e0!3m2!1szh-TW!2stw!4v1700000000000!5m2!1szh-TW!2stw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+
+    <div class="stat-grid">
+        <div class="stat-item">
+            <i class="fas fa-house-chimney-crack"></i>
+            <h3 class="counter" data-target="1500">0</h3>
+            <p>成功修復案件</p>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-shield-halved"></i>
+            <h3 class="counter" data-target="100">0</h3>
+            <p>完工合約保固 (%)</p>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-calendar-check"></i>
+            <h3 class="counter" data-target="24">0</h3>
+            <p>小時內快速回覆</p>
+        </div>
     </div>
 </div>
 
-<div class="menu-overlay" id="menuOverlay"></div>
+<a href="https://line.me/ti/p/rqqh-uyZsq" class="line-float"><i class="fab fa-line"></i></a>
 
-    <section class="page-header">
-        <h1>專業到府 · 中部全區服務</h1>
-        <p>台中、彰化、南投，預約現場勘查</p>
-    </section>
+<footer>
+    <h2 style="font-size: 1.6rem; color: var(--accent); font-weight: 900; margin-bottom: 10px;">錦德防水工程</h2>
+    <p>台中市太平區東村八街37巷8號<br>服務熱線：0963-696-032 | 統編：80081612</p>
+</footer>
 
-    <div class="section">
-        <div class="area-container">
-            <div class="area-info">
-                <h2>服務據點與範圍</h2>
-                <div class="city-box" style="margin-bottom: 30px;">
-                    <span class="city-name"><i class="fas fa-location-dot"></i> 台中地區</span>
-                    <div class="districts">
-                        <span class="dist-tag">太平區</span><span class="dist-tag">大里區</span><span class="dist-tag">北屯區</span>
-                        <span class="dist-tag">西屯區</span><span class="dist-tag">南屯區</span><span class="dist-tag">東區</span>
-                        <span class="dist-tag">西區</span><span class="dist-tag">南區</span><span class="dist-tag">北區</span>
-                        <span class="dist-tag">烏日區</span><span class="dist-tag">霧峰區</span>
-                    </div>
-                </div>
-                <div class="city-box">
-                    <span class="city-name"><i class="fas fa-car-side"></i> 彰化/南投地區</span>
-                    <div class="districts">
-                        <span class="dist-tag">彰化市</span><span class="dist-tag">員林市</span><span class="dist-tag">草屯鎮</span>
-                        <span class="dist-tag">南投市</span><span class="dist-tag">和美鎮</span><span class="dist-tag">鹿港鎮</span>
-                    </div>
-                </div>
-                <a href="tel:0963696032" class="btn-call"><i class="fas fa-phone"></i> 預約專線：0963-696-032</a>
-            </div>
-            <div class="map-wrapper">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.8354807494426!2d120.7135891!3d24.1336111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693dee278148b3%3A0x89e000f6b4d5a995!2zNDA25Y-w5Lit5biC5aSq5bmz5Y2A5p2x5p2R5YWr6KGXMzflt7c46Jmf!5e0!3m2!1szh-TW!2stw!4v1710000000000" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
+<script>
+    // 側邊選單
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
 
-        <div class="stat-grid">
-            <div class="stat-item">
-                <i class="fas fa-house-chimney-crack"></i>
-                <h3 class="counter" data-target="1000">0</h3>
-                <p>成功修復案例</p>
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-shield-halved"></i>
-                <h3 class="counter" data-target="100">0</h3>
-                <p>責任保固 (%)</p>
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-calendar-check"></i>
-                <h3 class="counter" data-target="24">0</h3>
-                <p>小時內快速場勘</p>
-            </div>
-        </div>
-    </div>
+    // 跑分動畫
+    function animateCounters() {
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            const increment = target / 30; // 調整速度
 
-    <footer>
-        <h2 style="font-size: 1.8rem; color: var(--accent); font-weight: 900; margin-bottom: 15px;">錦德防水工程</h2>
-        <p style="opacity: 0.7;">台中市太平區東村八街37巷8號</p>
-        <div style="margin-top: 30px; font-size: 0.8rem; opacity: 0.4;">© 2026 JINDE WATERPROOFING | 統編 80081612 | 守護您的家</div>
-    </footer>
-
-    <a href="https://line.me/ti/p/rqqh-uyZsq" class="line-float" target="_blank">
-        <i class="fab fa-line"></i><span>Line 諮詢</span>
-    </a>
-
-    <script>
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
-        const menuOverlay = document.getElementById('menuOverlay');
-
-        function toggleMenu() {
-            const isActive = navLinks.classList.toggle('active');
-            menuOverlay.classList.toggle('active');
-            document.body.style.overflow = isActive ? 'hidden' : 'auto';
-            const icon = hamburger.querySelector('i');
-            icon.className = isActive ? 'fas fa-times' : 'fas fa-bars';
-        }
-
-        hamburger.addEventListener('click', (e) => {
-            toggleMenu();
-            e.stopPropagation();
+            const updateCount = () => {
+                const count = +counter.innerText.replace('+', '');
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment) + (target >= 100 ? "+" : "");
+                    setTimeout(updateCount, 40);
+                } else {
+                    counter.innerText = target + (target >= 100 ? "+" : "");
+                }
+            };
+            updateCount();
         });
+    }
 
-        menuOverlay.addEventListener('click', toggleMenu);
+    // 當滾動到該區域時觸發動畫 (簡單版：載入即觸發)
+    window.onload = animateCounters;
+</script>
 
-        // 跑分腳本
-        function startCounting() {
-            const counters = document.querySelectorAll('.counter');
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                let count = 0;
-                const speed = target / 40; 
-                const update = () => {
-                    count += speed;
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count) + (target === 1000 ? "+" : "");
-                        requestAnimationFrame(update);
-                    } else {
-                        counter.innerText = target + (target === 1000 ? "+" : "");
-                    }
-                };
-                update();
-            });
-        }
-        window.addEventListener('load', startCounting);
-    </script>
 </body>
 </html>
