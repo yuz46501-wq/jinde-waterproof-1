@@ -8,59 +8,148 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* 這裡保留您之前的 CSS 樣式 (省略以縮短長度，請沿用之前的 Style) */
-        :root { --primary: #0F172A; --accent: #B8860B; --bg-light: #f8fafc; }
-        body { font-family: "Noto Sans TC", sans-serif; margin: 0; background: var(--bg-light); }
+        :root {
+            --primary: #0F172A;
+            --accent: #B8860B;
+            --accent-light: #D4AF37;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --white: #ffffff;
+            --bg-light: #f8fafc;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+        body { font-family: "Noto Sans TC", sans-serif; margin: 0; background: var(--bg-light); color: var(--text-main); line-height: 1.8; overflow-x: hidden; }
+
+        /* --- [導覽列] --- */
+        .header-fixed-container { position: sticky; top: 0; z-index: 10000; box-shadow: 0 4px 20px rgba(0,0,0,0.05); background: white; }
+        .navbar { height: 90px; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; }
+        .logo { display: flex; align-items: center; font-size: 1.6rem; font-weight: 900; color: var(--primary); text-decoration: none; }
+        .logo img { height: 45px; margin-right: 10px; }
+        .logo span { color: var(--accent); }
+        .hamburger { cursor: pointer; font-size: 1.6rem; color: var(--primary); z-index: 10002; }
+
+        .announcement-bar { background: var(--accent); color: white; padding: 10px 0; font-size: 0.85rem; font-weight: 600; text-align: center; }
+
+        @media (max-width: 1099px) {
+            .nav-links { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: #0F172A; display: flex; flex-direction: column; padding: 100px 35px; transition: 0.4s; z-index: 10001; }
+            .nav-links.active { right: 0; }
+            .nav-links a { color: white; text-decoration: none; padding: 15px 0; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        }
+
+        @media (min-width: 1100px) {
+            .hamburger { display: none; }
+            .nav-links { display: flex; gap: 25px; align-items: center; }
+            .nav-links a { text-decoration: none; color: var(--primary); font-weight: 700; transition: 0.3s; }
+            .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        }
+
+        /* --- [Hero 標題] --- */
+        .page-header { 
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1600');
+            background-size: cover; background-position: center; height: 35vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; 
+        }
+        .page-header h1 { font-size: clamp(2rem, 6vw, 3rem); margin: 0; letter-spacing: 6px; font-weight: 900; }
+
+        /* --- [實績案場 Grid] --- */
         .case-section { padding: 60px 6%; max-width: 1400px; margin: 0 auto; }
         .case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; }
-        .case-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .case-img-wrapper { height: 250px; position: relative; overflow: hidden; }
-        .case-img { height: 100%; background-size: cover; background-position: center; }
-        .case-badge { position: absolute; top: 15px; left: 15px; background: var(--accent); color: white; padding: 5px 12px; border-radius: 5px; font-size: 0.8rem; font-weight: 800; }
-        .case-body { padding: 25px; }
-        .case-body h3 { margin: 0 0 10px; color: var(--primary); }
-        /* 頁首頁尾樣式請保留... */
+        
+        .case-card { background: var(--white); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.05); transition: 0.4s; border: 1px solid #f1f5f9; }
+        .case-card:hover { transform: translateY(-10px); }
+        
+        .case-img-wrapper { height: 260px; overflow: hidden; position: relative; background: #eee; }
+        .case-img { height: 100%; background-size: cover; background-position: center; transition: 0.6s; }
+        
+        .case-badge { position: absolute; top: 20px; left: 20px; background: var(--accent); color: white; padding: 6px 16px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; z-index: 2; }
+        
+        .case-body { padding: 30px; }
+        .case-body h3 { font-size: 1.3rem; margin: 0 0 15px 0; color: var(--primary); font-weight: 900; line-height: 1.4; border-left: 4px solid var(--accent); padding-left: 15px; }
+        .case-body p { font-size: 0.95rem; color: var(--text-muted); margin: 0; line-height: 1.8; }
+
+        .floating-contact { position: fixed; right: 25px; bottom: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 9999; }
+        .float-btn { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 1.6rem; box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+        .line-btn { background-color: #06C755; }
+        .phone-btn { background-color: var(--accent); }
+
+        footer { background: var(--primary); color: var(--white); padding: 60px 5%; text-align: center; margin-top: 50px; }
     </style>
 </head>
 <body>
-    <section class="case-section">
-        <div class="case-grid" id="caseGrid">
-            <p style="text-align: center; grid-column: 1/-1;">實績載入中...</p>
-        </div>
-    </section>
 
-    <script>
-        // 1. 設定您的圖片路徑 (假設圖片跟網頁在同一個倉庫)
-        const imgPath = "./"; 
+<div class="header-fixed-container">
+    <header class="navbar">
+        <a href="index.html" class="logo"><img src="favicon.png">錦德<span>防水工程</span></a>
+        <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">首頁</a>
+            <a href="about.html">關於錦德</a>
+            <a href="services.html">服務項目</a>
+            <a href="methods.html">專業工法</a>
+            <a href="cases.html" class="active">實績對比</a>
+            <a href="daily.html">工程日常</a>
+            <a href="contact.html">預約場勘</a>
+        </nav>
+    </header>
+</div>
 
-        // 2. 開始抓取 cases.json
-        fetch('cases.json')
-            .then(response => response.json())
-            .then(data => {
-                const grid = document.getElementById('caseGrid');
-                grid.innerHTML = ''; // 清除「載入中」文字
+<section class="page-header">
+    <h1>專業修復實績</h1>
+    <p>品質見證 ‧ 責任施工</p>
+</section>
 
-                data.forEach(item => {
-                    // 組合 HTML 結構
-                    const card = `
-                        <div class="case-card">
-                            <div class="case-img-wrapper">
-                                <span class="case-badge">${item.category}</span>
-                                <div class="case-img" style="background-image: url('${imgPath}${item.image}');"></div>
-                            </div>
-                            <div class="case-body">
-                                <h3>${item.title}</h3>
-                                <p>${item.description}</p>
-                            </div>
+<section class="case-section">
+    <div class="case-grid" id="caseGrid">
+        <p style="text-align: center; grid-column: 1/-1;">實績載入中...</p>
+    </div>
+</section>
+
+<div class="floating-contact">
+    <a href="tel:0963696032" class="float-btn phone-btn"><i class="fas fa-phone-alt"></i></a>
+    <a href="https://line.me/ti/p/rqqh-uyZsq" target="_blank" class="float-btn line-btn"><i class="fab fa-line"></i></a>
+</div>
+
+<footer>
+    <h2 style="color:var(--accent)">錦德防水工程</h2>
+    <p>© 2026 JINDE WATERPROOFING | 統編 80081612</p>
+</footer>
+
+<script>
+    // 側邊選單功能
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+    // 讀取 JSON 並生成內容
+    fetch('cases.json')
+        .then(res => res.json())
+        .then(data => {
+            const grid = document.getElementById('caseGrid');
+            grid.innerHTML = '';
+            data.forEach(item => {
+                // 如果 image 寫的是完整網址就用網址，如果是檔名就去 github 抓
+                let imgUrl = item.image.startsWith('http') ? item.image : `./${item.image}`;
+                
+                grid.innerHTML += `
+                    <div class="case-card">
+                        <div class="case-img-wrapper">
+                            <span class="case-badge">${item.category}</span>
+                            <div class="case-img" style="background-image: url('${imgUrl}');"></div>
                         </div>
-                    `;
-                    grid.innerHTML += card;
-                });
-            })
-            .catch(err => {
-                console.error('讀取資料失敗:', err);
-                document.getElementById('caseGrid').innerHTML = '<p>暫時無法載入實績，請稍後再試。</p>';
+                        <div class="case-body">
+                            <h3>${item.title}</h3>
+                            <p>${item.description}</p>
+                        </div>
+                    </div>
+                `;
             });
-    </script>
+        })
+        .catch(err => {
+            console.error(err);
+            document.getElementById('caseGrid').innerHTML = '<p>讀取失敗，請確認 cases.json 是否存在。</p>';
+        });
+</script>
+
 </body>
 </html>
