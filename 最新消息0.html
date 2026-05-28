@@ -1,0 +1,298 @@
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>台中住宅屋頂鐵皮防水工程施工完成 - 錦德防水工程</title>
+    <meta name="description" content="錦德防水工程專業施工日常：台中住宅屋頂鐵皮防水工程，徹底解決釘孔脆化與搭接縫生鏽漏水問題。">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0F172A; 
+            --accent: #B8860B; 
+            --accent-light: #D4AF37;
+            --bg-light: #F8FAFC;
+            --white: #FFFFFF;
+            --line-green: #06C755;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+        }
+        
+        /* --- [基礎與通用佈局] --- */
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: "Noto Sans TC", sans-serif; margin: 0; background: var(--bg-light); color: var(--text-main); line-height: 1.8; overflow-x: hidden; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.2, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- [開場動畫] --- */
+        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--primary); display: flex; justify-content: center; align-items: center; z-index: 99999; transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
+        .loader-content { text-align: center; color: white; padding: 20px; }
+        .loader-logo { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900; margin: 0; letter-spacing: 5px; animation: logoFadeIn 1s ease-out forwards; }
+        .loader-logo span { color: var(--accent); }
+        .loader-line-box { width: 180px; height: 2px; background: rgba(255,255,255,0.1); margin: 25px auto; position: relative; overflow: hidden; }
+        .loader-line-fill { position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--accent); animation: lineSwipe 1.5s ease-in-out infinite; }
+        #loader.loaded { transform: translateY(-100%); }
+        @keyframes logoFadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes lineSwipe { 0% { left: -100%; } 50% { left: 0; } 100% { left: 100%; } }
+
+        /* --- [導覽列與下拉結構] --- */
+        .header-fixed-container { position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.05); background: white; }
+        .navbar { height: 90px; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; position: relative; }
+        .logo { display: flex; align-items: center; font-size: 1.6rem; font-weight: 900; color: var(--primary); text-decoration: none; }
+        .logo img { height: 50px; margin-right: 12px; }
+        .logo span { color: var(--accent); }
+        .hamburger { cursor: pointer; font-size: 1.5rem; color: var(--primary); z-index: 10001; }
+        .announcement-bar { background: var(--accent); color: white; padding: 10px 0; font-size: 0.85rem; font-weight: 600; overflow: hidden; position: relative; }
+        .marquee-content { white-space: nowrap; display: inline-block; animation: marquee-scroll 25s linear infinite; }
+        @keyframes marquee-scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
+
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-toggle { display: flex; align-items: center; gap: 5px; background: transparent; border: none; font-size: inherit; font-family: inherit; cursor: pointer; padding: 0; width: 100%; justify-content: center; }
+        .dropdown-toggle i { font-size: 0.8rem; transition: transform 0.3s; }
+        
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            background: var(--white); 
+            min-width: 190px; 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1); 
+            border-radius: 8px; 
+            padding: 10px 0; 
+            z-index: 1000;
+        }
+        .dropdown-menu a { display: block; padding: 10px 20px; text-decoration: none; font-size: 0.95rem; text-align: left; transition: 0.3s; color: var(--text-main) !important; font-weight: 500 !important; border-bottom: none !important; }
+        
+        /* --- [RWD 斷點控管] --- */
+        @media (max-width: 1099px) {
+            .nav-links { 
+                position: absolute; top: 90px; left: 0; width: 100%; 
+                background: var(--primary); 
+                display: flex; flex-direction: column; 
+                max-height: 0; overflow: hidden; 
+                transition: max-height 0.4s ease-in-out; 
+                z-index: 999;
+            }
+            .nav-links.active { max-height: 60vh; overflow-y: auto; border-top: 2px solid var(--accent); }
+            .nav-links a, .dropdown-toggle { color: white; padding: 16px 6%; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 1.1rem; font-weight: 700; text-decoration: none; }
+            .dropdown-menu { position: static; background: rgba(0,0,0,0.2); box-shadow: none; width: 100%; padding: 0; border-radius: 0; }
+            .dropdown-menu a { color: rgba(255,255,255,0.8) !important; text-align: center !important; padding: 12px 6%; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05) !important; }
+            .dropdown-menu a:hover { color: var(--accent-light) !important; }
+            .dropdown.open .dropdown-menu { display: block; }
+            .dropdown.open .dropdown-toggle i { transform: rotate(180deg); }
+        }
+
+        @media (min-width: 1100px) {
+            .nav-links { display: flex; gap: 25px; align-items: center; }
+            .nav-links a, .dropdown-toggle { text-decoration: none; color: var(--primary); font-weight: 700; transition: 0.3s; }
+            .nav-links a:hover, .dropdown-toggle:hover { color: var(--accent); }
+            .hamburger { display: none; }
+            
+            .dropdown-menu { right: 0; top: 100%; margin-top: 15px; border-top: 3px solid var(--accent); }
+            .dropdown-menu a:hover { background: var(--bg-light); color: var(--accent) !important; }
+            .dropdown:hover .dropdown-menu, .dropdown.open .dropdown-menu { display: block; }
+            .dropdown:hover .dropdown-toggle i, .dropdown.open .dropdown-toggle i { transform: rotate(180deg); }
+        }
+
+        /* --- [文章主體專用排版樣式] --- */
+        .article-wrapper { padding: 60px 6%; max-width: 950px; margin: 0 auto; }
+        .breadcrumb { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; font-weight: 500; }
+        .breadcrumb a { text-decoration: none; color: var(--text-muted); transition: 0.3s; }
+        .breadcrumb a:hover { color: var(--accent); }
+        
+        .article-header h1 { font-size: clamp(1.6rem, 5vw, 2.4rem); font-weight: 900; color: var(--primary); line-height: 1.4; margin: 0 0 20px 0; }
+        .article-meta { display: flex; flex-wrap: wrap; gap: 20px; font-size: 0.9rem; color: var(--text-muted); border-bottom: 1px solid #e2e8f0; padding-bottom: 25px; margin-bottom: 35px; }
+        .article-meta span i { color: var(--accent); margin-right: 6px; }
+
+        .article-main-img { width: 100%; height: clamp(240px, 45vh, 450px); background-size: cover; background-position: center; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 40px; }
+        
+        .article-body { background: var(--white); padding: 40px 5%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
+        .article-body p { font-size: 1.1rem; color: var(--text-main); line-height: 1.9; margin-top: 0; margin-bottom: 30px; text-align: justify; }
+        
+        /* 導讀框風格 */
+        .article-lead-box { background: #FCF9F2; border-left: 5px solid var(--accent); padding: 25px; border-radius: 0 12px 12px 0; margin-bottom: 45px; }
+        .article-lead-box p { font-size: 1.15rem; font-weight: 700; color: var(--primary); margin: 0; }
+
+        /* 章節標題 */
+        .article-body h2 { font-size: 1.6rem; font-weight: 900; color: var(--primary); margin-top: 50px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
+        .article-body h2 i { color: var(--accent); }
+        .article-body h3 { font-size: 1.25rem; font-weight: 800; color: var(--primary); margin-top: 35px; margin-bottom: 15px; border-left: 4px solid var(--accent); padding-left: 12px; }
+        
+        .text-highlight { color: var(--accent); font-weight: 700; }
+        
+        /* 完工總結框 */
+        .article-summary-box { background: var(--bg-light); border: 2px dashed #e2e8f0; padding: 30px; border-radius: 12px; margin-top: 50px; }
+        .article-summary-title { font-weight: 900; font-size: 1.1rem; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .article-summary-title i { color: #D4AF37; }
+        .article-summary-box p { font-size: 0.95rem; color: var(--text-muted); margin: 0; }
+
+        /* 返回列表按鈕 */
+        .btn-back-wrapper { text-align: center; margin-top: 50px; }
+        .btn-back { display: inline-flex; align-items: center; gap: 10px; padding: 14px 35px; background: var(--primary); color: white; text-decoration: none; font-weight: 700; border-radius: 50px; transition: 0.3s; box-shadow: 0 5px 15px rgba(15,23,42,0.15); }
+        .btn-back:hover { background: var(--accent); transform: translateY(-3px); }
+
+        /* --- [浮動按鈕與頁尾] --- */
+        .floating-contact { position: fixed; right: 20px; bottom: 30px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
+        .float-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 1.6rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .line-btn { background-color: #06C755; }
+        .phone-btn { background-color: var(--accent); }
+
+        footer { background: var(--primary); color: white; padding: 60px 6%; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="loader-content">
+            <h1 class="loader-logo">錦德<span>防水工程</span></h1>
+            <div class="loader-line-box"><div class="loader-line-fill"></div></div>
+            <p style="letter-spacing: 5px; font-weight: bold;">專業防水工程 ‧ 在地保固</p>
+        </div>
+    </div>
+
+    <div class="header-fixed-container">
+        <header class="navbar">
+            <a class='logo' href='/'>
+                <img src="https://i.meee.com.tw/xIPEk70.jpg" alt="錦德防水工程">
+                錦德<span>防水工程</span>
+            </a>
+            
+            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href='/'>首頁</a>
+                <a href='/about'>關於錦德</a>
+                <a href='/services'>服務項目</a>
+                <a href='/cases'>實績對比</a>
+                
+                <div class="dropdown id="navDropdown"">
+                    <button class="dropdown-toggle" id="dropdownBtn" style="color: var(--accent); font-weight: 900;">
+                        工程日常 <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="最新消息0.html" style="color: var(--accent) !important; font-weight: 700 !important;"><i class="fa-solid fa-sheet-plastic mr-1.5 text-xs"></i> 鐵皮防水工程</a>
+                        <a href="最新消息1.html"><i class="fa-solid fa-bath mr-1.5 text-xs"></i> 浴室翻修工程</a>
+                        <a href="最新消息2.html"><i class="fa-solid fa-warehouse mr-1.5 text-xs"></i> 地下室抓漏工程</a>
+                    </div>
+                </div>
+                
+                <a href='/areas'>服務區域</a>
+                <a href='/contact'>預約場勘</a>
+            </nav>
+        </header>
+        <div class="announcement-bar">
+            <div class="marquee-content">🛡️ 錦德防水：中彰投科技抓漏專家，提供五年正式合約保固。統編：80081612 ✨</div>
+        </div>
+    </div>
+
+    <main class="article-wrapper">
+        
+        <nav class="breadcrumb reveal">
+            <a href="/">首頁</a> &gt; 
+            <a href="/#news">最新消息</a> &gt; 
+            <span>台中住宅屋頂鐵皮防水工程</span>
+        </nav>
+
+        <header class="article-header reveal">
+            <h1>台中住宅屋頂鐵皮防水工程施工完成！徹底根治生鏽與接縫滲水</h1>
+            <div class="article-meta">
+                <span><i class="fa-regular fa-calendar"></i>2026-05-20</span>
+                <span><i class="fa-solid fa-map-marker-alt"></i>台中市</span>
+                <span><i class="fa-solid fa-user-check"></i>錦德專業防水團隊</span>
+            </div>
+        </header>
+
+        <div class="article-main-img reveal" style="background-image: url('https://i.meee.com.tw/vLi9aqD.png');"></div>
+
+        <article class="article-body reveal">
+            
+            <div class="article-lead-box">
+                <p>「明明加蓋了鐵皮屋頂，大雨一來室內卻還是滴滴答答？」許多台灣住宅頂樓都會加蓋鐵皮來防漏水兼隔熱。然而，鐵皮經過常年的烈日曝曬與梅雨洗禮，固定螺絲的墊片容易老化脆化，接縫處也隨之生鏽，原本防雨的鐵皮反而成了漏水源頭。</p>
+            </div>
+
+            <p>這次團隊前往台中處理的住宅現況便是如此。每逢大雨，屋主就得拿水桶出來接水，深受折磨。經過專業現場勘查後，我們針對此案採取了專業的<strong>「多重防護複合工法」</strong>，從結構根本解決漏水與夏季高溫問題。</p>
+
+            <h2><i class="fa-solid fa-screwdriver-wrench"></i> 本次工程三大核心步驟</h2>
+            <p>鐵皮防水絕對不是「防水漆塗一塗」就好。如果沒有做好扎實的前置處理，新塗料很快就會因為鐵皮的巨大熱脹冷縮而剝落碎裂。</p>
+
+            <h3>步驟 1：素地除鏽與全面清洗（結構基礎）</h3>
+            <p>針對已經生鏽的鐵皮局部，使用砂輪機與鋼絲刷進行徹底的機械除鏽，並將老化的舊矽利康膠全數剷除。隨後使用高壓水柱將屋頂積塵、青苔與鐵鏽完全清洗乾淨。<br>
+            <span class="text-highlight">【關鍵】</span>如果不除鏽就直接塗防水層，鐵鏽會在內部繼續腐蝕，導致防水層日後整片起泡、報銷。</p>
+
+            <h3>步驟 2：螺絲釘孔與接縫處局部「加固防護」</h3>
+            <p>鐵皮屋頂最容易漏水的兩個大魔王就是：<strong>螺絲釘孔</strong>與<strong>鐵皮搭接縫</strong>。我們逐一檢查所有螺絲，並使用<strong>高黏度抗裂不織布/玻纖網</strong>搭配<strong>專用防水補強樹脂</strong>，將所有釘孔與搭接處進行包覆加固，賦予接縫處極佳的抗拉裂性能。</p>
+
+            <h3>步驟 3：塗刷高滲透防鏽底漆與多道隔熱防水面漆</h3>
+            <p>全面塗刷一層高性能防鏽底漆，牢牢鎖住鐵皮表面，隔絕空氣與水氣。接續塗刷兩道高彈性、高反射率的純白色隔熱防水面漆。白色的面漆不僅能有效反射 90% 以上的太陽輻射熱，大幅降低室內溫度 <span class="text-highlight">3~5°C</span>，更能保護下層結構，延長防水壽命。</p>
+
+            <div class="article-summary-box">
+                <div class="article-summary-title">
+                    <i class="fa-solid fa-star"></i> 專家完工結語
+                </div>
+                <p>防水工程，細節決定耐用度。鐵皮屋頂防水不只要「防漏」，更要兼顧「防鏽」與「隔熱」。交給專業團隊，用最扎實的工法與結構思維，才能讓您的屋頂再戰十年！</p>
+            </div>
+
+        </article>
+
+        <div class="btn-back-wrapper reveal">
+            <a href="/#news" class="btn-back">
+                <i class="fa-solid fa-arrow-left"></i> 返回最新消息
+            </a>
+        </div>
+
+    </main>
+
+    <div class="floating-contact">
+        <a href="tel:0963696032" class="float-btn phone-btn"><i class="fas fa-phone-alt"></i></a>
+        <a href="https://line.me/ti/p/rqqh-uyZsq" target="_blank" class="float-btn line-btn"><i class="fab fa-line"></i></a>
+    </div>
+
+    <footer>
+        <h2 style="font-size: 1.6rem; color: var(--accent); font-weight: 900; margin-bottom: 10px;">錦德防水工程</h2>
+        <p><i class="fas fa-map-marker-alt"></i>  401臺中市東區建德街346巷7號</p>
+        <p><i class="fas fa-phone-alt"></i> 諮詢專線：0963-696-032 | 統編：80081612</p>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        const hamburgerIcon = hamburger.querySelector('i');
+        const navDropdown = document.getElementById('navDropdown');
+        const dropdownBtn = document.getElementById('dropdownBtn');
+
+        // 手機版漢堡按鈕
+        hamburger.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('active');
+            hamburgerIcon.classList.toggle('fa-bars', !isOpen);
+            hamburgerIcon.classList.toggle('fa-times', isOpen);
+        });
+
+        // 「工程日常」下拉選單切換
+        dropdownBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            navDropdown.classList.toggle('open');
+        });
+
+        // 點擊空白處自動關閉下拉
+        document.addEventListener('click', (e) => {
+            if (navDropdown && !navDropdown.contains(e.target)) {
+                navDropdown.classList.remove('open');
+            }
+        });
+
+        // 動態浮現特效控制
+        window.addEventListener('load', function() {
+            setTimeout(() => { 
+                 document.getElementById('loader').classList.add('loaded'); 
+                 reveal(); 
+             }, 800);
+        });
+
+        function reveal() {
+            document.querySelectorAll(".reveal").forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 80) {
+                    el.classList.add("active");
+                }
+            });
+        }
+        window.addEventListener("scroll", reveal);
+    </script>
+</body>
+</html>
