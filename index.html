@@ -34,7 +34,6 @@
         .loader-line-box { width: 180px; height: 2px; background: rgba(255,255,255,0.1); margin: 25px auto; position: relative; overflow: hidden; }
         .loader-line-fill { position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--accent); animation: lineSwipe 1.5s ease-in-out infinite; }
         #loader.loaded { transform: translateY(-100%); }
-
         @keyframes logoFadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
         @keyframes lineSwipe { 0% { left: -100%; } 50% { left: 0; } 100% { left: 100%; } }
 
@@ -49,6 +48,29 @@
         .marquee-content { white-space: nowrap; display: inline-block; animation: marquee-scroll 25s linear infinite; }
         @keyframes marquee-scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
+        /* --- [下拉選單樣式] --- */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content { 
+            display: none; 
+            position: absolute; 
+            background-color: white; 
+            min-width: 160px; 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
+            z-index: 1001; 
+            border-radius: 4px;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown-content a { 
+            color: var(--primary) !important; 
+            padding: 12px 16px !important; 
+            display: block; 
+            text-align: left; 
+            border-bottom: 1px solid #f1f1f1 !important;
+            font-weight: 500 !important;
+        }
+        .dropdown-content a:hover { background-color: #f8f9fa; }
+
         /* --- [手機下拉選單樣式] --- */
         @media (max-width: 1099px) {
             .nav-links { 
@@ -59,28 +81,30 @@
                 transition: max-height 0.4s ease-in-out; 
                 z-index: 999;
             }
-            .nav-links.active { max-height: 500px; border-top: 2px solid var(--accent); }
+            .nav-links.active { max-height: 800px; border-top: 2px solid var(--accent); }
             .nav-links a { text-decoration: none; color: white; padding: 20px 6%; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 1.1rem; }
+            
+            /* 手機版下拉選單調整 */
+            .dropdown { width: 100%; text-align: center; }
+            .dropdown-content { position: static; box-shadow: none; background: #0f172a; }
+            .dropdown-content a { color: white !important; border-bottom: 1px solid rgba(255,255,255,0.1) !important; text-align: center; background: rgba(0,0,0,0.2); }
         }
+
         @media (min-width: 1100px) {
-            .nav-links { display: flex; gap: 25px; }
+            .nav-links { display: flex; gap: 25px; align-items: center; }
             .nav-links a { text-decoration: none; color: var(--primary); font-weight: 700; transition: 0.3s; }
             .nav-links a:hover { color: var(--accent); }
             .hamburger { display: none; }
+            
+            /* 電腦版 Hover 觸發 */
+            .dropdown:hover .dropdown-content { display: block; }
         }
 
-        /* --- [Hero Section] --- */
-        .hero { 
-            height: 80vh; 
-            /* 已設定您提供的圖片 */
-            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.6)), url('https://meee.com.tw/CUBw49A.jpg') center/cover no-repeat fixed; 
-            display: flex; align-items: center; justify-content: center; text-align: center; color: white; 
-        }
+        /* --- [其餘樣式保持不變] --- */
+        .hero { height: 80vh; background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.6)), url('https://meee.com.tw/CUBw49A.jpg') center/cover no-repeat fixed; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
         .hero h1 { font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 900; margin-bottom: 20px; letter-spacing: 2px; }
         .btn-hero { padding: 18px 50px; text-decoration: none; font-size: 1.1rem; font-weight: 800; background: var(--accent); color: white; border-radius: 50px; display: inline-block; animation: pulse-gold 2s infinite; }
         @keyframes pulse-gold { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-
-        /* --- [新聞區塊樣式] --- */
         .news-section { padding: 80px 6%; background: #ffffff; }
         .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; max-width: 1200px; margin-left: auto; margin-right: auto; }
         .news-card { display: block; background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: 0.3s; text-decoration: none; color: inherit; }
@@ -91,15 +115,11 @@
         .news-date { font-size: 0.85rem; color: #94a3b8; margin-bottom: 8px; }
         .news-title { margin: 0 0 12px 0; font-size: 1.25rem; color: var(--primary); line-height: 1.4; }
         .news-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
-
-        /* --- [數據指標] --- */
         .metrics { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 80px 5%; background: var(--bg-light); }
         .metric-card { background: white; padding: 35px 20px; border-radius: 15px; width: 260px; text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.1); border-bottom: 5px solid var(--accent); }
         .metric-card h3 { font-size: 2.8rem; margin: 0; color: var(--primary); font-weight: 900; display: inline-block; }
         .metric-card span { font-size: 1.2rem; color: var(--accent); font-weight: 900; }
         .metric-card p { margin: 10px 0 0; font-weight: 700; color: var(--text-muted); }
-
-        /* --- [實績對比] --- */
         .section { padding: 80px 6%; max-width: 1400px; margin: 0 auto; }
         .ba-container { position: relative; width: 100%; height: 350px; overflow: hidden; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .ba-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; }
@@ -107,12 +127,10 @@
         .ba-slider { position: absolute; -webkit-appearance: none; width: 100%; height: 100%; background: transparent; z-index: 3; cursor: ew-resize; outline: none; margin: 0; }
         .ba-label { position: absolute; bottom: 20px; background: rgba(0,0,0,0.6); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; z-index: 4; }
         .label-before { left: 20px; } .label-after { right: 20px; }
-
         .floating-contact { position: fixed; right: 20px; bottom: 30px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
         .float-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 1.6rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         .line-btn { background-color: #06C755; }
         .phone-btn { background-color: var(--accent); }
-
         footer { background: var(--primary); color: white; padding: 60px 6%; text-align: center; }
     </style>
 </head>
@@ -127,45 +145,60 @@
 
     <div class="header-fixed-container">
         <header class="navbar">
-           <a href="index.html" class="logo">
-    <img src="https://i.meee.com.tw/xIPEk70.jpg" alt="錦德防水工程">
-    錦德<span>防水工程</span>
+           <a class='logo' href='/'>
+               <img src="https://i.meee.com.tw/xIPEk70.jpg" alt="錦德防水工程">
+               錦德<span>防水工程</span>
+           </a>
             <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
             <nav class="nav-links" id="navLinks">
-                <a href="index.html" style="color:var(--accent); font-weight: 900;">首頁</a>
+                <a href='/' style='color:var(--accent); font-weight: 900;'>首頁</a>
                 <a href='/about'>關於錦德</a>
-            <a href='/services'>服務項目</a>
-            <a href='/cases'>實績對比</a>
-            <a href='/daily'>工程日常</a>
-            <a href='/areas'>服務區域</a>
-            <a href='/contact'>預約場勘</a>
-        </nav>
+                
+                <div class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">服務項目 <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="/水性屋頂防水.html">水性屋頂防水</a>
+                        <a href="/油性屋頂防水.html">油性屋頂防水</a>
+                        <a href="/抓漏工程.html">抓漏工程</a>
+                      <a href="/防水.html">防水工程</a>
+                       <a href="/油漆工程.html">油漆工程工程</a>
+                        <a href="/浴室翻修.html">浴室翻修</a>
+                    </div>
+                </div>
+
+                <a href='/cases'>實績對比</a>
+                
+                <div class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">工程日常 <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="daily.html">錦德團隊紀錄</a>
+                        <a href="專業知識.html">專業知識</a>
+                         <a href="人才招募.html">加入我們</a>
+                    </div>
+                </div>
+                
+                <a href='/areas'>服務區域</a>
+                <a href='/contact'>預約場勘</a>
             </nav>
         </header>
         <div class="announcement-bar">
             <div class="marquee-content">🛡️ 錦德防水：中彰投科技抓漏專家，提供五年正式合約保固。統編：80081612 ✨</div>
         </div>
-    </div>
- <section class="hero" style="height: 80vh; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.meee.com.tw/CUBw49A.png') center/cover no-repeat; display: flex; align-items: center; justify-content: center; text-align: center; color: white;">
+    </div> 
 
-    <div class="hero-content reveal">
-
-        <h1>防水工程首選</h1>
-
-        <p>‧正式合約保固 ‧ 責任施工</p>
-
-        <a href="contact.html" class="btn-hero" style="padding: 18px 50px; text-decoration: none; font-size: 1.1rem; font-weight: 800; background: #B8860B; color: white; border-radius: 50px; display: inline-block;">開始您的免費場勘</a>
-
-    </div>
-
-</section> 
+    <section class="hero" style="height: 80vh; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.meee.com.tw/CUBw49A.png') center/cover no-repeat; display: flex; align-items: center; justify-content: center; text-align: center; color: white;">
+        <div class="hero-content reveal">
+            <h1>防水工程首選</h1>
+            <p>‧正式合約保固 ‧ 責任施工</p>
+            <a class='btn-hero' href='/contact' style='padding: 18px 50px; text-decoration: none; font-size: 1.1rem; font-weight: 800; background: #B8860B; color: white; border-radius: 50px; display: inline-block;'>開始您的免費場勘</a>
+        </div>
+    </section> 
 
     <section class="news-section">
         <div style="text-align: center;" class="reveal">
             <h2 style="font-size: 2.2rem; font-weight: 900; color: var(--primary); margin: 0;">最新消息</h2>
             <p style="color: var(--text-muted); margin: 10px 0 0 0;">掌握錦德防水最新台中、彰化、南投工程動態與專業分享</p>
-        </div>
-        
+        </div>                
         <div class="news-grid">
             <a href="最新消息0.html" class="news-card reveal">
                 <div class="news-img" style="background-image: url('https://i.meee.com.tw/vLi9aqD.png');"></div>
@@ -176,18 +209,16 @@
                     <p class="news-desc">團隊前往台中進行鐵皮屋頂防水翻修...</p>
                 </div>
             </a>
-
             <a href="最新消息1.html" class="news-card reveal">
                 <div class="news-img" style="background-image: url('https://i.meee.com.tw/0kLkmyj.png');"></div>
                 <div class="news-content">
                     <span class="news-tag">工程日常</span>
                     <div class="news-date">2026-05-12</div>
                     <h3 class="news-title">浴室翻修工程</h3>
-                    <p class="news-desc">浴室不只是洗澡的地方，更是家中最容易受潮發霉的角落。」
-很多浴室翻修後沒兩年就發生漏水，原因往往是「防水層沒做透」或是「管線老舊未更換」</p>
+                    <p class="news-desc">浴室不只是洗澡的地方，更是家中最容易受潮發霉的角落。」很多浴室翻修後沒兩年就發生漏水，原因往往是「防水層沒做透」或是「管線老舊未更換」</p>
                 </div>
-            </a>
-                        <a href="最新消息1.html" class="news-card reveal">
+            </a>                        
+            <a href="最新消息2.html" class="news-card reveal">
                 <div class="news-img" style="background-image: url('https://i.meee.com.tw/lSOPi9O.jpg');"></div>
                 <div class="news-content">
                     <span class="news-tag">工程日常</span>
@@ -195,21 +226,26 @@
                     <h3 class="news-title">地下室抓漏工程</h3>
                     <p class="news-desc">明明外面沒下雨，地下室牆面卻總是在流汗？」地下室長期處於高水壓與通風不良的環境，一旦結構出現裂縫，就會變成壁癌與漏水的重災區。抓漏不能只靠表面塗刷，必須從結構防滲與精準止水著手，才能真正一勞永逸</p>
                 </div>
+                 <a href="最新消息3.html" class="news-card reveal">
+                <div class="news-img" style="background-image: url('https://i.meee.com.tw/YDYD4BB.jpg');"></div>
+                <div class="news-content">
+                    <span class="news-tag">工程日常</span>
+                    <div class="news-date">2026-03-24</div>
+                    <h3 class="news-title">PU防水工程</h3>
+                    <p class="news-desc">針對屋頂/露台進行多層次 PU 防水施作，嚴格控管塗佈厚度，確保結構密封性與耐候性。</p>
+                </div>
             </a>
-
-
-            <a href="最新消息2.html" class="news-card reveal">
-                <div class="news-img" style="background-image: url('https://i.meee.com.tw/0kLkmyj.png');"></div>
+            <a href="最新消息4.html" class="news-card reveal">
+                <div class="news-img" style="background-image: url('https://i.meee.com.tw/LNvY9lz.png');"></div>
                 <div class="news-content">
                     <span class="news-tag">專業公告</span>
                     <div class="news-date">2026-05-12</div>
                     <h3 class="news-title">引進全新高階熱顯像儀！大幅提升漏水定位精準度</h3>
-                    <p class="news-desc">為了提供中彰投鄉親更完美的抓漏服務，錦德全面升級科技儀器，免破壞裝潢即可找出隱藏的管路與結構滲水點。</p>
+                    <p class="news-desc">為了提供更完美的抓漏服務，錦德全面升級科技儀器，免破壞裝潢即可找出隱藏的管路與結構滲水點。</p>
                 </div>
             </a>
-
-            <a href="最新消息3.html" class="news-card reveal">
-                <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600');"></div>
+            <a href="最新消息5.html" class="news-card reveal">
+                <div class="news-img" style="background-image: url('https://i.meee.com.tw/CqYkZfo.png');"></div>
                 <div class="news-content">
                     <span class="news-tag">保固承諾</span>
                     <div class="news-date">2026-05-01</div>
@@ -238,7 +274,7 @@
     <section class="section">
         <div style="text-align: center; margin-bottom: 50px;" class="reveal">
             <h2 style="font-size: 2.2rem; font-weight: 900; color: var(--primary);">即時實績對比</h2>
-        </div>                
+        </div>                        
         <div class="ba-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
             <div class="reveal">
                 <div class="ba-container">
@@ -279,13 +315,10 @@
 
         hamburger.addEventListener('click', () => {
             const isOpen = navLinks.classList.toggle('active');
-            
-            // 變更圖示
             hamburgerIcon.classList.toggle('fa-bars', !isOpen);
             hamburgerIcon.classList.toggle('fa-times', isOpen);
         });
 
-        // 點擊選單項目後自動收合
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
