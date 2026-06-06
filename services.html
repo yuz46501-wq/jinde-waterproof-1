@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>錦德防水工程 | 結構防水專家 | 專業抓漏翻修</title>
-    <!-- 字體與圖標 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -20,37 +19,31 @@
         .logo img { height: 45px; margin-right: 12px; }
         .logo span { color: var(--accent); }
         
-        .nav-links { display: flex; align-items: center; gap: 20px; }
+        .nav-links { display: none; align-items: center; gap: 20px; }
         .nav-links > a, .dropbtn { text-decoration: none; color: var(--primary); font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .nav-links > a:hover { color: var(--accent); }
+        .nav-links > a:hover, .dropbtn:hover { color: var(--accent); }
 
         /* 下拉選單 */
-        .dropdown { position: relative; display: inline-block; }
+        .dropdown { position: relative; }
         .dropdown-content { display: none; position: absolute; background: white; min-width: 180px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); border-radius: 12px; top: 100%; left: 0; padding: 10px 0; z-index: 1000; }
         .dropdown-content a { color: var(--primary); padding: 12px 20px; display: block; text-decoration: none; font-size: 0.95rem; }
         .dropdown-content a:hover { background: #f8fafc; color: var(--accent); }
         .dropdown:hover .dropdown-content { display: block; }
 
-        /* --- 3D 旋轉進場動畫 --- */
-        .reveal { 
-            opacity: 0; 
-            transform: translateY(80px) rotateY(-20deg); 
-            transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1); 
-            perspective: 1000px;
-        }
-        .reveal.active { 
-            opacity: 1; 
-            transform: translateY(0) rotateY(0deg); 
+        /* 漢堡選單按鈕 */
+        .hamburger { display: block; cursor: pointer; font-size: 1.5rem; }
+        @media (min-width: 1024px) { 
+            .nav-links { display: flex; } 
+            .hamburger { display: none; } 
         }
 
-        /* --- 內容區塊 --- */
+        /* 動畫與其他區塊 */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1.5s cubic-bezier(0.23, 1, 0.32, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
         .hero { padding: 120px 5%; text-align: center; background: white; }
         .services-grid { padding: 60px 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .card { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; }
-        
-        .case-img { transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1); width: 100%; height: 250px; object-fit: cover; border-radius: 20px; }
-        .case-img:hover { transform: scale(1.05) rotate(2deg); filter: brightness(1.1); }
-        
+        .card { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .case-img { transition: transform 0.5s; width: 100%; height: 250px; object-fit: cover; border-radius: 20px; }
         .footer-cta { background: var(--primary); color: white; padding: 60px 5%; text-align: center; border-radius: 40px; margin: 20px 5%; }
     </style>
 </head>
@@ -64,6 +57,7 @@
         </a>
         <nav class="nav-links">
             <a href='/'>首頁</a>
+            <a href='/about'>關於錦德</a>
             <div class="dropdown">
                 <a class="dropbtn">服務項目 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-content">
@@ -84,14 +78,16 @@
                     <a href="人才招募.html">加入我們</a>
                 </div>
             </div>
+            <a href='/areas'>服務區域</a>
             <a href='/contact' style="background: var(--accent); color: white; padding: 10px 20px; border-radius: 8px;">預約場勘</a>
         </nav>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
     </header>
 </div>
 
 <section class="hero reveal">
     <h1 style="font-size: 3.2rem;">結構級防水・精準抓漏</h1>
-    
+</section>
 </section>
 
 <section class="services-grid reveal">
@@ -133,7 +129,6 @@
     <h2>錦德防水</h2>
     <p style="margin-top: 15px;">每一項工程皆提供正式契約保障，提供3至5年完善保固，讓您安心交付，無後顧之憂。</p>
 </section>
-
 <script>
     function reveal() {
         var reveals = document.querySelectorAll(".reveal");
