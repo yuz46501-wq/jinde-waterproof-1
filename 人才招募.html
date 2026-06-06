@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>人才招募 | 錦德防水工程</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #0F172A; --accent: #B8860B; --bg-light: #F8FAFC; --text-main: #1E293B; }
+        * { box-sizing: border-box; }
+        body { font-family: "Noto Sans TC", sans-serif; margin: 0; background: var(--bg-light); color: var(--text-main); line-height: 1.8; }
+
+        /* 導覽列 */
+        .header-fixed-container { position: sticky; top: 0; z-index: 1000; background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .navbar { height: 90px; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; }
+        .logo { font-size: 1.4rem; font-weight: 900; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 40px; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links a, .dropbtn { text-decoration: none; color: var(--primary); font-weight: 700; cursor: pointer; white-space: nowrap; }
+        .dropdown { position: relative; }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 150px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-radius: 8px; padding: 10px 0; }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content a { display: block; padding: 8px 15px; font-size: 0.9rem; }
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
+
+        @media (max-width: 1100px) {
+            .hamburger { display: block; }
+            .nav-links { position: fixed; top: 90px; right: -100%; width: 250px; height: 100vh; background: white; flex-direction: column; padding: 20px; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: 0.3s; }
+            .nav-links.active { right: 0; }
+        }
+
+        /* 頁面內容 */
+        .page-header { height: 30vh; background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1600') center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; }
+        .container { max-width: 900px; margin: -50px auto 50px; padding: 0 20px; }
+        .job-card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 30px; border-left: 5px solid var(--accent); }
+        .tag { background: #fff7e6; color: var(--accent); padding: 4px 15px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; display: inline-block; margin-bottom: 15px; }
+        .apply-btn { display: inline-block; background: var(--primary); color: white; padding: 14px 35px; border-radius: 50px; text-decoration: none; font-weight: 900; margin-top: 20px; }
+        footer { background: #0b1120; color: white; padding: 40px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="header-fixed-container">
+    <header class="navbar">
+        <a href="/" class="logo">
+            <img src="https://i.meee.com.tw/xIPEk70.jpg" alt="錦德防水工程">
+            錦德<span>防水工程</span>
+        </a>
+        <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+        <nav class="nav-links" id="navLinks">
+            <a href='/'>首頁</a>
+            <a href='/about'>關於錦德</a>
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">服務項目 <i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="/水性屋頂防水.html">水性屋頂防水</a>
+                    <a href="/油性屋頂防水.html">油性屋頂防水</a>
+                    <a href="/抓漏工程.html">抓漏工程</a>
+                    <a href="/防水.html">防水工程</a>
+                    <a href="/油漆工程.html">油漆工程</a>
+                    <a href="/浴室翻修.html">浴室翻修</a>
+                </div>
+            </div>
+            <a href="methods.html">專業工法</a>
+            <a href="cases.html">實績對比</a>
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">工程日常 <i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="daily.html">錦德團隊紀錄</a>
+                    <a href="專業知識.html">專業知識</a>
+                    <a href="人才招募.html" style="color:var(--accent)">加入我們</a>
+                </div>
+            </div>
+            <a href='/areas'>服務區域</a>
+            <a href='/contact'>預約場勘</a>
+        </nav>
+    </header>
+</div>
+
+<section class="page-header">
+    <h1>加入錦德職人團隊</h1>
+    <p>技術傳承 ‧ 精益求精 ‧ 歡迎您的加入</p>
+</section>
+
+<div class="container">
+    <div class="job-card">
+        <span class="tag"><i class="fas fa-tools"></i> 全職 / 防水學徒</span>
+        <h2>防水工程施工人員</h2>
+        <p>跟隨資深師傅進行工地現場作業，學習高壓灌注、PU防水等專業工法。無需相關經驗，只要具備責任感與肯學的心。</p>
+        <a href="https://line.me/ti/p/rqqh-uyZsq" class="apply-btn">立即聯繫面試</a>
+    </div>
+
+    <div class="job-card">
+        <span class="tag"><i class="fas fa-user-tie"></i> 全職 / 領班</span>
+        <h2>工地領班 / 技術工</h2>
+        <p>具備相關防水工程 2 年以上實務經驗，能獨立帶領團隊執行項目，維持施工品質並確保工地安全。</p>
+        <a href="https://line.me/ti/p/rqqh-uyZsq" class="apply-btn">立即聯繫面試</a>
+    </div>
+</div>
+
+<footer>
+    <p>錦德防水工程 | 台中市東區建德街346巷7號 | 統編：80081612</p>
+</footer>
+
+<script>
+    document.getElementById('hamburger').addEventListener('click', function() {
+        document.getElementById('navLinks').classList.toggle('active');
+    });
+</script>
+</body>
+</html>
