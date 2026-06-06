@@ -1,67 +1,77 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+    <link rel="icon" href="favicon.png" type="image/png">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>錦德防水工程 | 結構防水專家 | 專業抓漏翻修</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>服務項目 | 錦德防水工程 - 頂樓防水、高壓灌注、壁癌處理</title>
+    <meta name="description" content="錦德防水提供專業屋頂防水、Pu防水、外牆防水、新建案工程、壁癌處理、鐵皮隔熱、高壓灌注及浴室翻修。台中、彰化、南投全區服務。">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
-        :root { --primary: #0F172A; --accent: #B8860B; --white: #FFFFFF; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "Noto Sans TC", sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.8; overflow-x: hidden; }
+        :root { --primary: #0F172A; --accent: #B8860B; --accent-light: #D4AF37; --bg-light: #F8FAFC; --text-main: #1E293B; --text-muted: #64748B; --line-green: #06C755; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: "Noto Sans TC", sans-serif; margin: 0; background: var(--bg-light); color: var(--text-main); line-height: 1.8; overflow-x: hidden; }
 
-        /* --- 導覽列 --- */
-        .header-fixed { position: sticky; top: 0; z-index: 1000; background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        .navbar { height: 90px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; }
-        .logo { display: flex; align-items: center; font-size: 1.4rem; font-weight: 900; color: var(--primary); text-decoration: none; }
-        .logo img { height: 45px; margin-right: 12px; }
+        /* Navbar & Dropdown Styles */
+        .header-fixed-container { position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.05); background: white; }
+        .navbar { height: 90px; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; }
+        .logo { display: flex; align-items: center; font-size: 1.6rem; font-weight: 900; color: var(--primary); text-decoration: none; }
+        .logo img { height: 50px; margin-right: 12px; }
         .logo span { color: var(--accent); }
         
-        .nav-links { display: none; align-items: center; gap: 20px; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
         .nav-links > a, .dropbtn { text-decoration: none; color: var(--primary); font-weight: 700; cursor: pointer; transition: 0.3s; }
         .nav-links > a:hover, .dropbtn:hover { color: var(--accent); }
-
-        /* 下拉選單 */
+        
         .dropdown { position: relative; }
-        .dropdown-content { display: none; position: absolute; background: white; min-width: 180px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); border-radius: 12px; top: 100%; left: 0; padding: 10px 0; z-index: 1000; }
-        .dropdown-content a { color: var(--primary); padding: 12px 20px; display: block; text-decoration: none; font-size: 0.95rem; }
-        .dropdown-content a:hover { background: #f8fafc; color: var(--accent); }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 160px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-radius: 8px; padding: 10px 0; z-index: 1000; }
         .dropdown:hover .dropdown-content { display: block; }
-
-        /* 漢堡選單按鈕 */
-        .hamburger { display: block; cursor: pointer; font-size: 1.5rem; }
-        @media (min-width: 1024px) { 
-            .nav-links { display: flex; } 
-            .hamburger { display: none; } 
+        .dropdown-content a { display: block; padding: 8px 15px; color: var(--text-main); text-decoration: none; font-size: 0.9rem; }
+        .dropdown-content a:hover { color: var(--accent); background: #f8fafc; }
+        
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--primary); z-index: 10001; }
+        
+        @media (max-width: 1099px) {
+            .hamburger { display: block; }
+            .nav-links { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: #0F172A; flex-direction: column; padding: 100px 35px; transition: 0.4s; z-index: 10000; box-shadow: -10px 0 30px rgba(0,0,0,0.4); }
+            .nav-links.active { right: 0; }
+            .nav-links a { color: white; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); width: 100%; }
+            .dropdown-content { position: static; background: transparent; padding-left: 20px; box-shadow: none; }
+            .dropdown-content a { color: #cbd5e1; }
         }
 
-        /* 動畫與其他區塊 */
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1.5s cubic-bezier(0.23, 1, 0.32, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .hero { padding: 120px 5%; text-align: center; background: white; }
-        .services-grid { padding: 60px 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .card { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .case-img { transition: transform 0.5s; width: 100%; height: 250px; object-fit: cover; border-radius: 20px; }
-        .footer-cta { background: var(--primary); color: white; padding: 60px 5%; text-align: center; border-radius: 40px; margin: 20px 5%; }
+        /* Announcement & Sections */
+        .announcement-bar { background: var(--accent); color: white; padding: 10px 0; font-size: 0.85rem; font-weight: 600; overflow: hidden; }
+        .page-header { height: 45vh; background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1600') center/cover no-repeat fixed; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; }
+        .section { padding: 80px 6%; max-width: 1300px; margin: 0 auto; }
+        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: -80px; }
+        .service-card { background: white; border-radius: 15px; padding: 45px 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.4s; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .service-card i { color: var(--accent); font-size: 3rem; margin-bottom: 25px; display: block; }
+        .cta-section { background: var(--primary); color: white; padding: 60px 5%; text-align: center; border-radius: 20px; margin: 60px auto; max-width: 1200px; }
+        .btn-cta { display: inline-block; background: var(--accent); color: white; padding: 16px 45px; border-radius: 50px; text-decoration: none; font-weight: 900; }
+        .floating-contact { position: fixed; right: 20px; bottom: 30px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
+        .float-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 1.6rem; }
+        .line-btn { background-color: #06C755; }
+        .phone-btn { background-color: var(--accent); }
     </style>
 </head>
 <body>
 
-<div class="header-fixed">
+<div class="header-fixed-container">
     <header class="navbar">
-        <a class='logo' href='/'>
-            <img src="https://i.meee.com.tw/xIPEk70.jpg" alt="錦德防水工程">
-            錦德<span>防水工程</span>
+        <a href="index.html" class="logo">
+            <img src="favicon.png" alt="錦德Logo">錦德<span>防水工程</span>
         </a>
-        <nav class="nav-links">
+        <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+        <nav class="nav-links" id="navLinks">
             <a href='/'>首頁</a>
             <a href='/about'>關於錦德</a>
             <div class="dropdown">
-                <a class="dropbtn">服務項目 <i class="fas fa-caret-down"></i></a>
+                <a href="javascript:void(0)" class="dropbtn">服務項目 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-content">
-                    <a href="services.html">所有服務</a>
                     <a href="/水性屋頂防水.html">水性屋頂防水</a>
                     <a href="/油性屋頂防水.html">油性屋頂防水</a>
                     <a href="/抓漏工程.html">抓漏工程</a>
@@ -70,9 +80,10 @@
                     <a href="/浴室翻修.html">浴室翻修</a>
                 </div>
             </div>
-            <a href='/cases'>實績對比</a>
+            <a href="methods.html">專業工法</a>
+            <a href="cases.html">實績對比</a>
             <div class="dropdown">
-                <a class="dropbtn">工程日常 <i class="fas fa-caret-down"></i></a>
+                <a href="javascript:void(0)" class="dropbtn">工程日常 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-content">
                     <a href="daily.html">錦德團隊紀錄</a>
                     <a href="專業知識.html">專業知識</a>
@@ -80,67 +91,94 @@
                 </div>
             </div>
             <a href='/areas'>服務區域</a>
-            <a href='/contact' style="background: var(--accent); color: white; padding: 10px 20px; border-radius: 8px;">預約場勘</a>
+            <a href='/contact'>預約場勘</a>
         </nav>
-        <div class="hamburger"><i class="fas fa-bars"></i></div>
     </header>
+    <div class="announcement-bar">
+        <div class="marquee-content"></div>
+    </div>
 </div>
 
-<section class="hero reveal">
-    <h1 style="font-size: 3.2rem;">結構級防水・精準抓漏</h1>
-</section>
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<section class="page-header">
+    <h1>專業服務項目</h1>
+    <p>名片級誠信品質 ‧ 守護您的每一吋空間</p>
 </section>
 
-<section class="services-grid reveal">
-    <div class="card">
-        <div style="width: 100%; height: 180px; overflow: hidden; border-radius: 12px; margin-bottom: 20px;">
-            <img src="https://i.meee.com.tw/tPv2IlS.png" alt="高壓灌注技術" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+<section class="section">
+        <div class="service-grid">
+            <div class="service-card reveal">
+                <div class="card-body">
+                    <i class="fas fa-house-circle-check"></i>
+                    <h3>屋頂防水</h3>
+                    <p>針對透天、公寓頂樓提供深層防水施工，從基底處理到面漆防護，徹底解決漏水問題。</p>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-body">
+                    <i class="fas fa-layer-group"></i>
+                    <h3>Pu 防水</h3>
+                    <p>使用高品質彈性 Pu 塗料，具備極佳的耐候性與抗拉裂能力，適合大面積防水施工。</p>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-body">
+                    <i class="fas fa-building"></i>
+                    <h3>外牆防水</h3>
+                    <p>專業高空作業施工，針對外牆裂縫、磁磚滲透進行全面封鎖，阻斷室內滲水來源。</p>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-body">
+                    <i class="fas fa-helmet-safety"></i>
+                    <h3>新建案工程</h3>
+                    <p>配合營造建案進行標準防水鋪設，提供從地基、窗框到屋頂的嚴謹防水預防工程。</p>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-body">
+                    <i class="fas fa-paint-roller"></i>
+                    <h3>油漆壁癌處理</h3>
+                    <p>根除牆面粉化、脫落現象。先斷水源、再除病灶，使用抗鹼處理還原美觀牆面。</p>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-body">
+                    <i class="fas fa-sun"></i>
+                    <h3>鐵皮隔熱</h3>
+                    <p>提升頂樓鐵皮屋耐候性，搭配專業隔熱塗料有效降低室內溫度，並預防生鏽滲水。</p>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-body">
+                    <i class="fas fa-syringe"></i>
+                    <h3>高壓灌注</h3>
+                    <p>專業「打針」工法，針對混凝土結構裂縫進行止漏藥劑灌注，速效根治結構性漏水。</p>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-body">
+                    <i class="fas fa-bath"></i>
+                    <h3>浴室翻修</h3>
+                    <p>浴室重新施作核心防水層。針對管線周邊加強補強，確保磁磚底下十年滴水不漏。</p>
+                </div>
+            </div>
         </div>
-        <h3>工業級高壓灌注</h3>
-        <p>針對混凝土細微裂縫進行反應膨脹止水，達到結構內部的二次加固，確保滴水不漏。</p>
-    </div>
 
-    <div class="card">
-        <div style="width: 100%; height: 180px; overflow: hidden; border-radius: 12px; margin-bottom: 20px;">
-            <img src="https://i.meee.com.tw/LNvY9lz.png" alt="紅外線檢測" style="width: 100%; height: 100%; object-fit: cover;">
+        <div class="cta-section reveal">
+            <h2 style="font-weight: 900; letter-spacing: 1px;">諮詢專線：0963-696-032 | 統編：80081612 </h2>
+            <h2 style="font-weight: 900; letter-spacing: 1px;"> 401臺中市東區建德街346巷7號</h2>
+
+            <p>專業儀器配合，給您最長久的守護。</p>
         </div>
-        <h3>科技漏水檢測</h3>
-        <p>運用紅外線熱顯像儀精準標定滲漏路徑，為您節省無謂的拆除成本與工程費用。</p>
-    </div>
-
-    <div class="card">
-        <div style="width: 100%; height: 180px; overflow: hidden; border-radius: 12px; margin-bottom: 20px;">
-            <img src="https://i.meee.com.tw/ptKA4ZE.png" alt="標準化防水" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
-        <h3>標準化防水工序</h3>
-        <p>從高壓水刀徹底清淤到多層防水塗佈，嚴格執行SOP標準化作業程序。</p>
-    </div>
 </section>
 
-<section class="reveal" style="padding: 60px 5%;">
-    <h2 style="text-align: center; margin-bottom: 40px; font-weight: 900;">精選工程實績</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-        <div style="overflow: hidden; border-radius: 20px;"><img src="https://i.meee.com.tw/YKKAHCr.jpg" class="case-img" alt="工程實績"></div>
-        <div style="overflow: hidden; border-radius: 20px;"><img src="https://i.meee.com.tw/e5rYITE.jpg" class="case-img" alt="工程實績"></div>
-        <div style="overflow: hidden; border-radius: 20px;"><img src="https://i.meee.com.tw/RC0pCbC.jpg" class="case-img" alt="工程實績"></div>
-    </div>
-</section>
-
-<section class="footer-cta reveal">
-    <h2>錦德防水</h2>
-    <p style="margin-top: 15px;">每一項工程皆提供正式契約保障，提供3至5年完善保固，讓您安心交付，無後顧之憂。</p>
-</section>
 <script>
-    function reveal() {
-        var reveals = document.querySelectorAll(".reveal");
-        for (var i = 0; i < reveals.length; i++) {
-            var windowHeight = window.innerHeight;
-            var elementTop = reveals[i].getBoundingClientRect().top;
-            if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
-        }
-    }
-    window.addEventListener("scroll", reveal);
-    window.onload = reveal;
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
 </script>
 
 </body>
