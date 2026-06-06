@@ -24,6 +24,11 @@
         .dropdown-content a { display: block; padding: 8px 15px; font-size: 0.9rem; }
         .hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
 
+        /* 彈跳視窗 Modal 樣式 */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
+        .modal-content { background: white; padding: 40px; border-radius: 20px; max-width: 600px; width: 100%; position: relative; max-height: 90vh; overflow-y: auto; }
+        .close-btn { position: absolute; top: 20px; right: 25px; cursor: pointer; font-size: 1.8rem; color: var(--primary); }
+
         @media (max-width: 1100px) {
             .hamburger { display: block; }
             .nav-links { position: fixed; top: 90px; right: -100%; width: 250px; height: 100vh; background: white; flex-direction: column; padding: 20px; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: 0.3s; }
@@ -33,10 +38,8 @@
         /* 頁面內容 */
         .page-header { height: 30vh; background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1600') center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; }
         .container { max-width: 1000px; margin: -50px auto 50px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .kb-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.3s; border-top: 5px solid var(--accent); }
-        .kb-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
-        .kb-card h3 { color: var(--primary); margin-top: 0; }
-        .read-more { display: inline-block; margin-top: 15px; color: var(--accent); font-weight: 700; text-decoration: none; }
+        .kb-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 5px solid var(--accent); }
+        .read-more { cursor: pointer; display: inline-block; margin-top: 15px; color: var(--accent); font-weight: 700; text-decoration: none; border: none; background: none; font-size: 1rem; }
         footer { background: #0b1120; color: white; padding: 40px; text-align: center; }
     </style>
 </head>
@@ -88,28 +91,35 @@
     <article class="kb-card">
         <h3><i class="fas fa-droplet"></i> 判斷漏水的徵兆</h3>
         <p>從壁癌、水痕到牆面剝落，教您如何觀察建築物釋放出的漏水警訊。</p>
-        <a href="#" class="read-more">瞭解更多 →</a>
+        <button class="read-more" onclick="openModal('modal1')">瞭解更多 →</button>
     </article>
     <article class="kb-card">
         <h3><i class="fas fa-syringe"></i> 高壓灌注原理</h3>
         <p>針對結構裂縫進行「打針」止漏，說明藥劑如何填補混凝土縫隙與凝固。</p>
-        <a href="#" class="read-more">瞭解更多 →</a>
+        <button class="read-more" onclick="openModal('modal2')">瞭解更多 →</button>
     </article>
     <article class="kb-card">
         <h3><i class="fas fa-umbrella"></i> 防水層保養要點</h3>
         <p>防水做好後，日常該如何維護才能延長使用年限？避開常見的破壞行為。</p>
-        <a href="#" class="read-more">瞭解更多 →</a>
+        <button class="read-more" onclick="openModal('modal3')">瞭解更多 →</button>
     </article>
 </div>
+
+<!-- Modal 內容區 -->
+<div id="modal1" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('modal1')">&times;</span><h2>判斷漏水的徵兆</h2><p>若發現以下情況，請盡快檢查：<br>1. <strong>壁癌：</strong>牆面出現白色結晶粉末。<br>2. <strong>漆面起泡：</strong>油漆層因內部受潮而鼓起。<br>3. <strong>牆面水痕：</strong>長期潮濕形成的深色印記。</p></div></div>
+<div id="modal2" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('modal2')">&times;</span><h2>高壓灌注原理</h2><p>高壓灌注適用於混凝土結構裂縫。透過壓力將親水性或疏水性發泡劑灌入縫隙，遇水後膨脹填滿空隙，達成止水效果。</p></div></div>
+<div id="modal3" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('modal3')">&times;</span><h2>防水層保養要點</h2><p>完工後的保養很重要：<br>1. 避免重物拖行刮傷防水層。<br>2. 定期檢查排水孔是否堵塞。<br>3. 避免尖銳物刺穿塗層。</p></div></div>
 
 <footer>
     <p>錦德防水工程 | 台中市東區建德街346巷7號 | 統編：80081612</p>
 </footer>
 
 <script>
-    document.getElementById('hamburger').addEventListener('click', function() {
-        document.getElementById('navLinks').classList.toggle('active');
-    });
+    document.getElementById('hamburger').addEventListener('click', function() { document.getElementById('navLinks').classList.toggle('active'); });
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    window.onclick = function(event) { if (event.target.className === 'modal') { event.target.style.display = 'none'; } }
 </script>
+
 </body>
 </html>
