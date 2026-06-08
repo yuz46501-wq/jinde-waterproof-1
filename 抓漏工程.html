@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服務項目 | 錦德防水工程</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root { --primary: #0F172A; --accent: #B8860B; --accent-light: #D4AF37; --bg-light: #F8FAFC; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; background: var(--bg-light); color: var(--primary); line-height: 1.6; }
+        
+        /* 導覽列 */
+        .navbar { background: white; height: 90px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: sticky; top: 0; z-index: 2000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .logo { font-size: 1.4rem; font-weight: 900; color: var(--primary); text-decoration: none; display: flex; align-items: center; }
+        .logo img { height: 48px; margin-right: 12px; }
+        .logo span { color: var(--accent); margin-left: 5px; }
+        .nav-links { display: none; align-items: center; gap: 20px; }
+        .nav-links > a, .dropbtn { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.95rem; cursor: pointer; border: none; background: none; transition: 0.3s; }
+        .nav-links a:hover, .dropbtn:hover { color: var(--accent); }
+        .dropdown { position: relative; }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 170px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-radius: 8px; padding: 10px 0; }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content a { display: block; padding: 10px 20px; color: #334155 !important; font-size: 0.9rem !important; text-decoration: none; }
+        .dropdown-content a:hover { background: #F1F5F9; color: var(--accent) !important; }
+        .hamburger { display: block; cursor: pointer; font-size: 1.5rem; }
+
+        /* 服務區 */
+        .section { padding: 80px 6%; max-width: 1300px; margin: 0 auto; }
+        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .service-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: all 0.4s; border: 1px solid rgba(0,0,0,0.05); }
+        .service-card:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+        .card-body { padding: 45px 30px; text-align: center; }
+        .card-body i { color: var(--accent); font-size: 2.5rem; margin-bottom: 25px; background: rgba(184, 134, 11, 0.1); width: 80px; height: 80px; line-height: 80px; border-radius: 50%; }
+        
+        /* 技術演示區 */
+        .tech-box { text-align: center; background: white; padding: 50px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 60px; }
+        .gif-container { max-width: 850px; margin: 30px auto; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .tech-img { width: 100%; display: block; }
+
+        /* CTA區 */
+        .cta-section { background: var(--primary); color: white; padding: 60px 5%; text-align: center; border-radius: 20px; margin: 0 auto; max-width: 1200px; }
+        .btn-cta { display: inline-block; background: var(--accent); color: white; padding: 16px 45px; border-radius: 50px; text-decoration: none; font-weight: 900; margin-top: 25px; transition: 0.3s; }
+        .btn-cta:hover { background: var(--accent-light); transform: scale(1.05); }
+
+        @media (min-width: 1100px) { .nav-links { display: flex; } .hamburger { display: none; } }
+    </style>
+</head>
+<body>
+
+<header class="navbar">
+    <a class="logo" href="/">
+        <img src="https://i.meee.com.tw/xIPEk70.jpg" alt="錦德防水工程">
+        錦德<span>防水工程</span>
+    </a>
+    <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+    <nav class="nav-links" id="navLinks">
+        <a href='/'>首頁</a>
+        <a href='/about'>關於錦德</a>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn" style='color:var(--accent);'>服務項目 <i class="fas fa-caret-down"></i></a>
+            <div class="dropdown-content">
+                <a href="/水性屋頂防水.html">水性屋頂防水</a>
+                <a href="/油性屋頂防水.html">油性屋頂防水</a>
+                <a href="/抓漏工程.html">抓漏工程</a>
+                <a href="/油漆工程.html">油漆工程</a>
+                <a href="/浴室翻修.html">浴室翻修</a>
+            </div>
+        </div>
+        <a href="methods.html">專業工法</a>
+        <a href='/contact' style='font-weight: 900;'>預約場勘</a>
+    </nav>
+</header>
+
+<section class="section">
+    <div class="service-grid">
+        <div class="service-card" data-aos="fade-up"><div class="card-body"><i class="fas fa-house-circle-check"></i><h3>屋頂防水</h3><p>透天頂樓深層防水，根除滲漏。</p></div></div>
+        <div class="service-card" data-aos="fade-up" data-aos-delay="100"><div class="card-body"><i class="fas fa-layer-group"></i><h3>PU 防水</h3><p>高彈性塗料，極佳抗拉裂能力。</p></div></div>
+        <div class="service-card" data-aos="fade-up" data-aos-delay="200"><div class="card-body"><i class="fas fa-syringe"></i><h3>高壓灌注</h3><p>速效根治結構性漏水。</p></div></div>
+    </div>
+
+    <div class="tech-box" data-aos="fade-up">
+        <h2>技術核心：結構灌注止漏</h2>
+        <p style="color: #64748b; margin-bottom: 25px;">
+            透過專業工法與儀器，確保藥劑完全填滿混凝土內部的每一處裂縫。
+        </p>
+        <div class="gif-container">
+            <img src="光徑.gif" alt="高壓灌注技術演示" class="tech-img" loading="lazy">
+        </div>
+    </div>
+
+    <div class="cta-section" data-aos="fade-up">
+        <h2>專業工程預約</h2>
+        <p>錦德防水工程行 (統編:80081612) | 專業儀器配合職人技術</p>
+        <a href="tel:0963696032" class="btn-cta"><i class="fas fa-phone"></i> 立即諮詢</a>
+    </div>
+</section>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ once: true });
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+        navLinks.style.display = (navLinks.style.display === 'flex') ? 'none' : 'flex';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '90px';
+        navLinks.style.left = '0';
+        navLinks.style.width = '100%';
+        navLinks.style.background = 'white';
+        navLinks.style.padding = '20px 0';
+        navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+    });
+</script>
+</body>
+</html>
