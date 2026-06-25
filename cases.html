@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -7,31 +8,12 @@
     <title>專業實績 | 錦德防水工程</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #0F172A;
-            --accent: #B8860B;
-            --accent-light: #D4AF37;
-            --text-main: #1E293B;
-            --text-muted: #64748B;
-            --white: #ffffff;
-            --bg-light: #f8fafc;
-            --line-green: #06C755;
-        }
-
+        :root { --primary: #0F172A; --accent: #B8860B; --accent-light: #D4AF37; --text-main: #1E293B; --text-muted: #64748B; --white: #ffffff; --bg-light: #f8fafc; --line-green: #06C755; }
         * { box-sizing: border-box; scroll-behavior: smooth; }
-        
-        body { 
-            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; 
-            margin: 0; background: var(--bg-light); color: var(--text-main); 
-            line-height: 1.6; overflow-x: hidden;
-        }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; margin: 0; background: var(--bg-light); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
-        /* --- [載入動畫 Loader] --- */
-        #loader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: white; display: flex; justify-content: center; align-items: center;
-            z-index: 9999; transition: opacity 0.5s ease;
-        }
+        /* Loader */
+        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease; }
         .loader-content { text-align: center; }
         .loader-logo { font-size: 2rem; font-weight: 900; color: var(--primary); margin-bottom: 20px; }
         .loader-logo span { color: var(--accent); }
@@ -39,91 +21,59 @@
         .loader-line-fill { width: 0; height: 100%; background: var(--accent); animation: loading 2s infinite; }
         @keyframes loading { 0% { width: 0; } 100% { width: 100%; } }
 
-        /* --- [導覽列 Header] --- */
+        /* Header */
         .header-fixed-container { position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.05); background: white; }
         .navbar { height: 90px; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; position: relative; }
-        
-        .logo { display: flex; align-items: center; font-size: 1.6rem; font-weight: 900; color: var(--primary); text-decoration: none; letter-spacing: 1px; }
+        .logo { display: flex; align-items: center; font-size: 1.6rem; font-weight: 900; color: var(--primary); text-decoration: none; }
         .logo img { height: 55px; margin-right: 12px; border-radius: 4px; }
         .logo span { color: var(--accent); }
-
         .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--primary); }
 
-        /* 下拉選單核心 CSS */
+        /* Dropdown */
         .dropdown { position: relative; }
         .dropbtn { cursor: pointer; display: flex; align-items: center; gap: 6px; font-weight: 600; }
-        .dropdown-content { 
-            display: none; position: absolute; top: 100%; left: 0; 
-            background: white; min-width: 180px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); 
-            border-radius: 12px; padding: 10px 0; border: 1px solid #f1f5f9;
-        }
-        .dropdown-content a { 
-            display: block !important; padding: 12px 20px !important; 
-            font-size: 0.95rem !important; border-bottom: none !important; 
-            color: var(--text-main) !important;
-        }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 180px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-radius: 12px; padding: 10px 0; border: 1px solid #f1f5f9; }
+        .dropdown-content a { display: block !important; padding: 12px 20px !important; font-size: 0.95rem !important; color: var(--text-main) !important; }
         .dropdown-content a:hover { background: #f8fafc; color: var(--accent) !important; }
 
-        /* 公告欄 Marquee */
+        /* Announcement */
         .announcement-bar { background: var(--accent); color: white; padding: 10px 0; font-size: 0.9rem; font-weight: 600; overflow: hidden; }
         .marquee-content { white-space: nowrap; display: inline-block; animation: marquee-scroll 30s linear infinite; }
         @keyframes marquee-scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
-        /* --- [響應式：電腦版 >= 1100px] --- */
+        /* Responsive */
         @media (min-width: 1100px) {
             .nav-links { display: flex; gap: 28px; align-items: center; }
-            .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; transition: 0.3s; padding: 10px 0; }
-            .nav-links a:hover, .nav-links a.active-link { color: var(--accent); }
+            .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; padding: 10px 0; }
+            .nav-links a:hover { color: var(--accent); }
             .dropdown:hover .dropdown-content { display: block; animation: fadeInUp 0.3s ease; }
             .menu-tag, .menu-footer { display: none; }
         }
-
-        /* --- [響應式：手機版 < 1100px] --- */
         @media (max-width: 1099px) {
             .hamburger { display: block; }
-            .nav-links { 
-                position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
-                background: #121A2D; display: flex; flex-direction: column; 
-                padding: 80px 35px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                z-index: 10000; box-shadow: -10px 0 30px rgba(0,0,0,0.4);
-            }
+            .nav-links { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: #121A2D; display: flex; flex-direction: column; padding: 80px 35px; transition: 0.4s; z-index: 10000; }
             .nav-links.active { right: 0; }
-            .nav-links a { color: white !important; padding: 18px 0; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.05); width: 100%; }
-            .dropdown-content { position: static; background: rgba(255,255,255,0.05); box-shadow: none; width: 100%; margin-top: 5px; border: none; }
-            .dropdown-content a { padding: 12px 25px !important; color: #cbd5e1 !important; font-size: 1rem !important; }
-            .dropdown-content.show { display: block; }
-            .menu-tag { color: var(--accent); font-weight: 900; font-size: 0.85rem; letter-spacing: 4px; margin-bottom: 25px; display: block; }
-            .menu-footer { margin-top: auto; padding-bottom: 20px; width: 100%; }
-            .menu-contact-btn { display: flex; align-items: center; gap: 12px; text-decoration: none; padding: 12px 0; color: white; }
+            .nav-links a { color: white !important; padding: 15px 0; }
+            .dropdown-content { position: static; background: rgba(255,255,255,0.05); width: 100%; margin-top: 5px; }
+            .menu-footer { margin-top: auto; padding-top: 20px; }
+            .menu-contact-btn { display: flex; align-items: center; gap: 12px; color: white; text-decoration: none; padding: 10px 0; }
         }
-
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- [內容區樣式] --- */
-        .page-header { 
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://image2url.com/r2/default/images/1770444380703-49c0d98d-f939-4e2f-ab22-001cbf7f1f32.heic');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            color: white; padding: 120px 5% 100px; text-align: center; 
-        }
-        .page-header h1 { font-size: clamp(2.2rem, 8vw, 3.2rem); margin-bottom: 15px; letter-spacing: 4px; font-weight: 900; }
-        
+        /* Content */
+        .page-header { background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://image2url.com/r2/default/images/1770444380703-49c0d98d-f939-4e2f-ab22-001cbf7f1f32.heic'); background-size: cover; background-position: center; padding: 120px 5% 100px; text-align: center; color: white; }
         .case-section { padding: 80px 6%; max-width: 1400px; margin: 0 auto; }
         .case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 35px; }
         .case-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.4s; }
-        .case-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
         .case-img { height: 280px; background-size: cover; background-position: center; position: relative; }
         .case-badge { position: absolute; top: 15px; left: 15px; background: var(--accent); color: white; padding: 6px 14px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; }
         .case-body { padding: 25px; }
-        .case-body h3 { font-size: 1.3rem; margin-bottom: 12px; color: var(--primary); font-weight: 800; }
-        .case-body p { color: var(--text-muted); font-size: 1rem; }
-
-        /* --- [浮動聯絡鈕] --- */
+        
         .floating-contact { position: fixed; right: 20px; bottom: 30px; display: flex; flex-direction: column; gap: 12px; z-index: 1999; }
-        .float-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 1.6rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; }
+        .float-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 1.6rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .line-btn { background-color: #06C755; }
         .phone-btn { background-color: var(--accent); }
-
-        footer { background: var(--primary); color: white; padding: 50px 5%; text-align: center; font-size: 0.95rem; }
+        footer { background: var(--primary); color: white; padding: 50px 5%; text-align: center; }
     </style>
 </head>
 <body>
@@ -132,7 +82,6 @@
         <div class="loader-content">
             <h1 class="loader-logo">錦德<span>防水工程</span></h1>
             <div class="loader-line-box"><div class="loader-line-fill"></div></div>
-            <p style="letter-spacing: 5px; font-weight: bold; color: #64748B;">在地保固 ‧ 專業防水</p>
         </div>
     </div>
 
@@ -141,52 +90,43 @@
             <a href="index.html" class="logo">
                 <img src="https://i.meee.com.tw/xIPEk70.jpg" alt="錦德Logo">錦德<span>防水工程</span>
             </a>
-            
             <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
             
             <nav class="nav-links" id="navLinks">
                 <span class="menu-tag">M E N U</span>
                 <a href="index.html">首頁</a>
                 <a href="about.html">關於錦德</a>
-                
                 <div class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">服務項目 <i class="fas fa-caret-down"></i></a>
                     <div class="dropdown-content">
-                        <a href="services-water.html">水性屋頂防水</a>
-                        <a href="services-oil.html">油性屋頂防水</a>
-                        <a href="services-leak.html">科技抓漏工程</a>
-                        <a href="services-general.html">一般防水工程</a>
-                        <a href="services-paint.html">外牆油漆工程</a>
-                        <a href="services-bathroom.html">浴室翻修工程</a>
+                        <a href="services.html">所有服務</a>
+                        <a href="/水性屋頂防水.html">水性屋頂防水</a>
+                        <a href="/油性屋頂防水.html">油性屋頂防水</a>
+                        <a href="/抓漏工程.html">抓漏工程</a>
+                        <a href="/防水.html">防水工程</a>
+                        <a href="/油漆工程.html">油漆工程</a>
+                        <a href="/浴室翻修.html">浴室翻修</a>
                     </div>
                 </div>
-                
-                <a href="process.html">專業工法</a>
-                <a href="cases.html" class="active-link">實績對比</a>
-                
+                <a href="methods.html">專業工法</a>
+                <a href="cases.html">實績對比</a>
                 <div class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">工程日常 <i class="fas fa-caret-down"></i></a>
                     <div class="dropdown-content">
                         <a href="daily.html">錦德團隊紀錄</a>
-                        <a href="knowledge.html">防水專業知識</a>
-                        <a href="jobs.html">人才招募</a>
+                        <a href="專業知識.html">專業知識</a>
+                        <a href="人才招募.html">加入我們</a>
                     </div>
                 </div>
+                <a href="/areas">服務區域</a>
+                <a href="/contact">預約場勘</a>
                 
-                <a href="area.html">服務區域</a>
-                <a href="contact.html">預約場勘</a>
-
                 <div class="menu-footer">
-                    <a href="https://line.me/ti/p/rqqh-uyZsq" class="menu-contact-btn">
-                        <i class="fab fa-line" style="color: #06C755; font-size: 1.5rem;"></i> <span>Line 諮詢</span>
-                    </a>
-                    <a href="tel:0963696032" class="menu-contact-btn">
-                        <i class="fas fa-phone-alt" style="color: var(--accent); font-size: 1.3rem;"></i> <span>撥打專線</span>
-                    </a>
+                    <a href="https://line.me/ti/p/rqqh-uyZsq" class="menu-contact-btn"><i class="fab fa-line"></i> Line 諮詢</a>
+                    <a href="tel:0963696032" class="menu-contact-btn"><i class="fas fa-phone-alt"></i> 撥打專線</a>
                 </div>
             </nav>
         </header>
-        
         <div class="announcement-bar">
             <div class="marquee-content">🛡️ 錦德防水：中彰投科技抓漏專家，提供三至五年正式合約保固。統編：80081612 ✨ 專業施作 ‧ 用心守護 ✨</div>
         </div>
@@ -197,62 +137,59 @@
         <p>每一處細節 ‧ 都是品質的見證</p>
     </section>
 
-<section class="case-section">
-    <div class="case-grid">
-        <div class="case-card">
-            <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770441553415-a28a70f7-53b5-4e45-a0ec-965659fdf57a.jpg');"><span class="case-badge">外牆防水</span></div>
-            <div class="case-body"><h3>台中 | 5層住宅 水性外牆防水</h3><p>高耐候性彈性塗料施作，徹底解決老舊建築滲漏與保護結構體。</p></div>
-        </div>
-        <div class="case-card">
-            <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770441675618-6a6c09ce-382d-49ac-89dd-d976ba4ba684.jpg');"><span class="case-badge">科技抓漏</span></div>
-            <div class="case-body"><h3>台中 | 儀器設備檢測水管漏水</h3><p>利用高精密檢測儀定位管路漏點，減少拆除範圍，精準修復。</p></div>
-        </div>
-        <div class="case-card">
-            <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770441736809-00c7a529-2e31-423d-8633-4c160708daa8.jpg');"><span class="case-badge">新建工程</span></div>
-            <div class="case-body"><h3>大台中 | 工地外牆基礎防水</h3><p>新建工程基礎防護，針對剪力牆與施工縫進行抗壓防水處理。</p></div>
-        </div>
-        <div class="case-card">
-            <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770441771819-9d27a571-71ba-4d73-a17e-27bae7d350e7.jpg');"><span class="case-badge">窗框補強</span></div>
-            <div class="case-body"><h3>台中 | 窗戶漏水與外牆防水</h3><p>針對窗框矽利康老化與結構龜裂進行斷源防水，杜絕室內滲水。</p></div>
-        </div>
-        <div class="case-card">
-            <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770441856293-a83a3cfd-dcaf-47cc-94b1-79e3d8a49589.jpg');"><span class="case-badge">南投案場</span></div>
-            <div class="case-body"><h3>南投 | 多處隱蔽水管漏水</h3><p>跨區專業支援，解決透天住宅複雜的給排水管滲漏難題。</p></div>
-        </div>
-        <div class="case-card">
-            <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770441923868-4f4c90a2-97b6-4e0b-a228-795c6fdc9f20.jpg');"><span class="case-badge">屋頂工程</span></div>
-            <div class="case-body"><h3>彰化 | 水性屋頂防水噴塗</h3><p>大面積綠色環保防水膠塗佈，抗紫外線並有效降低頂樓室溫。</p></div>
-        </div>
-        <div class="case-card">
-            <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770442016986-59bd2dac-bd90-4561-833d-074f1166ba19.jpg');"><span class="case-badge">窗框防水</span></div>
-            <div class="case-body"><h3>台中 | 窗邊滲水與牆面防護</h3><p>修復窗緣滲水，結合外牆彈性漆施工，打造完整的防水屏障。</p></div>
-        </div>
-        <div class="case-card">
-            <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770442209106-efd586ae-323b-4f6b-b08d-23a24a8ff934.jpg');"><span class="case-badge">機坑止水</span></div>
-            <div class="case-body"><h3>大台中 | 電梯機坑漏水處理</h3><p>電梯底座積水排除與負水壓灌注止水，保護電梯鋼索與設備。</p></div>
-        </div>
-        <div class="case-card">
-            <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770442251971-ed8a2a5c-2113-47b9-b9dc-77f9a64735b7.jpg');"><span class="case-badge">深層止水</span></div>
-            <div class="case-body"><h3>台中 | 機坑結構漏水補強</h3><p>針對地下水位壓力造成的滲漏進行專業親水性樹脂止水工程。</p></div>
-        </div>
-        <div class="case-card">
-            <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770442279441-ff38b430-86d6-43ee-b419-6a5add44a477.jpg');"><span class="case-badge">PU 工程</span></div>
-            <div class="case-body"><h3>台中 | 屋頂專業 PU 防水層</h3><p>高拉力五道式工法，包含底油、中塗增厚及耐曬面漆，穩固持久。</p></div>
-        </div>
-        <div class="case-card">
-            <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770442305057-df554746-0937-4216-addb-d17f2ec9445f.jpg');"><span class="case-badge">室內修復</span></div>
-            <div class="case-body"><h3>大台中 | 牆面壁癌專業根治</h3><p>清除病變層、施作抗鹼材料並配合外部斷水，讓牆面恢復美觀。</p></div>
-        </div>
-        <div class="case-card">
-            <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770442393139-ced8d508-b881-46ad-a73c-c8e006fd824b.jpg');"><span class="case-badge">衛浴防水</span></div>
-            <div class="case-body"><h3>台中 | 工地廁所基礎防水</h3><p>管口四周強化處理，搭配不織布抗裂網施作，確保浴室絕不漏水。</p></div>
-        </div>
-        <div class="case-card">
-            <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770442474159-5435a95f-496b-4f88-a632-91750f2ae2ec.jpg');"><span class="case-badge">精密診斷</span></div>
-            <div class="case-body"><h3>台中 | 再次定位管路隱患</h3><p>運用科技診斷疑難雜症，排除社區大樓多層重疊的漏水糾紛。</p></div>
-        </div>
-    </div>
-</section>
+    <section class="case-section">
+        <div class="case-grid">
+            <div class="case-card">
+                <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770441553415-a28a70f7-53b5-4e45-a0ec-965659fdf57a.jpg');"><span class="case-badge">外牆防水</span></div>
+                <div class="case-body"><h3>台中 | 5層住宅 水性外牆防水</h3><p>高耐候性彈性塗料施作，徹底解決老舊建築滲漏與保護結構體。</p></div>
+            </div>
+            <div class="case-card">
+                <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770441675618-6a6c09ce-382d-49ac-89dd-d976ba4ba684.jpg');"><span class="case-badge">科技抓漏</span></div>
+                <div class="case-body"><h3>台中 | 儀器設備檢測水管漏水</h3><p>利用高精密檢測儀定位管路漏點，減少拆除範圍，精準修復。</p></div>
+            </div>
+            <div class="case-card">
+                <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770441736809-00c7a529-2e31-423d-8633-4c160708daa8.jpg');"><span class="case-badge">新建工程</span></div>
+                <div class="case-body"><h3>大台中 | 工地外牆基礎防水</h3><p>新建工程基礎防護，針對剪力牆與施工縫進行抗壓防水處理。</p></div>
+            </div>
+            <div class="case-card">
+                <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770441771819-9d27a571-71ba-4d73-a17e-27bae7d350e7.jpg');"><span class="case-badge">窗框補強</span></div>
+                <div class="case-body"><h3>台中 | 窗戶漏水與外牆防水</h3><p>針對窗框矽利康老化與結構龜裂進行斷源防水，杜絕室內滲水。</p></div>
+            </div>
+            <div class="case-card">
+                <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770441856293-a83a3cfd-dcaf-47cc-94b1-79e3d8a49589.jpg');"><span class="case-badge">南投案場</span></div>
+                <div class="case-body"><h3>南投 | 多處隱蔽水管漏水</h3><p>跨區專業支援，解決透天住宅複雜的給排水管滲漏難題。</p></div>
+            </div>
+            <div class="case-card">
+                <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770441923868-4f4c90a2-97b6-4e0b-a228-795c6fdc9f20.jpg');"><span class="case-badge">屋頂工程</span></div>
+                <div class="case-body"><h3>彰化 | 水性屋頂防水噴塗</h3><p>大面積綠色環保防水膠塗佈，抗紫外線並有效降低頂樓室溫。</p></div>
+            </div>
+            <div class="case-card">
+                <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770442016986-59bd2dac-bd90-4561-833d-074f1166ba19.jpg');"><span class="case-badge">窗框防水</span></div>
+                <div class="case-body"><h3>台中 | 窗邊滲水與牆面防護</h3><p>修復窗緣滲水，結合外牆彈性漆施工，打造完整的防水屏障。</p></div>
+            </div>
+            <div class="case-card">
+                <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770442209106-efd586ae-323b-4f6b-b08d-23a24a8ff934.jpg');"><span class="case-badge">機坑止水</span></div>
+                <div class="case-body"><h3>大台中 | 電梯機坑漏水處理</h3><p>電梯底座積水排除與負水壓灌注止水，保護電梯鋼索與設備。</p></div>
+            </div>
+            <div class="case-card">
+                <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770442251971-ed8a2a5c-2113-47b9-b9dc-77f9a64735b7.jpg');"><span class="case-badge">深層止水</span></div>
+                <div class="case-body"><h3>台中 | 機坑結構漏水補強</h3><p>針對地下水位壓力造成的滲漏進行專業親水性樹脂止水工程。</p></div>
+            </div>
+            <div class="case-card">
+                <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770442279441-ff38b430-86d6-43ee-b419-6a5add44a477.jpg');"><span class="case-badge">PU 工程</span></div>
+                <div class="case-body"><h3>台中 | 屋頂專業 PU 防水層</h3><p>高拉力五道式工法，包含底油、中塗增厚及耐曬面漆，穩固持久。</p></div>
+            </div>
+            <div class="case-card">
+                <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770442305057-df554746-0937-4216-addb-d17f2ec9445f.jpg');"><span class="case-badge">室內修復</span></div>
+                <div class="case-body"><h3>大台中 | 牆面壁癌專業根治</h3><p>清除病變層、施作抗鹼材料並配合外部斷水，讓牆面恢復美觀。</p></div>
+            </div>
+            <div class="case-card">
+                <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770442393139-ced8d508-b881-46ad-a73c-c8e006fd824b.jpg');"><span class="case-badge">衛浴防水</span></div>
+                <div class="case-body"><h3>台中 | 工地廁所基礎防水</h3><p>管口四周強化處理，搭配不織布抗裂網施作，確保浴室絕不漏水。</p></div>
+            </div>
+            <div class="case-card">
+                <div class="case-img" style="background-image: url('https://image2url.com/r2/default/images/1770442474159-5435a95f-496b-4f88-a632-91750f2ae2ec.jpg');"><span class="case-badge">精密診斷</span></div>
+                <div class="case-body"><h3>台中 | 再次定位管路隱患</h3><p>運用科技診斷疑難雜症，排除社區大樓多層重疊的漏水糾紛。</p></div>
             </div>
         </div>
     </section>
@@ -267,39 +204,16 @@
     </footer>
 
     <script>
-        // 載入動畫隱藏
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 500);
-            }, 1000);
+            setTimeout(() => { loader.style.opacity = '0'; setTimeout(() => loader.style.display = 'none', 500); }, 1000);
         });
-
-        // 漢堡選單控制
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
-
-        hamburger.addEventListener('click', (e) => {
-            navLinks.classList.toggle('active');
-            e.stopPropagation();
-        });
-
-        // 點擊選單外區域縮回選單
-        document.addEventListener('click', (e) => {
-            if (navLinks.classList.contains('active') && !navLinks.contains(e.target)) {
-                navLinks.classList.remove('active');
-            }
-        });
-
-        // 手機版下拉選單點擊處理
+        hamburger.addEventListener('click', (e) => { navLinks.classList.toggle('active'); e.stopPropagation(); });
         document.querySelectorAll('.dropbtn').forEach(btn => {
             btn.addEventListener('click', function(e) {
-                if (window.innerWidth < 1100) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.nextElementSibling.classList.toggle('show');
-                }
+                if (window.innerWidth < 1100) { e.preventDefault(); this.nextElementSibling.classList.toggle('show'); }
             });
         });
     </script>
