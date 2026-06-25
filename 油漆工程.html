@@ -1,5 +1,3 @@
-
-<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
@@ -30,7 +28,6 @@
         .dropdown:hover .dropdown-content { display: block; }
         .dropdown-content a { display: block; padding: 10px 20px; color: #334155 !important; font-size: 0.9rem !important; }
 
-        /* 手機板適配 */
         @media (max-width: 1100px) {
             .hamburger { display: block; }
             .nav-links { display: none; position: absolute; top: 90px; left: 0; width: 100%; background: white; flex-direction: column; padding: 20px; box-shadow: 0 10px 10px rgba(0,0,0,0.1); }
@@ -55,20 +52,16 @@
         .p3.active { background: var(--accent); transform: translateZ(120px); color: #fff; }
 
         .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
-        
-        /* 表格區塊 */
         .table-wrap { overflow-x: auto; margin: 40px 0; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         table { width: 100%; border-collapse: collapse; min-width: 600px; }
         th, td { padding: 15px; border: 1px solid #e2e8f0; text-align: center; }
         th { background: #f8fafc; font-weight: 700; color: var(--primary); }
         .highlight { color: #b45309; font-weight: bold; background: #fffbeb; }
 
-        /* 實績圖案 */
         .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
         .gallery img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
         .cta-box { background: white; padding: 40px; border-radius: 12px; margin-top: 40px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         
-        /* 頁尾 */
         footer { background: var(--primary); color: white; text-align: center; padding: 40px 20px; margin-top: 60px; font-size: 0.95rem; }
         footer p { margin: 5px 0; opacity: 0.8; }
     </style>
@@ -113,68 +106,66 @@
 
 <section class="method-hero">
     <div class="info-panel">
-        <h2>錦德專業油漆工法</h2>
-        <div class="step-text active" id="t0"><strong>1. 牆面基底刨除清潔</strong><br>刨除舊有剝落漆面，徹底清除壁癌、粉化層，恢復最健康的牆面結構。</div>
-        <div class="step-text" id="t1"><strong>2. 抗鹼底漆殺菌阻絕</strong><br>塗佈專業強效抗鹼底漆，深層殺菌並封鎖水泥毛細孔，徹底杜絕壁癌復發。</div>
-        <div class="step-text" id="t2"><strong>3. 細緻精準批土研磨</strong><br>進行至少二道精細補土，並搭配專業研磨機砂紙打磨，創造極致平整的烤漆級手感。</div>
-        <div class="step-text" id="t3"><strong>4. 一底兩面飽和塗裝</strong><br>堅持一底兩面高標準施作，全面使用無毒環保乳膠漆/水泥漆，呈現均勻飽和的完美色澤。</div>
+        <h2>錦德專業牆面防護工法</h2>
+        <div class="step-text active" id="t0"><strong>1. 水氣來源診斷</strong><br>運用熱顯像與含水率檢測，精準定位漏水或壁癌成因，徹底杜絕無效修繕。</div>
+        <div class="step-text" id="t1"><strong>2. 深度除癌與封閉處理</strong><br>完整刨除受損面，針對水泥主體施作奈米封閉劑，阻斷牆面與外界濕氣的交互反應。</div>
+        <div class="step-text" id="t2"><strong>3. 結構強化與精密批土</strong><br>導入結構補強素材，經多道防裂處理與細膩研磨，打造鋼鐵般堅實的漆前基底。</div>
+        <div class="step-text" id="t3"><strong>4. 長效防護漆膜塗裝</strong><br>選用專業級防霉耐候漆料，以多層次覆蓋工法，為居家牆面披上持久的防禦外衣。</div>
     </div>
     <div class="stage">
         <div class="cube">
-            <div class="layer base active" id="p0">水泥牆面基底</div>
-            <div class="layer p1" id="p1">1. 抗鹼高固底漆層</div>
-            <div class="layer p2" id="p2">2. 多道細緻批土層</div>
-            <div class="layer p3" id="p3">3. 飽和環保面漆層</div>
+            <div class="layer base active" id="p0">結構體主牆</div>
+            <div class="layer p1" id="p1">1. 奈米封閉處理</div>
+            <div class="layer p2" id="p2">2. 結構精密整平</div>
+            <div class="layer p3" id="p3">3. 長效保護塗層</div>
         </div>
     </div>
 </section>
 
-<div class="container">
-    <div class="cta-box">
-        <h2 style="margin-bottom: 20px;">室內漆料系統專業評比</h2>
+<div class="cta-box">
+        <h2 style="margin-bottom: 20px;">錦德工程 vs. 一般粉刷：長效抗潮實證</h2>
+        <p style="margin-bottom: 25px; color: #64748b;">我們不只是一次性的油漆粉刷，而是提供完整的結構防潮診斷與責任施工，讓牆面恢復應有的健康防禦力。</p>
         <div class="table-wrap">
             <table>
                 <thead>
                     <tr>
-                        <th>評估項目</th>
-                        <th>一般傳統水泥漆</th>
-                        <th>頂級環保乳膠漆 (防水行推薦)</th>
+                        <th>防護維度</th>
+                        <th>傳統油漆粉刷</th>
+                        <th>錦德專業防潮責任施工</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>漆膜細緻質感</td>
-                        <td>普通 (色澤較霧面)</td>
-                        <td class="highlight">極細緻 (絲絨絲滑質感)</td>
+                        <td><strong>壁癌處理深度</strong></td>
+                        <td>表面蓋過，癌根仍在</td>
+                        <td class="highlight">深層刨除 + 結構固化斷根</td>
                     </tr>
                     <tr>
-                        <td>防霉耐擦洗次數</td>
-                        <td>低 (擦拭易掉粉)</td>
-                        <td class="highlight">卓越 (耐擦洗高達數萬次)</td>
+                        <td><strong>耐潮濕保固</strong></td>
+                        <td>無保固，復發率高</td>
+                        <td class="highlight">正式合約保固，安心有保障</td>
                     </tr>
                     <tr>
-                        <td>微小裂縫遮蓋力</td>
-                        <td>無</td>
-                        <td class="highlight">極強 (具備優異彈性延展)</td>
+                        <td><strong>施工技術標準</strong></td>
+                        <td>單純塗裝，不論基底</td>
+                        <td class="highlight">水分診斷+除癌+防霉塗裝</td>
                     </tr>
                     <tr>
-                        <td>環保低氣味 (VOC)</td>
-                        <td>普通 (開工初期有味道)</td>
-                        <td class="highlight">極高 (無毒淨味、當天可入住)</td>
+                        <td><strong>長期維護費用</strong></td>
+                        <td>低初價，高重複維修成本</td>
+                        <td class="highlight">高性價比，一次處理長久無憂</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-<h2>油漆施工現場紀錄</h2>
+
+    <h2>油漆施工現場紀錄</h2>
     <div class="gallery">
-        <!-- 修正語法：只保留 img 標籤並正確設定 src -->
         <img src="https://i.ibb.co/Ldd03spK/Gemini-Generated-Image-v4fb1qv4fb1qv4fb.png" alt="精細環境傢俱保護">
         <img src="https://i.ibb.co/0ybyP2Xd/Gemini-Generated-Image-vel1d6vel1d6vel1.png" alt="牆面壁癌根治刨除">
-        
+    </div>
 
-    </div>
-    </div>
     <div class="cta-box">
         <h2>想要徹底告別壁癌、為家換上極緻新衣嗎？</h2>
         <p style="margin: 15px 0 25px; color: #64748b;">結合防水工程專長！錦德提供中彰投地區免費到府現場估價，簽訂正式合約，責任施作。</p>
@@ -189,26 +180,20 @@
 </footer>
 
 <script>
-    // 手機版選單開關
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
 
-    // 3D 堆疊分層階梯式動態展示
     window.onload = () => {
         const layers = ['p1', 'p2', 'p3'];
         const texts = ['t1', 't2', 't3'];
-        
         layers.forEach((layerId, i) => {
             setTimeout(() => {
-                // 清除前一個步驟的亮起
                 if(i === 0) {
                     document.getElementById('t0').classList.remove('active');
                 } else {
                     document.getElementById(texts[i-1]).classList.remove('active');
                 }
-                
-                // 活化當前 3D 模型層與文字敘述
                 document.getElementById(layerId).classList.add('active');
                 document.getElementById(texts[i]).classList.add('active');
             }, (i + 1) * 1200);
